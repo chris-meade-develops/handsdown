@@ -1,6 +1,8 @@
 import NavigationComposer from "@/components/navigation";
 import Hero from "@/components/hero";
 import DivJoin from "@/components/DivJoin";
+import Section from "@/components/layout/section";
+import Form from "@/components/form";
 
 export default async function Home() {
   return (
@@ -11,9 +13,16 @@ export default async function Home() {
 
       <main>
         <Hero />
-        <section className="relative bg-secondary h-[500px]">
-          <DivJoin color="bg-secondary" />
-        </section>
+        <Section
+          bgColor="bg-secondary"
+          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 font-montserrat text-tertiary-text"
+        >
+          <div className="text-center mb-13">
+            Fill in the form below and we’ll be in touch to book you in to try
+            one of our classes
+          </div>
+          <Form />
+        </Section>
       </main>
     </div>
   );

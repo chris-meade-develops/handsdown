@@ -91,6 +91,7 @@ module.exports = {
         accent: "#ED2224",
         "primary-text": "##231F20",
         "secondary-text": "#FFFFFF",
+        "tertiary-text": "#212121",
         offBlack: "#231F20",
       },
       fontFamily: {
@@ -107,5 +108,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 };
