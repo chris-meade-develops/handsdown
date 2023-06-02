@@ -6,11 +6,13 @@ export default function Input({
   value,
   onChange,
   name,
-}: Input) {
+  label,
+}: iInput) {
   return (
     <label className="flex flex-col w-full mb-6">
-      <span className=" text-tertiary-text mb-[3px]">{name}</span>
+      <span className=" text-tertiary-text mb-[3px] font-medium">{label}</span>
       <input
+        name={name}
         type={type}
         onChange={onChange}
         value={value ? value : undefined}
