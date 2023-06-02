@@ -1,6 +1,6 @@
 "use client";
 
-export default function Radio({ onChange, name, label }: Radio) {
+export default function Radio({ onChange, name, label }: iRadio) {
   return (
     <label className="w-full">
       <input
