@@ -1,6 +1,5 @@
 import NavigationComposer from "@/components/navigation";
 import Hero from "@/components/hero";
-import DivJoin from "@/components/DivJoin";
 import Section from "@/components/layout/section";
 import Form from "@/components/form";
 
