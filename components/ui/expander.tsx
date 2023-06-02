@@ -1,5 +1,6 @@
 import useExpander from "@/hooks/useExpander";
 import { Plus } from "@/icons";
+import { useEffect } from "react";
 
 export default function Expander({
   children,
@@ -9,12 +10,25 @@ export default function Expander({
   title: string;
 }) {
   const { ref, isExpanded, handleToggle } = useExpander<HTMLDivElement>();
+
+  useEffect(() => {
+    if (isExpanded) {
+      setTimeout(() => {
+        if (ref.current) ref.current.style.overflow = "visible";
+      }, 500);
+    } else {
+      if (ref.current) ref.current.style.overflow = "hidden";
+    }
+  }, [isExpanded, ref]);
+
   return (
     <div className="border-y border-tertiary-text py-9">
       <button
         type="button"
         onClick={handleToggle}
-        className={`flex items-center w-full transition-all duration-500 ${isExpanded && "mb-7"}`}
+        className={`flex items-center w-full transition-all duration-500 ${
+          isExpanded && "mb-7"
+        }`}
       >
         <Plus
           className={`${

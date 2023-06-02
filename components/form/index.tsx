@@ -3,6 +3,7 @@ import { useState } from "react";
 import Radio from "./radio";
 import FormSection from "./FormSection";
 import Expander from "../ui/expander";
+import Primary from "../buttons/primary";
 
 const options = [
   { value: "dragons", label: "HD Little Dragons (Ages 5-6)" },
@@ -82,6 +83,13 @@ export default function Form() {
     },
   ];
 
+  function handleClick() {
+    return (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      console.log("clicked");
+    };
+  }
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     console.log(e.target.value);
   }
@@ -125,6 +133,13 @@ export default function Form() {
       <Expander title="Sign up another student">
         <FormSection options={studentOptions} />
       </Expander>
+      <div className="w-9/12 mx-auto h-26 mt-14 mb-41 ">
+        <Primary type="submit" onClick={handleClick}>
+          <span className="font-montserrat font-extrabold text-white text-lg leading-[1.4px] uppercase">
+            Submit
+          </span>
+        </Primary>
+      </div>
     </form>
   );
 }
