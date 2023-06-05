@@ -2,6 +2,7 @@ import NavigationComposer from "@/components/navigation";
 import Hero from "@/components/hero";
 import Section from "@/components/layout/section";
 import Form from "@/components/form";
+import Intro from "@/components/intro";
 
 export default async function Home() {
   return (
@@ -12,6 +13,12 @@ export default async function Home() {
 
       <main>
         <Hero />
+        <Section
+          bgColor="bg-secondary"
+          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 font-montserrat text-tertiary-text"
+        >
+          <Intro />
+        </Section>
         <Section
           bgColor="bg-secondary"
           className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 font-montserrat text-tertiary-text"
