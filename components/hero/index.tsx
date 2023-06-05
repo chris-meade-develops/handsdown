@@ -8,7 +8,7 @@ export default function Hero() {
       <div className="absolute top-0 w-full h-full bg-offBlack/50 z-2" />
       <HeroBrush svgOne="absolute -top-[44px]" svgTwo="absolute top-1/3 " svgThree="absolute -bottom-[81px] " />
 
-      <h1 className="text-white font-montserrat text-base uppercase font-extrabold leading-[22px] max-w-[220px] z-2 mb-9 mt-16">
+      <h1 className="text-white font-montserrat text-base uppercase font-extrabold leading-[22px] max-w-[220px] z-2 mb-9 mt-31">
         Surrey&apos;s world class martial arts academy
       </h1>
 

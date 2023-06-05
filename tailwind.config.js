@@ -89,7 +89,7 @@ module.exports = {
         secondary: "#F5F5F5",
         tertiary: "#888888",
         accent: "#ED2224",
-        "primary-text": "##231F20",
+        "primary-text": "#231F20",
         "secondary-text": "#FFFFFF",
         "tertiary-text": "#212121",
         offBlack: "#231F20",
