@@ -1,3 +1,3 @@
-export type SvgProps = {
+interface SvgProps {
   className?: string;
-};
+}
