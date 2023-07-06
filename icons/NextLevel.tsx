@@ -18,7 +18,7 @@ export default function NextLevel({ className }: SvgProps) {
           />
         </clipPath>
       </defs>
-      <g id="Group_5230" data-name="Group 5230" clip-path="url(#clip-end-path)">
+      <g id="Group_5230" data-name="Group 5230" clipPath="url(#clip-end-path)">
         <path
           id="Path_2106"
           data-name="Path 2106"

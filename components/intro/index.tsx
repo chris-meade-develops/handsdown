@@ -1,15 +1,10 @@
-import { HeadingBrush } from "@/icons";
 import Primary from "../links/primary";
+import Heading from "../ui/heading";
 
 export default function Intro() {
   return (
     <div>
-      <div className="relative w-4/5 h-40 mx-auto">
-        <HeadingBrush className="absolute z-0 w-full h-full -translate-x-1/2 -translate-y-1/2 left-[54%] top-[29%] fill-primary min-w-[340px]" />
-        <h2 className=" relative z-1 max-w-[155px] uppercase font-montserrat font-extrabold text-xl leading-6 text-center text-white -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/4 ">
-          who we are
-        </h2>
-      </div>
+      <Heading text="who we are" fill="fill-primary" textColour="text-white" />
 
       <p className="text-lg font-normal leading-9 text-center font-montserrat text-primary-text">
         Hands Down is a family run martial arts club in Surrey set up by

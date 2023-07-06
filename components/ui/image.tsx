@@ -5,20 +5,27 @@ interface iImage {
   src: string;
   alt: string;
   className?: string;
+  imgPosition?: string;
+  cover?: boolean;
 }
 
-export default function Image({ src, alt, className }: iImage) {
+export default function Image({
+  src,
+  alt,
+  className,
+  imgPosition,
+  cover,
+}: iImage) {
   return (
-    <div className="w-full">
-      <NextImage
-        src={src}
-        alt={alt}
-        fill
-        style={{
-          objectFit: "contain",
-        }}
-        className={className}
-      />
-    </div>
+    <NextImage
+      src={src}
+      alt={alt}
+      fill
+      style={{
+        objectFit: cover ? "cover" : "contain",
+        objectPosition: imgPosition ? imgPosition : "center",
+      }}
+      className={className}
+    />
   );
 }
