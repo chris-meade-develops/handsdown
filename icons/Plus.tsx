@@ -1,5 +1,3 @@
-import { SvgProps } from "./icons";
-
 export default function Plus({ className }: SvgProps) {
   return (
     <svg id="Layer_1" viewBox="0 0 512 512" className={className}>
