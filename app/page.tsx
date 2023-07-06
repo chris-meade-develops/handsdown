@@ -8,6 +8,8 @@ import Heading from "@/components/ui/heading";
 import Pricing from "@/components/cards/pricing";
 import Image from "@/components/ui/image";
 import Primary from "@/components/links/primary";
+import Review from "@/components/cards/reviews";
+import Carousel from "@/components/carousel/carousel";
 
 const classes = [
   {
@@ -56,6 +58,30 @@ const pricing = [
     description:
       "Full access to set classes. Up to 21 hours of training available per month. from £3 per class",
     footer: "Our best seller! Intended to help you progress quickly",
+  },
+];
+
+const reviews = [
+  {
+    review:
+      "A great way to improve fitness, in a family friendly atmosphere. Progress at your pace with the support of the very experienced instructors.",
+    name: "James Brown",
+    description: "member for 4 years",
+    image: "/images/James_Brown_headshot.jpeg",
+  },
+  {
+    review:
+      "A great way to improve fitness, in a family friendly atmosphere. Progress at your pace with the support of the very experienced instructors.",
+    name: "James Brown",
+    description: "member for 4 years",
+    image: "/images/James_Brown_headshot.jpeg",
+  },
+  {
+    review:
+      "A great way to improve fitness, in a family friendly atmosphere. Progress at your pace with the support of the very experienced instructors.",
+    name: "James Brown",
+    description: "member for 4 years",
+    image: "/images/James_Brown_headshot.jpeg",
   },
 ];
 
@@ -132,9 +158,41 @@ export default async function Home() {
           </div>
         </Section>
         <Section
+          bgColor="bg-primary"
+          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-primary py-23 font-montserrat text-tertiary-text"
+        >
+          <Heading
+            text="member's reviews"
+            fill="fill-white"
+            textColour="text-primary-text"
+          >
+            <h2
+              className={`relative z-1 max-w-[155px] uppercase font-montserrat font-extrabold text-xl leading-6 text-center text-primary-text -translate-x-1/2 -translate-y-1/2 left-[37%] top-1/4 whitespace-nowrap`}
+            >
+              member&#39;s reviews
+            </h2>
+          </Heading>
+          <Carousel>
+            {reviews.map((item, index) => (
+              <Review key={index} {...item} />
+            ))}
+          </Carousel>
+        </Section>
+        <Section
           bgColor="bg-secondary"
           className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 font-montserrat text-tertiary-text"
         >
+          <Heading
+            text="book a trial class"
+            fill="fill-primary"
+            textColour="text-white"
+          >
+            <h2
+              className={`relative z-1 max-w-[155px] uppercase font-montserrat font-extrabold text-xl leading-6 text-center text-white -translate-x-1/2 -translate-y-1/2 left-[34%] top-1/4 whitespace-nowrap`}
+            >
+              book a trial class
+            </h2>
+          </Heading>
           <div className="text-center mb-13">
             Fill in the form below and we’ll be in touch to book you in to try
             one of our classes
