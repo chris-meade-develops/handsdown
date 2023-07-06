@@ -18,7 +18,7 @@ export default function ToThe({ className }: SvgProps) {
         />
       </clipPath>
     </defs>
-    <g id="Group_5228" data-name="Group 5228" clip-path="url(#clip-path)">
+    <g id="Group_5228" data-name="Group 5228" clipPath="url(#clip-path)">
       <path
         id="Path_2105"
         data-name="Path 2105"

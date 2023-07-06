@@ -1,5 +1,5 @@
 import { TakeYourself, ToThe, NextLevel } from "../../icons";
-import Image from "../ui/image";
+import Image from "./image";
 
 interface HeroBrushProps {
   svgOne: string;
@@ -17,11 +17,12 @@ export default function HeroBrush({
       <TakeYourself className={svgOne} />
       <ToThe className={svgTwo} />
       <NextLevel className={svgThree} />
-      <div className="absolute w-full h-full">
+      <div className="absolute w-[70%] h-full">
         <Image
           src="/images/TakeYourselfTotheNextLevel.png"
-          className="h-auto  z-2"
+          className="h-auto z-2"
           alt="take yourself to the next level"
+          cover={false}
         />
       </div>
     </div>
