@@ -5,5 +5,6 @@ import TakeYourself from "./TakeYourself";
 import ToThe from "./ToThe";
 import NextLevel from "./NextLevel";
 import HeadingBrush from "./HeadingBrush";
+import Quote from "./Quote";
 
-export { Phone, Plus, Minus, TakeYourself, ToThe, NextLevel, HeadingBrush };
+export { Phone, Plus, Minus, TakeYourself, ToThe, NextLevel, HeadingBrush, Quote };
