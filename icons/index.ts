@@ -6,5 +6,22 @@ import ToThe from "./ToThe";
 import NextLevel from "./NextLevel";
 import HeadingBrush from "./HeadingBrush";
 import Quote from "./Quote";
+import Facebook from "./Facebook";
+import Instagram from "./Instagram";
+import Twitter from "./Twitter";
+import StackedSquares from "./StackedSquares";
 
-export { Phone, Plus, Minus, TakeYourself, ToThe, NextLevel, HeadingBrush, Quote };
+export {
+  Phone,
+  Plus,
+  Minus,
+  TakeYourself,
+  ToThe,
+  NextLevel,
+  HeadingBrush,
+  Quote,
+  Facebook,
+  Instagram,
+  Twitter,
+  StackedSquares,
+};
