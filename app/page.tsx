@@ -6,10 +6,11 @@ import Intro from "@/components/intro";
 import Classes from "@/components/cards/classes";
 import Heading from "@/components/ui/heading";
 import Pricing from "@/components/cards/pricing";
-import Image from "@/components/ui/image";
 import Primary from "@/components/links/primary";
 import Review from "@/components/cards/reviews";
 import Carousel from "@/components/carousel/carousel";
+import Icons from "@/components/social/icons";
+import InstagramFeed from "@/components/social/instagramFeed";
 
 const classes = [
   {
@@ -198,6 +199,18 @@ export default async function Home() {
             one of our classes
           </div>
           <Form />
+        </Section>
+        <Section
+          bgColor="bg-offBlack"
+          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-offBlack py-23 font-montserrat text-tertiary-text"
+        >
+          <Heading
+            text="Follow us"
+            fill="fill-white"
+            textColour="text-primary-text"
+          />
+          <Icons />
+          <InstagramFeed />
         </Section>
       </main>
     </div>
