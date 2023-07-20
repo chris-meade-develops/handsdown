@@ -1,5 +1,5 @@
 import Input from "./Input";
-import Select from "./Select";
+import Select from "./CustomSelect";
 import Checkbox from "./Checkbox";
 import Radio from "./Radio";
 
