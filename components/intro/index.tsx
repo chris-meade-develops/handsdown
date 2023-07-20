@@ -1,5 +1,5 @@
-import Primary from '../links/primary'
-import Heading from '../ui/heading'
+import Primary from '../links/Primary'
+import Heading from '../ui/Heading'
 
 export default function Intro() {
   return (

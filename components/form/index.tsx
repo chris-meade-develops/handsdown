@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import Radio from "./radio";
+import Radio from "./Radio";
 import FormSection from "./FormSection";
-import Expander from "../ui/expander";
-import Primary from "../buttons/primary";
+import Expander from "../ui/Expander";
+import Primary from "../buttons/Primary";
 
 const options = [
   { value: "dragons", label: "HD Little Dragons (Ages 5-6)" },

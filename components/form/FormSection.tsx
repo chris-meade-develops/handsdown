@@ -1,7 +1,7 @@
-import Input from "./input";
-import Select from "./select";
-import Checkbox from "./checkbox";
-import Radio from "./radio";
+import Input from "./Input";
+import Select from "./Select";
+import Checkbox from "./Checkbox";
+import Radio from "./Radio";
 
 export default function FormSection({ options }: iFormSectionProps) {
   const componentMap: ComponentMap = {

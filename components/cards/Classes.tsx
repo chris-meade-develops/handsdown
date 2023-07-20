@@ -1,5 +1,5 @@
-import Primary from "../links/primary";
-import Image from "../ui/image";
+import Primary from "../links/Primary";
+import Image from "../ui/Image";
 
 interface iClassesCardProps {
   title: string;

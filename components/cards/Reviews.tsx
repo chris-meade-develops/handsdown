@@ -1,5 +1,5 @@
 import { Quote } from "@/icons";
-import Image from "../ui/image";
+import Image from "../ui/Image";
 
 interface ReviewProps {
   review: string;

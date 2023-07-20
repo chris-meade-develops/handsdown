@@ -1,7 +1,7 @@
 "use client";
-import Primary from "../buttons/primary";
+import Primary from "../buttons/Primary";
 import HeroBrush from "../ui/HeroBrush";
-import Image from "../ui/image";
+import Image from "../ui/Image";
 
 export default function Hero() {
   return (
