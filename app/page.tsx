@@ -1,16 +1,16 @@
 import NavigationComposer from "@/components/navigation";
 import Hero from "@/components/hero";
-import Section from "@/components/layout/section";
+import Section from "@/components/layout/Section";
 import Form from "@/components/form";
 import Intro from "@/components/intro";
-import Classes from "@/components/cards/classes";
-import Heading from "@/components/ui/heading";
-import Pricing from "@/components/cards/pricing";
-import Primary from "@/components/links/primary";
-import Review from "@/components/cards/reviews";
-import Carousel from "@/components/carousel/carousel";
-import Icons from "@/components/social/icons";
-import InstagramFeed from "@/components/social/instagramFeed";
+import Classes from "@/components/cards/Classes";
+import Heading from "@/components/ui/Heading";
+import Pricing from "@/components/cards/Pricing";
+import Review from "@/components/cards/Reviews";
+import Carousel from "@/components/carousel/Carousel";
+import Icons from "@/components/social/Icons";
+import InstagramFeed from "@/components/social/InstagramFeed";
+import Primary from "@/components/links/Primary";
 
 const classes = [
   {

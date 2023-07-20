@@ -1,5 +1,5 @@
 import { TakeYourself, ToThe, NextLevel } from "../../icons";
-import Image from "./image";
+import Image from "./Image";
 
 interface HeroBrushProps {
   svgOne: string;

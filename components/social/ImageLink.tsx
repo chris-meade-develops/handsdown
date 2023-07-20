@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Image from '../ui/image'
+import Image from '../ui/Image'
 import StackedSquares from '@/icons/StackedSquares'
 
 export default function ImageLink({ image, link }: iImageLinks) {

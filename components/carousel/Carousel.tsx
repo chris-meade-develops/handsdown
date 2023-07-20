@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { EmblaOptionsType, EmblaCarouselType } from "embla-carousel-react";
-import DotButton from "./dotButton";
+import DotButton from "./DotButton";
 
 interface CarouselProps {
   children: React.ReactNode;

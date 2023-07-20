@@ -1,5 +1,5 @@
 //this will need to query the instagram api and return the images
-import ImageLink from "@/components/social/imageLink"
+import ImageLink from "@/components/social/ImageLink"
 
 const images: iImageLinks[] = [
   {
