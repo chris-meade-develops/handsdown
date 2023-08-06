@@ -21,6 +21,11 @@ const openSans = Open_Sans({
   variable: '--font-open-sans',
 })
 
+const deadIsland = localFont({
+  src: '../fonts/DeadIsland.ttf',
+  variable: '--font-dead-island',
+})
+
 export const metadata: Metadata = {
   title: 'Hands Down Martial Arts, Boxing, Kickboxing in Cobham & Epsom',
   description:
@@ -35,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${futura.variable} ${montserrat.variable} ${openSans.variable}`}
+      className={`${futura.variable} ${montserrat.variable} ${openSans.variable} ${deadIsland.variable}`}
     >
       <body className="overflow-x-hidden">
         {children}
