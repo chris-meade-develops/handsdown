@@ -3,7 +3,7 @@ export default function ToThe({ className }: SvgProps) {
     <svg
     xmlns="http://www.w3.org/2000/svg"
     width="100%"
-    height="100.02"
+    height="116"
     viewBox="0 0 311.192 100.02"
     className={className}
   >
@@ -13,7 +13,7 @@ export default function ToThe({ className }: SvgProps) {
           id="Rectangle_4744"
           data-name="Rectangle 4744"
           width="100%"
-          height="100.02"
+          height="116"
           fill="none"
         />
       </clipPath>

@@ -1,26 +1,28 @@
 "use client";
+import { HeroLogo } from "@/icons";
 import Primary from "../buttons/Primary";
 import HeroBrush from "../ui/HeroBrush";
-import Image from "../ui/Image";
 
 export default function Hero() {
   return (
-    <div className="relative w-full h-[622px] xl:h-[792px] bg-hero-pattern bg-no-repeat bg-cover bg-[23%] xl:bg-center z-0 flex flex-col items-center justify-center">
+    <section className="relative w-full bg-hero-pattern bg-no-repeat bg-cover bg-[23%]smbg-center z-0 flex flex-col items-center justify-between sm:pt-48 sm:pb-51">
       <div className="absolute top-0 w-full h-full bg-offBlack/50 z-2" />
-      
-      <HeroBrush svgOne="absolute -top-[44px]" svgTwo="absolute top-1/3 " svgThree="absolute -bottom-[81px] " />
 
-      <h1 className="text-white font-montserrat text-base uppercase font-extrabold leading-[22px] max-w-[220px] z-2 mb-9 mt-31">
+      <HeroLogo className="h-auto z-3 w-52 sm:w-[226px] mb-16" />
+      
+      <HeroBrush svgOne="absolute -top-[44px] sm:-top-[6px] h-[138px] sm:h-[147px]" svgTwo="absolute top-[46%] " svgThree="absolute -bottom-[77px] sm:-bottom-[75px] sm:-left-[47px] " />
+
+      <h1 className="text-white font-montserrat text-base uppercase font-extrabold leading-[22px] max-w-[220px] sm:max-w-none z-2 mb-9 mt-31 sm:text-xl sm:leading-6 sm:font-extrabold sm:whitespace-nowrap ">
         Surrey&apos;s world class martial arts academy
       </h1>
 
-      <div className="w-[71%] mx-auto h-25 relative z-2">
+      <div className="w-[71%] sm:w-[301px] sm:h-[55px] mx-auto relative z-2">
         <Primary type="button" onClick={() => console.log("clicked")}>
-          <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
+          <span className="flex items-center justify-center text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text sm:text-base sm:tracking-widest">
             book a trial class
           </span>
         </Primary>
       </div>
-    </div>
+    </section>
   );
 }

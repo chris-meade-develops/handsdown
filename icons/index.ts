@@ -10,6 +10,7 @@ import Facebook from "./Facebook";
 import Instagram from "./Instagram";
 import Twitter from "./Twitter";
 import StackedSquares from "./StackedSquares";
+import HeroLogo from "./HeroLogo";
 
 export {
   Phone,
@@ -24,4 +25,5 @@ export {
   Instagram,
   Twitter,
   StackedSquares,
+  HeroLogo,
 };

@@ -4,7 +4,7 @@ import BurgerMenu from "./BurgerMenu";
 
 export default function Mobile({ open, onClick }: MobileNav) {
   return (
-    <nav className="absolute top-0 left-0 w-full py-20 xl:hidden px-14 z-2">
+    <nav className="absolute top-0 left-0 w-full py-20 md:hidden px-14 z-2">
       <ul className="flex items-center justify-between list-none">
         <li>
           <BurgerMenu open={open} onClick={onClick} />
