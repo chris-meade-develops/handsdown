@@ -11,7 +11,6 @@ import Carousel from '@/components/carousel/Carousel'
 import Icons from '@/components/social/Icons'
 import InstagramFeed from '@/components/social/InstagramFeed'
 import Primary from '@/components/links/Primary'
-import Image from 'next/image'
 import Kalon from '@/components/coaches/Kalon'
 import Michael from '@/components/coaches/Michael'
 
@@ -89,6 +88,13 @@ const reviews = [
   },
 ]
 
+// const carouselOptions = {
+//   breakpoints: {
+//     '(min-width: 768px)': { active: false },
+//   },
+//   slidesToScroll: 3,
+// }
+
 export default async function Home() {
   return (
     <div className="relative">
@@ -133,10 +139,10 @@ export default async function Home() {
           bgColor="bg-secondary"
           className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 font-montserrat text-tertiary-text"
         >
-          <div className="absolute w-full h-full opacity-10">
+          <div className="absolute w-full h-full opacity-10 md:top-0">
             <img
               src="/images/action_shot.jpg"
-              className="object-cover object-[-242px_-30px] w-full h-full"
+              className="object-cover object-[-242px_-30px] w-full h-full md:object-center "
               alt="action shot"
             />
           </div>
@@ -146,7 +152,7 @@ export default async function Home() {
             textColour="text-white"
           >
             <h2
-              className={`relative z-1 max-w-[155px] uppercase font-montserrat font-extrabold text-xl leading-6 text-center text-white -translate-x-1/2 -translate-y-1/2 left-[34%] top-1/4 whitespace-nowrap`}
+              className={`relative z-1 max-w-[155px] uppercase font-montserrat font-extrabold text-xl leading-6 text-center text-white -translate-x-1/2 -translate-y-1/2 left-[38%] top-1/4 whitespace-nowrap`}
             >
               pricing programes
             </h2>
@@ -155,12 +161,12 @@ export default async function Home() {
             We offer 2 different pricing programmes depending on your budget,
             training goals and time commitment.
           </p>
-          <div className="flex flex-col md:flex-row md:gap-30 md:px-51">
+          <div className="flex flex-col md:flex-row md:gap-30 md:px-51 md:mb-34">
             {pricing.map((item, index) => (
               <Pricing key={index} {...item} />
             ))}
           </div>
-          <div className="h-25 w-[269px] mx-auto mb-14">
+          <div className="h-25 w-[269px] md:w-[305px] md:h-[55px] mx-auto mb-14 z-1 relative">
             <Primary href="/pricing">
               <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
                 learn more
@@ -170,7 +176,7 @@ export default async function Home() {
         </Section>
         <Section
           bgColor="bg-primary"
-          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-primary py-23 font-montserrat text-tertiary-text"
+          className="relative pl-8 pr-10 text-base font-medium leading-7 md:px-23 bg-primary py-23 font-montserrat text-tertiary-text"
         >
           <Heading
             text="member's reviews"
@@ -183,15 +189,33 @@ export default async function Home() {
               member&#39;s reviews
             </h2>
           </Heading>
-          <Carousel>
+          <div className="hidden grid-cols-3 md:grid gap-11">
             {reviews.map((item, index) => (
-              <Review key={index} {...item} />
+              <div key={index} className="max-w-[436px]">
+                <Review {...item} />
+              </div>
             ))}
-          </Carousel>
+          </div>
+          <div className="hidden md:block mx-auto max-w-[305px] h-[55px] mt-40 mb-15">
+            <Primary href="/reviews">
+              <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
+                read more
+              </span>
+            </Primary>
+          </div>
+          <div className="md:hidden">
+            <Carousel>
+              {reviews.map((item, index) => (
+                <div key={index} className="embla_slide flex-[0_0_100%] mb-19">
+                  <Review {...item} />
+                </div>
+              ))}
+            </Carousel>
+          </div>
         </Section>
         <Section
           bgColor="bg-secondary"
-          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 font-montserrat text-tertiary-text"
+          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 font-montserrat text-tertiary-text md:px-[25%]"
         >
           <Heading
             text="book a trial class"
@@ -199,7 +223,7 @@ export default async function Home() {
             textColour="text-white"
           >
             <h2
-              className={`relative z-1 max-w-[155px] uppercase font-montserrat font-extrabold text-xl leading-6 text-center text-white -translate-x-1/2 -translate-y-1/2 left-[34%] top-1/4 whitespace-nowrap`}
+              className={`relative z-1 max-w-[155px] uppercase font-montserrat font-extrabold text-xl leading-6 text-center text-white -translate-x-1/2 -translate-y-1/2 left-[38%] top-1/4 whitespace-nowrap`}
             >
               book a trial class
             </h2>
@@ -212,7 +236,7 @@ export default async function Home() {
         </Section>
         <Section
           bgColor="bg-offBlack"
-          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-offBlack py-23 font-montserrat text-tertiary-text"
+          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-offBlack py-23 md:px-53 md:pt-26 md:pb-49 font-montserrat text-tertiary-text"
         >
           <Heading
             text="Follow us"

@@ -15,7 +15,7 @@ export default function Review({
   image,
 }: ReviewProps) {
   return (
-    <div className="embla_slide flex-[0_0_100%] min-w-0 w-full rounded-[15px] relative overflow-hidden flex flex-col mb-19 pt-16 pb-25 px-15 bg-white font-montserrat text-base font-medium">
+    <div className="min-w-0 w-full rounded-[15px] relative overflow-hidden flex flex-col pt-16 pb-25 px-15 bg-white font-montserrat text-base font-medium">
       <div className="absolute w-6 h-6 rounded-full bg-primary-text top-6 left-6"></div>
       <div className="absolute w-6 h-6 rounded-full bg-primary-text top-6 right-6"></div>
       <div className="absolute w-6 h-6 rounded-full bg-primary-text bottom-6 left-6"></div>

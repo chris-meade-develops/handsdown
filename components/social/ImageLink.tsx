@@ -4,7 +4,7 @@ import StackedSquares from '@/icons/StackedSquares'
 
 export default function ImageLink({ image, link }: iImageLinks) {
   return (
-    <Link href={link} className="relative w-51 h-50">
+    <Link href={link} className="relative block w-full h-auto pb-[50%] min-h-[156px] md:min-h-[334px]">
       <StackedSquares className="absolute w-2 h-2 right-2 top-2 stroke-transparent fill-white" />
       <Image
         src={image}
