@@ -4,7 +4,6 @@ export default function TakeYourself({ className }: SvgProps) {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1043.594 138.658"
       width="100%"
-      height="138px"
       className={className}
     >
       <path

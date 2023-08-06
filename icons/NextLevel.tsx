@@ -5,7 +5,7 @@ export default function NextLevel({ className }: SvgProps) {
       viewBox="0 0 1000.225 146.781"
       className={className}
       width="100%"
-      height={146.781}
+      height={164}
     >
       <defs>
         <clipPath id="clip-end-path">
