@@ -1,6 +1,6 @@
 export default function Radio({ onChange, name, label }: iRadio) {
   return (
-    <label className="w-full">
+    <label className="flex items-center">
       <input
         type="radio"
         className="rounded-full text-tertiary-text h-9 w-9 form-radio border-tertiary-text focus:ring-transparent "

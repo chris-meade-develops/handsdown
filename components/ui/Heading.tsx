@@ -22,7 +22,7 @@ export default function Heading({
         children
       ) : (
         <h2
-          className={`relative z-1 max-w-[155px] uppercase font-montserrat font-extrabold text-xl leading-6 text-center ${textColour} -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/4 whitespace-nowrap`}
+          className={`relative z-1 max-w-[155px] uppercase font-montserrat font-extrabold text-xl leading-6 text-center ${textColour} -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/4 whitespace-nowrap md:text-2xl`}
         >
           {text}
         </h2>
