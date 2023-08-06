@@ -110,7 +110,7 @@ export default async function Home() {
         </Section>
         <Section
           bgColor="bg-primary"
-          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-primary py-23 font-montserrat text-tertiary-text"
+          className="relative pl-8 pr-10 text-base font-medium leading-7 md:px-40 bg-primary py-23 font-montserrat text-tertiary-text"
         >
           <Heading
             text="Our classes"
@@ -123,9 +123,11 @@ export default async function Home() {
             progression across both Epsom and Cobham.
           </p>
 
-          {classes.map((item, index) => (
-            <Classes key={index} {...item} />
-          ))}
+          <div className="flex flex-col md:grid md:grid-cols-4 md:gap-24">
+            {classes.map((item, index) => (
+              <Classes key={index} {...item} />
+            ))}
+          </div>
         </Section>
         <Section
           bgColor="bg-secondary"
@@ -149,14 +151,15 @@ export default async function Home() {
               pricing programes
             </h2>
           </Heading>
-          <p className="mb-20 text-base text-center text-primary font-open-sans opacity-80 min-w-[334px] mx-auto leading-7">
+          <p className="mb-20 text-base text-center text-primary font-open-sans opacity-80 min-w-[334px] mx-auto leading-7 md:text-lg md:max-w-[664px]">
             We offer 2 different pricing programmes depending on your budget,
             training goals and time commitment.
           </p>
-
-          {pricing.map((item, index) => (
-            <Pricing key={index} {...item} />
-          ))}
+          <div className="flex flex-col md:flex-row md:gap-30 md:px-51">
+            {pricing.map((item, index) => (
+              <Pricing key={index} {...item} />
+            ))}
+          </div>
           <div className="h-25 w-[269px] mx-auto mb-14">
             <Primary href="/pricing">
               <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
