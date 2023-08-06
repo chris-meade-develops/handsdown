@@ -1,4 +1,4 @@
-const navItems = [
+const navItems: NavigationItem[] = [
   { href: "/classes", label: "classes", items: [
     { href: "/classes/dragons", label: "HD Dragons (Ages 5-6)" },
     { href: "/classes/children", label: "Children (Ages 7+)" },

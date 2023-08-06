@@ -9,6 +9,7 @@ interface Toggleable {
 interface NavigationItem {
   href: string;
   label: string;
+  items?: NavigationItem[];
 }
 
 interface NavigationList {
