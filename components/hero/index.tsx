@@ -10,7 +10,7 @@ export default function Hero() {
 
       <HeroLogo className="h-auto z-3 w-52 sm:w-[226px] mb-16" />
       
-      <HeroBrush svgOne="absolute -top-[14px] sm:-top-[6px] h-[83px] sm:h-[147px]" svgTwo="absolute top-[46%] hidden sm:block " svgThree="absolute -bottom-[44px] sm:-bottom-[75px] sm:-left-[47px]" svgFour="absolute -bottom-[68px] rotate-180 sm:hidden" />
+      <HeroBrush svgOne="absolute -top-[14px] sm:-top-[12px] h-[83px] sm:h-[147px]" svgTwo="absolute top-[46%] hidden sm:block " svgThree="absolute -bottom-[44px] sm:-bottom-[85px] sm:-left-[47px]" svgFour="absolute -bottom-[68px] rotate-180 sm:hidden" />
 
       <h1 className="text-white font-montserrat text-base uppercase font-extrabold leading-[22px] max-w-[220px] sm:max-w-none z-2 mb-9 mt-31 sm:text-xl sm:leading-6 sm:font-extrabold sm:whitespace-nowrap ">
         Surrey&apos;s world class martial arts academy

@@ -1,90 +1,93 @@
-import NavigationComposer from "@/components/navigation";
-import Hero from "@/components/hero";
-import Section from "@/components/layout/Section";
-import Form from "@/components/form";
-import Intro from "@/components/intro";
-import Classes from "@/components/cards/Classes";
-import Heading from "@/components/ui/Heading";
-import Pricing from "@/components/cards/Pricing";
-import Review from "@/components/cards/Reviews";
-import Carousel from "@/components/carousel/Carousel";
-import Icons from "@/components/social/Icons";
-import InstagramFeed from "@/components/social/InstagramFeed";
-import Primary from "@/components/links/Primary";
+import NavigationComposer from '@/components/navigation'
+import Hero from '@/components/hero'
+import Section from '@/components/layout/Section'
+import Form from '@/components/form'
+import Intro from '@/components/intro'
+import Classes from '@/components/cards/Classes'
+import Heading from '@/components/ui/Heading'
+import Pricing from '@/components/cards/Pricing'
+import Review from '@/components/cards/Reviews'
+import Carousel from '@/components/carousel/Carousel'
+import Icons from '@/components/social/Icons'
+import InstagramFeed from '@/components/social/InstagramFeed'
+import Primary from '@/components/links/Primary'
+import Image from 'next/image'
+import Kalon from '@/components/coaches/Kalon'
+import Michael from '@/components/coaches/Michael'
 
 const classes = [
   {
-    title: "HD Dragons",
-    description: "(Ages 5 - 6)",
-    image: "/images/happy.jpg",
-    alt: "HD Dragons",
-    link: "/classes/dragons",
+    title: 'HD Dragons',
+    description: '(Ages 5 - 6)',
+    image: '/images/happy.jpg',
+    alt: 'HD Dragons',
+    link: '/classes/dragons',
   },
   {
-    title: "Children",
-    description: "(Ages 5 - 6)",
-    image: "/images/children.jpg",
-    alt: "Children",
-    link: "/classes/children",
+    title: 'Children',
+    description: '(Ages 5 - 6)',
+    image: '/images/children.jpg',
+    alt: 'Children',
+    link: '/classes/children',
   },
   {
-    title: "Juniors",
-    description: "(Ages 5 - 6)",
-    image: "/images/juniors.jpg",
-    alt: "Juniors",
-    link: "/classes/juniors",
+    title: 'Juniors',
+    description: '(Ages 5 - 6)',
+    image: '/images/juniors.jpg',
+    alt: 'Juniors',
+    link: '/classes/juniors',
   },
   {
-    title: "Adults",
-    description: "(Ages 5 - 6)",
-    image: "/images/michael-grading.jpg",
-    alt: "Adults",
-    link: "/classes/adults",
-    imgPosition: "top center",
+    title: 'Adults',
+    description: '(Ages 5 - 6)',
+    image: '/images/michael-grading.jpg',
+    alt: 'Adults',
+    link: '/classes/adults',
+    imgPosition: 'top center',
   },
-];
+]
 
 const pricing = [
   {
     highlight: false,
-    title: "1 session per week",
-    pricing: "£50",
-    description: "Works out at roughly £12.50 per class",
-    footer: "Great for beginners or those looking to improve their fitness",
+    title: '1 session per week',
+    pricing: '£50',
+    description: 'Works out at roughly £12.50 per class',
+    footer: 'Great for beginners or those looking to improve their fitness',
   },
   {
     highlight: true,
-    title: "Unlimited",
-    pricing: "£65",
+    title: 'Unlimited',
+    pricing: '£65',
     description:
-      "Full access to set classes. Up to 21 hours of training available per month. from £3 per class",
-    footer: "Our best seller! Intended to help you progress quickly",
+      'Full access to set classes. Up to 21 hours of training available per month. from £3 per class',
+    footer: 'Our best seller! Intended to help you progress quickly',
   },
-];
+]
 
 const reviews = [
   {
     review:
-      "A great way to improve fitness, in a family friendly atmosphere. Progress at your pace with the support of the very experienced instructors.",
-    name: "James Brown",
-    description: "member for 4 years",
-    image: "/images/James_Brown_headshot.jpeg",
+      'A great way to improve fitness, in a family friendly atmosphere. Progress at your pace with the support of the very experienced instructors.',
+    name: 'James Brown',
+    description: 'member for 4 years',
+    image: '/images/James_Brown_headshot.jpeg',
   },
   {
     review:
-      "A great way to improve fitness, in a family friendly atmosphere. Progress at your pace with the support of the very experienced instructors.",
-    name: "James Brown",
-    description: "member for 4 years",
-    image: "/images/James_Brown_headshot.jpeg",
+      'A great way to improve fitness, in a family friendly atmosphere. Progress at your pace with the support of the very experienced instructors.',
+    name: 'James Brown',
+    description: 'member for 4 years',
+    image: '/images/James_Brown_headshot.jpeg',
   },
   {
     review:
-      "A great way to improve fitness, in a family friendly atmosphere. Progress at your pace with the support of the very experienced instructors.",
-    name: "James Brown",
-    description: "member for 4 years",
-    image: "/images/James_Brown_headshot.jpeg",
+      'A great way to improve fitness, in a family friendly atmosphere. Progress at your pace with the support of the very experienced instructors.',
+    name: 'James Brown',
+    description: 'member for 4 years',
+    image: '/images/James_Brown_headshot.jpeg',
   },
-];
+]
 
 export default async function Home() {
   return (
@@ -97,9 +100,13 @@ export default async function Home() {
         <Hero />
         <Section
           bgColor="bg-secondary"
-          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 font-montserrat text-tertiary-text"
+          className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 md:pt-40 md:pb-43 font-montserrat text-tertiary-text"
         >
           <Intro />
+          <div className="hidden md:block">
+            <Kalon />
+            <Michael />
+          </div>
         </Section>
         <Section
           bgColor="bg-primary"
@@ -214,5 +221,5 @@ export default async function Home() {
         </Section>
       </main>
     </div>
-  );
+  )
 }
