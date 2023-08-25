@@ -9,7 +9,7 @@ namespace ICms {
     href: string
   }
 
-  interface Footer { 
+  interface Footer {
     location: string
     address: string
     telephone: string
@@ -35,7 +35,7 @@ namespace ICms {
 
   interface Page {
     hero: Hero
-    body : Body
+    body: Body
   }
 
   interface Social extends Image, Link {}
@@ -44,5 +44,9 @@ namespace ICms {
     pricing: ICard.CallToAction[]
     reviews: ICard.WithImage[]
     classes: ICard.WithImage[]
+  }
+
+  interface ClassPage extends Omit<HomePage, 'pricing'> {
+    graduates: ICard.WithImage[]
   }
 }

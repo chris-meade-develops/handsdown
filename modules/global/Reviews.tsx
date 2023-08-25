@@ -14,13 +14,7 @@ export default function Reviews({ data }: { data: ICard.WithImage[] }) {
         text="member's reviews"
         fill="fill-white"
         textColour="text-primary-text"
-      >
-        <h2
-          className={`relative z-1 max-w-[155px] uppercase font-montserrat font-extrabold text-xl leading-6 text-center text-primary-text -translate-x-1/2 -translate-y-1/2 left-[37%] top-1/4 whitespace-nowrap`}
-        >
-          member&#39;s reviews
-        </h2>
-      </Heading>
+      />
       <div className="hidden grid-cols-3 md:grid gap-11">
         {data.map((item, index) => (
           <div key={index} className="max-w-[436px]">

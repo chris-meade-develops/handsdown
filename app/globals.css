@@ -25,3 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.tilted-left {
+  transform: perspective(1500px) rotateY(-20deg);
+}
+
+.tilted-right {
+  transform: perspective(1500px) rotateY(12deg);
+}

@@ -1,3 +1,4 @@
+import PrimaryLink from '../links/PrimaryLink'
 import Primary from '../links/PrimaryLink'
 import Image from '../ui/Image'
 
@@ -9,7 +10,7 @@ export default function ClassesCard({
   imgPosition,
 }: ICard.WithImage) {
   return (
-    <div className="w-full rounded-[30px] pt-47 relative overflow-hidden flex flex-col justify-end mb-27">
+    <div className="w-full rounded-[30px] pt-47 relative overflow-hidden flex flex-col justify-end mb-27 h-full">
       <Image
         src={image.src}
         alt={image.alt}
@@ -17,21 +18,23 @@ export default function ClassesCard({
         imgPosition={imgPosition}
         cover
       />
-      <div className="relative flex flex-col items-center w-full pt-8 h-1/2 bg-tertiary/75 z-1">
-        <h3 className="mt-8 text-2xl font-bold text-center text-white uppercase font-montserrat">
-          {title}
-        </h3>
-        <p className="mt-4 mb-6 text-base font-normal text-center text-white font-montserrat">
-          {description}
-        </p>
-        <div className="h-25 w-[185px] mx-auto mb-14">
-          {link && (
-            <Primary href={link}>
-              <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
-                learn more
-              </span>
-            </Primary>
-          )}
+      <div className="relative w-full pt-8 px-25 bg-tertiary/75 z-1">
+        <div className="md:mb-25">
+          <h3 className="mt-8 text-2xl font-bold text-center text-white uppercase font-montserrat">
+            {title}
+          </h3>
+          <p className="mt-4 mb-6 text-base font-normal text-center text-white font-montserrat">
+            {description}
+          </p>
+          <div className="h-25 w-[185px] mx-auto mb-14">
+            {link && (
+              <PrimaryLink href={link}>
+                <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
+                  learn more
+                </span>
+              </PrimaryLink>
+            )}
+          </div>
         </div>
       </div>
     </div>

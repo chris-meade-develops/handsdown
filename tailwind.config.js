@@ -4,9 +4,15 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './modules/**/**/**/*.{js,ts,jsx,tsx,mdx}'
+    './modules/**/**/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    extend: {
+      rotate: {
+        '30': '30deg',
+        '60': '60deg',
+      },
+    },
     screens: {
       sm: '768px',
       md: '1024px',
@@ -133,5 +139,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('tailwindcss-3d')({ legacy: true }),
+  ],
 }
