@@ -1,7 +1,7 @@
-"use client";
+"use client"
 import { HeroLogo } from "@/icons";
 import Primary from "../buttons/Primary";
-import HeroBrush from "../ui/HeroBrush";
+import HeroBrush from "./HeroBrush";
 
 export default function Hero() {
   return (

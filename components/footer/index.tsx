@@ -2,7 +2,7 @@ import { Phone } from '@/icons'
 import Link from 'next/link'
 import { default as NextImage } from 'next/image'
 
-const locations: iAddress[] = [
+const locations: ICms.Footer[] = [
   {
     location: 'Epsom',
     address: 'East St, Epsom, Surrey KT17 1BN (Rainbow Leisure Centre)',
@@ -58,7 +58,7 @@ export default function Footer() {
   )
 }
 
-function Address({ location, address, telephone }: iAddress) {
+function Address({ location, address, telephone }: ICms.Footer) {
   return (
     <div className="flex flex-col w-full whitespace-normal mb-14 md:justify-between">
       <p className="mb-6 font-bold">{location}</p>

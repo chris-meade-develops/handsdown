@@ -1,6 +1,6 @@
 "use client";
 
-export default function BurgerMenu({ onClick, open }: BurgerMenu) {
+export default function BurgerMenu({ onClick, open }: INavigation.BurgerMenu) {
   return (
     <button
       className="flex flex-col justify-between h-8 w-13"

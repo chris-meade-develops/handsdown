@@ -1,49 +1,44 @@
-"use client";
-import { useCallback, useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import { EmblaOptionsType, EmblaCarouselType } from "embla-carousel-react";
-import DotButton from "./DotButton";
+'use client'
+import { useCallback, useEffect, useState } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+import { EmblaCarouselType } from 'embla-carousel-react'
+import DotButton from './DotButton'
 
-interface CarouselProps {
-  children: React.ReactNode;
-  options?: EmblaOptionsType;
-}
-
-export default function Carousel({ children, options }: CarouselProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+export default function Carousel({ children, options }: ICarousel.Props) {
+  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
     [emblaApi]
-  );
+  )
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
     [emblaApi]
-  );
+  )
   const scrollTo = useCallback(
     (index: number) => emblaApi && emblaApi.scrollTo(index),
     [emblaApi]
-  );
+  )
 
   const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-    setScrollSnaps(emblaApi.scrollSnapList());
-  }, []);
+    setScrollSnaps(emblaApi.scrollSnapList())
+  }, [])
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, []);
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [])
 
   useEffect(() => {
-    if (!emblaApi) return;
+    if (!emblaApi) return
 
-    onInit(emblaApi);
-    onSelect(emblaApi);
-    emblaApi.on("reInit", onInit);
-    emblaApi.on("reInit", onSelect);
-    emblaApi.on("select", onSelect);
-  }, [emblaApi, onInit, onSelect]);
+    onInit(emblaApi)
+    onSelect(emblaApi)
+    emblaApi.on('reInit', onInit)
+    emblaApi.on('reInit', onSelect)
+    emblaApi.on('select', onSelect)
+  }, [emblaApi, onInit, onSelect])
 
   return (
     <>
@@ -60,5 +55,5 @@ export default function Carousel({ children, options }: CarouselProps) {
         ))}
       </div>
     </>
-  );
+  )
 }

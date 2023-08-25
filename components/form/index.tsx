@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import Radio from './Radio'
+import Radio from '../inputs/Radio'
 import FormSection from './FormSection'
 import Expander from '../ui/Expander'
 import Primary from '../buttons/Primary'
@@ -27,7 +27,7 @@ export default function Form() {
     ? selectValue
     : { value: '', label: 'Please select a course' }
 
-  const parentOptions: iFormOptions[] = [
+  const parentOptions: IForm.Options[] = [
     {
       type: 'input',
       props: {
@@ -60,7 +60,7 @@ export default function Form() {
     },
   ]
 
-  const studentOptions: iFormOptions[] = [
+  const studentOptions: IForm.Options[] = [
     {
       type: 'input',
       props: {
@@ -75,7 +75,7 @@ export default function Form() {
       type: 'select',
       props: {
         name: 'course',
-        stateSetter: setData,
+        onChange: setData,
         options: options,
         selectValue: parsedValue,
         label: 'Class to try',

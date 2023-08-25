@@ -1,49 +1,67 @@
 //this will need to query the instagram api and return the images
-import ImageLink from "@/components/social/ImageLink"
+import ImageLink from '@/components/social/ImageLink'
 
-const images: iImageLinks[] = [
+const images: ICms.Social[] = [
   {
-    image: "/images/michael-grading.jpg",
-    link: "https://www.instagram.com/p/CPQ4ZJ5nZ3I/",
+    src: '/images/michael-grading.jpg',
+    alt: 'Michael grading',
+    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
+    text: '',
   },
   {
-    image: "/images/michael-grading.jpg",
-    link: "https://www.instagram.com/p/CPQ4ZJ5nZ3I/",
+    src: '/images/michael-grading.jpg',
+    alt: 'Michael grading',
+    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
+    text: '',
   },
   {
-    image: "/images/michael-grading.jpg",
-    link: "https://www.instagram.com/p/CPQ4ZJ5nZ3I/",
+    src: '/images/michael-grading.jpg',
+    alt: 'Michael grading',
+    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
+    text: '',
   },
   {
-    image: "/images/michael-grading.jpg",
-    link: "https://www.instagram.com/p/CPQ4ZJ5nZ3I/",
+    src: '/images/michael-grading.jpg',
+    alt: 'Michael grading',
+    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
+    text: '',
   },
   {
-    image: "/images/michael-grading.jpg",
-    link: "https://www.instagram.com/p/CPQ4ZJ5nZ3I/",
+    src: '/images/michael-grading.jpg',
+    alt: 'Michael grading',
+    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
+    text: '',
   },
   {
-    image: "/images/michael-grading.jpg",
-    link: "https://www.instagram.com/p/CPQ4ZJ5nZ3I/",
+    src: '/images/michael-grading.jpg',
+    alt: 'Michael grading',
+    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
+    text: '',
   },
   {
-    image: "/images/michael-grading.jpg",
-    link: "https://www.instagram.com/p/CPQ4ZJ5nZ3I/",
+    src: '/images/michael-grading.jpg',
+    alt: 'Michael grading',
+    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
+    text: '',
   },
   {
-    image: "/images/michael-grading.jpg",
-    link: "https://www.instagram.com/p/CPQ4ZJ5nZ3I/",
+    src: '/images/michael-grading.jpg',
+    alt: 'Michael grading',
+    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
+    text: '',
   },
 ]
-
 
 export default function InstagramFeed() {
   return (
     <div className="grid grid-cols-2 gap-5 mb-18 md:grid-cols-3 md:gap-10">
       {images.map((image, index) => (
-        <ImageLink key={index} image={image.image} link={image.link} />
+        <ImageLink
+          key={index}
+          image={{ src: image.src, alt: image.alt }}
+          link={image.href}
+        />
       ))}
     </div>
   )
 }
-

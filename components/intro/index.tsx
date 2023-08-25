@@ -1,4 +1,4 @@
-import Primary from '../links/Primary'
+import Primary from '../links/PrimaryLink'
 import Heading from '../ui/Heading'
 
 export default function Intro() {

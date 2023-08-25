@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function MobileDropDown({ open, items }: MobileDropDown) {
+export default function MobileDropDown({ open, items }: INavigation.MobileDropDown) {
   if(!open) return null
   return (
     <div className="w-full py-11">

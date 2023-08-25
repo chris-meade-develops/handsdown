@@ -3,7 +3,7 @@ import Link from 'next/link'
 export default function DesktopDropDown({
   items,
 }: {
-  items: NavigationItem[]
+  items: INavigation.Item[]
 }) {
   return (
     <div className="absolute hidden pt-6 -translate-x-1/2 group-hover:block left-1/2">
