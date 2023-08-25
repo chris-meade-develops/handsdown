@@ -6,7 +6,7 @@ import { Plus, Minus } from "@/icons";
 
 const DynamicDropDown = dynamic(() => import("./MobileDropDown"));
 
-export default function MobileNavItem({ href, label, items }: MobileNavItem) {
+export default function MobileNavItem({ href, label, items }: INavigation.MobileItem) {
   const { open, toggle } = useToggle({ initial: false });
   if (items)
     return (

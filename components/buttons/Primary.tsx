@@ -1,4 +1,4 @@
-export default function Primary({ children, onClick, type }: Button) {
+export default function Primary({ children, onClick, type }: IButton.Props) {
   return (
     <button
       type={type}
