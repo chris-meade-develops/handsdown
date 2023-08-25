@@ -17,7 +17,7 @@ const locations: ICms.Footer[] = [
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col justify-center w-full pb-10 text-center text-white border-t-2 border-white md:justify-normal md:flex-row bg-offBlack px-35 pt-26 md:pl-45 font-montserrat md:text-lg ">
+    <footer className="flex flex-col justify-center w-full pb-10 text-center text-white border-t-2 border-white md:justify-normal md:flex-row bg-primary px-35 pt-26 md:pl-45 font-montserrat md:text-lg ">
       <div className="md:mr-55 md:w-1/3">
         <h4 className="text-[22px] md:text-2xl leading-7 font-extrabold mb-10 md:text-left">
           Visit us

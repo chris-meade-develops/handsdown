@@ -1,7 +1,7 @@
 namespace ISection {
   interface Props {
     children: React.ReactNode
-    bgColor: string
+    bgColor: 'bg-primary' | 'bg-secondary'
     className?: string
   }
 }

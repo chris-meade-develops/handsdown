@@ -1,10 +1,25 @@
 import { headers } from 'next/headers'
-import ClassesHero from '@/components/hero/ClassesHero'
+import ClassesHero from '@/modules/classes/sections/ClassesHero'
+import ClassesBody from '@/modules/classes/ClassesBody'
 
 async function getClassesData(pageName: string): Promise<ICms.Page> {
   'use server'
-  const data = (await import(`../../../temporary_data/pages/${pageName}`)).default
+  const data = (await import(`../../../temporary_data/pages/${pageName}`))
+    .default
   return data
+}
+
+async function getCarouselData(): Promise<{
+  reviews: ICard.WithImage[]
+  classes: ICard.WithImage[]
+  graduates: ICard.WithImage[]
+}> {
+  'use server'
+  const reviews = (await import('@/temporary_data/carousels/reviews')).default
+  const classes = (await import('@/temporary_data/carousels/classes')).default
+  const graduates = (await import('@/temporary_data/carousels/graduates')).default
+
+  return { reviews, classes, graduates }
 }
 
 export default async function Page() {
@@ -12,7 +27,8 @@ export default async function Page() {
   const activePath = headersList.get('x-invoke-path')
   const page = activePath?.split('/')[2]
 
-  const classesData: ICms.Page = await getClassesData(page!)
+  const cmsData: ICms.Page = await getClassesData(page!)
+  const pageData = await getCarouselData()
 
-  return <ClassesHero {...classesData.hero} />
+  return <ClassesBody cmsData={cmsData} pageData={pageData} />
 }

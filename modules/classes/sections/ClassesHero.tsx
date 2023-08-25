@@ -1,5 +1,5 @@
-import Primary from '../links/PrimaryLink'
-import HeroBrush from './HeroBrush'
+import Primary from '@/components/links/PrimaryLink'
+import HeroBrush from '@/components/hero/HeroBrush'
 
 export default function ClassesHero(heroData: ICms.Hero) {
   return (

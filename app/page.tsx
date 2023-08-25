@@ -2,7 +2,7 @@ import NavigationComposer from '@/components/navigation'
 import classes from '@/temporary_data/carousels/classes'
 import pricing from '@/temporary_data/callToAction/pricing'
 import reviews from '@/temporary_data/carousels/reviews'
-import Body from '@/modules/home/Body'
+import HomeBody from '@/modules/home/HomeBody'
 
 export default async function Home() {
   const props = {
@@ -15,7 +15,7 @@ export default async function Home() {
       <header>
         <NavigationComposer />
       </header>
-      <Body {...props} />
+      <HomeBody {...props} />
     </div>
   )
 }
