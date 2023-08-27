@@ -19,6 +19,7 @@ export default function ClassesHero(heroData: ICms.Hero) {
             svgThree="absolute -bottom-[44px] sm:-bottom-[85px] sm:-left-[68px]"
             svgFour="absolute -bottom-[71px] rotate-180 left-[55px]"
             image={false}
+            text={heroData}
           />
         </div>
       </div>
