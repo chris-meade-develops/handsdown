@@ -5,5 +5,6 @@ namespace IHero {
     svgThree: string
     svgFour: string
     image?: boolean
+    text?: Pick<ICms.Hero, 'title' | 'sub-title' | 'description'>
   }
 }
