@@ -144,9 +144,6 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwindcss-3d')({ legacy: true }),
-    plugin(function({addVariant}) {
-      addVariant('group-link', ':merge(.group).link &')
-      addVariant('group-button', ':merge(.group).button &')
-    })
+    require('tailwindcss-labeled-groups')(['links', 'buttons'])
   ],
 }
