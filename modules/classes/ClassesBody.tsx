@@ -4,6 +4,7 @@ import MeetTheCoaches from '../global/MeetTheCoaches'
 import Reviews from '../global/Reviews'
 import ClassesHero from './sections/ClassesHero'
 import LatestGraduates from './sections/LatestGraduates'
+import MainText from './sections/MainText'
 
 export default function ClassesBody({
   cmsData,
@@ -19,6 +20,7 @@ export default function ClassesBody({
   return (
     <main>
       <ClassesHero {...cmsData.hero} />
+      <MainText />
       <MeetTheCoaches coaches={pageData.coaches} />
       <LatestGraduates
         heading="Latest Graduates"
