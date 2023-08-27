@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,8 +11,8 @@ module.exports = {
   theme: {
     extend: {
       rotate: {
-        '30': '30deg',
-        '60': '60deg',
+        30: '30deg',
+        60: '60deg',
       },
     },
     screens: {
@@ -142,5 +144,9 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwindcss-3d')({ legacy: true }),
+    plugin(function({addVariant}) {
+      addVariant('group-link', ':merge(.group).link &')
+      addVariant('group-button', ':merge(.group).button &')
+    })
   ],
 }

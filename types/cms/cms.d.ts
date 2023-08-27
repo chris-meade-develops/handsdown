@@ -48,5 +48,6 @@ namespace ICms {
 
   interface ClassPage extends Omit<HomePage, 'pricing'> {
     graduates: ICard.WithImage[]
+    coaches: ICard.WithImage[]
   }
 }
