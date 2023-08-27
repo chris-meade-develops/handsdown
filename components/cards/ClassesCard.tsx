@@ -1,5 +1,4 @@
 import PrimaryLink from '../links/PrimaryLink'
-import Primary from '../links/PrimaryLink'
 import Image from '../ui/Image'
 
 export default function ClassesCard({

@@ -4,6 +4,8 @@ namespace ICarousel {
     options?: EmblaOptionsType
     displayButtons?: boolean
     displayDots?: boolean
+    selectableChildren?: boolean
+    reverseColors?: boolean
   }
   
   interface ButtonProps {
@@ -11,7 +13,7 @@ namespace ICarousel {
     onClick: () => void;
   };
 
-  interface ArrowButton {
+  interface ArrowButton extends Pick<Props, "reverseColors"> {
     type: "next" | "prev"
     onClick: () => void
   }

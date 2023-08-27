@@ -13,13 +13,15 @@ async function getCarouselData(): Promise<{
   reviews: ICard.WithImage[]
   classes: ICard.WithImage[]
   graduates: ICard.WithImage[]
+  coaches: ICard.WithImage[]
 }> {
   'use server'
   const reviews = (await import('@/temporary_data/carousels/reviews')).default
   const classes = (await import('@/temporary_data/carousels/classes')).default
   const graduates = (await import('@/temporary_data/carousels/graduates')).default
+  const coaches = (await import('@/temporary_data/carousels/coaches')).default
 
-  return { reviews, classes, graduates }
+  return { reviews, classes, graduates, coaches }
 }
 
 export default async function Page() {
