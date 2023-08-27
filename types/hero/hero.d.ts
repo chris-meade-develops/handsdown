@@ -4,5 +4,6 @@ namespace IHero {
     svgTwo: string
     svgThree: string
     svgFour: string
+    image?: boolean
   }
 }
