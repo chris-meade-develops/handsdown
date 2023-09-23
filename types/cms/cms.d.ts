@@ -50,4 +50,9 @@ namespace ICms {
     graduates: ICard.WithImage[]
     coaches: ICard.WithImage[]
   }
+
+  interface AboutPage {
+    cmsData: Page
+    reviews: ICard.WithImage[]
+  }
 }

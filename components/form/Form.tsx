@@ -94,7 +94,9 @@ export default function Form() {
     console.log(e.target.value)
   }
   return (
-    <form className="flex flex-col w-full text-base font-medium font-montserrat">
+    <form
+      className="flex flex-col w-full text-base font-medium font-montserrat"
+    >
       <div className="flex justify-center gap-10 mb-20 md:gap-20">
         <Radio
           onChange={handleChange}

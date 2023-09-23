@@ -4,7 +4,7 @@ import DesktopDropDown from './DesktopDropDown'
 export default function DesktopItem({ href, label, items }: INavigation.Item) {
   return (
     <li
-      className="relative text-base font-semibold leading-5 tracking-widest uppercase font-montserrat text-secondary-text group hover:text-accent"
+      className="relative text-base font-semibold leading-5 tracking-widest uppercase font-montserrat group hover:text-accent"
     >
       <Link href={href}>{label}</Link>
 

@@ -4,10 +4,9 @@ import Hero from '@/components/hero'
 import Intro from './sections/Intro'
 import Classes from '../global/Classes'
 import BookAClass from '../global/BookAClass'
-import SocialFeed from './sections/SocialFeed'
+import SocialFeed from '../global/SocialFeed'
 
 export default function HomeBody(data: ICms.HomePage) {
-  console.log(data)
   return (
     <main>
       <Hero />

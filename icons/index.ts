@@ -11,6 +11,7 @@ import Instagram from "./Instagram";
 import Twitter from "./Twitter";
 import StackedSquares from "./StackedSquares";
 import HeroLogo from "./HeroLogo";
+import MeetTheFounders from "./MeetTheFounders";
 
 export {
   Phone,
@@ -26,4 +27,5 @@ export {
   Twitter,
   StackedSquares,
   HeroLogo,
+  MeetTheFounders,
 };
