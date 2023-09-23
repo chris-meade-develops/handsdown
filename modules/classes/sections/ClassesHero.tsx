@@ -1,4 +1,5 @@
-import Primary from '@/components/links/PrimaryLink'
+'use client'
+import Primary from '@/components/buttons/Primary'
 import HeroBrush from '@/components/hero/HeroBrush'
 
 export default function ClassesHero(heroData: ICms.Hero) {
@@ -7,7 +8,7 @@ export default function ClassesHero(heroData: ICms.Hero) {
       style={{
         backgroundImage: `url("${heroData.image.src}")`,
       }}
-      className="relative w-full h-[521px] bg-no-repeat bg-center bg-cover pt-43 pb-50 z-0
+      className="relative w-full h-[638px] bg-no-repeat bg-center bg-cover pt-[185px] pb-50 z-0
       "
     >
       <div className="absolute top-0 w-full h-full bg-offBlack/50 z-2" />
@@ -24,7 +25,16 @@ export default function ClassesHero(heroData: ICms.Hero) {
         </div>
       </div>
       <div className="w-[270px] h-25 mx-auto relative z-2 mt-20">
-        <Primary href="#booking-form">Book a trial class</Primary>
+        <Primary
+          type="button"
+          onClick={() => {
+            document
+              .getElementById('#booking-form')
+              ?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
+          Book a trial class
+        </Primary>
       </div>
     </section>
   )
