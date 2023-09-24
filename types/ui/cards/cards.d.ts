@@ -9,6 +9,7 @@ namespace ICard {
   interface WithImage extends BasicProps {
     image: ICms.Image
     imgPosition?: string
+    reverse?: boolean
   }
 
 
