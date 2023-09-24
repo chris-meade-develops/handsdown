@@ -4,21 +4,30 @@ import PrimaryLink from '@/components/links/PrimaryLink'
 import Heading from '@/components/ui/Heading'
 import ReviewCard from '@/components/cards/ReviewCard'
 
-export default function Reviews({ data }: { data: ICard.WithImage[] }) {
+export default function Reviews({
+  data,
+  reverse,
+}: {
+  data: ICard.WithImage[]
+  reverse?: boolean
+}) {
+  const sectionBg = reverse ? 'bg-secondary' : 'bg-primary'
+  const headingBg = reverse ? 'fill-primary' : 'fill-white'
+  const headingText = reverse ? 'text-white' : 'text-primary-text'
   return (
     <Section
-      bgColor="bg-primary"
-      className="relative pl-8 pr-10 text-base font-medium leading-7 md:px-23 bg-primary py-23 font-montserrat text-tertiary-text"
+      bgColor={sectionBg}
+      className={`relative pl-8 pr-10 text-base font-medium leading-7 md:px-23 py-23 font-montserrat text-tertiary-text ${sectionBg}`}
     >
       <Heading
         text="member's reviews"
-        fill="fill-white"
-        textColour="text-primary-text"
+        fill={headingBg}
+        textColour={headingText}
       />
       <div className="hidden grid-cols-3 md:grid gap-11">
         {data.map((item, index) => (
           <div key={index} className="max-w-[436px]">
-            <ReviewCard {...item} />
+            <ReviewCard {...item} reverse={reverse} />
           </div>
         ))}
       </div>
@@ -33,7 +42,7 @@ export default function Reviews({ data }: { data: ICard.WithImage[] }) {
         <Carousel>
           {data.map((item, index) => (
             <div key={index} className="embla_slide flex-[0_0_100%] mb-19">
-              <ReviewCard {...item} />
+              <ReviewCard {...item} reverse={reverse} />
             </div>
           ))}
         </Carousel>

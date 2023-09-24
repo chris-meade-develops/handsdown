@@ -1,4 +1,3 @@
-import PrimaryLink from '@/components/links/PrimaryLink'
 import Section from '@/components/section/Section'
 import { Quote } from '@/icons'
 

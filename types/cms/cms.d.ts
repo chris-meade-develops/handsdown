@@ -20,6 +20,13 @@ namespace ICms {
     description: string
   }
 
+  interface Faq {
+    number: string
+    question: string
+    answer: string
+    link?: Link
+  }
+
   interface Hero {
     title: string
     'sub-title': string
@@ -54,5 +61,12 @@ namespace ICms {
   interface AboutPage {
     cmsData: Page
     reviews: ICard.WithImage[]
+  }
+
+  interface FaqPage {
+    cmsData: Page
+    classes: ICard.WithImage[]
+    reviews: ICard.WithImage[]
+    questions: Faq[]
   }
 }

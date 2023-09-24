@@ -1,8 +1,8 @@
 'use client'
 import Primary from '@/components/buttons/Primary'
-import { MeetTheFounders, TakeYourself } from '@/icons'
+import { MeetTheFounders } from '@/icons'
 
-export default function AboutHero(heroData: ICms.Hero) {
+export default function DefaultHero(heroData: ICms.Hero) {
   return (
     <section
       style={{
@@ -15,7 +15,7 @@ export default function AboutHero(heroData: ICms.Hero) {
 
       <div className="relative">
         <MeetTheFounders className="w-9/12 mx-auto" />
-        <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 text-[42px] text-white font-montserrat z-3 -translate-y-1/2 leading-[100px] font-extrabold uppercase ">
+        <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 text-[42px] text-white font-montserrat z-3 -translate-y-1/2 leading-[100px] font-extrabold uppercase whitespace-nowrap">
           {heroData.title}
         </h1>
       </div>
