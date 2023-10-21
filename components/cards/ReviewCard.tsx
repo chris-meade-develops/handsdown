@@ -1,5 +1,10 @@
 import { Quote } from '@/icons'
-import Image from '../ui/Image'
+import Image from 'next/image'
+
+const IS_LOCAL = process.env.NODE_ENV === 'development'
+const CMS_URL = IS_LOCAL
+  ? `${process.env.STRAPI_DEV_URL}/`
+  : `${process.env.STRAPI_URL}/`
 
 export default function ReviewCard({
   title,
@@ -33,13 +38,13 @@ export default function ReviewCard({
 
       <Quote className={`w-auto mb-8 h-18 top-6 left-6 ${quoteColour}`} />
 
-      <p className="mb-8 leading-6 text-center">
-        {description}
-      </p>
+      <p className="mb-8 leading-6 text-center">{description}</p>
 
       <div className="flex justify-center w-full">
         <div className="relative mr-6 overflow-hidden rounded-full h-26 w-26">
-          <Image src={image.src} alt={image.alt} cover />
+          {image.src.data.attributes.url && (
+            <Image src={image.src.data.attributes.url} alt={image.alt} fill />
+          )}
         </div>
         <div className="flex flex-col justify-center">
           <p className="mb-1 font-semibold leading-5">{title}</p>

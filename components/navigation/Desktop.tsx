@@ -43,7 +43,7 @@ export default function Desktop({ scrollable }: { scrollable: boolean }) {
       <div className={`transition-all duration-300 ${scrolled ? 'my-8' : ''}`}>
         <a href="/" className={`${scrolled ? 'block' : 'hidden'}`}>
           <Image
-            src="/images/nav_logo.png"
+            src="/uploads/nav_logo_0d594e89df.png"
             width={116}
             height={71}
             alt="Handsdown logo"

@@ -5,13 +5,15 @@ import BookAClass from '../global/BookAClass'
 import MeetTheFounders from './sections/MeetTheFounders'
 import MainText from './sections/MainText'
 
-export default function AboutBody({ cmsData, reviews }: ICms.AboutPage) {
+export default function AboutBody({ cmsData, }: IPage.Props) {
+  const { hero, reviews_carousel, classes_carousel, graduates_carousel, coaches_carousel, dynamicComponents  } = cmsData
+  console.log("reviews_carousel", reviews_carousel)
   return (
     <main>
-      <DefaultHero {...cmsData.hero} />
+      <DefaultHero {...hero} />
       <MainText />
       <MeetTheFounders />
-      <Reviews data={reviews} />
+      {reviews_carousel && <Reviews data={reviews_carousel.data.attributes.reviews} />}
       <BookAClass />
       <SocialFeed />
     </main>
