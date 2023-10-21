@@ -7,7 +7,9 @@ const navItems: INavigation.Item[] = [
   ] },
   { href: "/pricing", label: "pricing" },
   { href: "/timetables", label: "timetables" },
-  { href: "/about", label: "About" },
+  { href: "/about", label: "About", items: [
+    { href: "/coaches", label: "Meet our coaches" },
+  ] },
   { href: "/faq", label: "faq" },
   { href: "/shop", label: "shop" },
   { href: "/contact", label: "contact" },

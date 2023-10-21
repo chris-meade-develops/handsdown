@@ -5,8 +5,10 @@ import Heading from '@/components/ui/Heading'
 
 export default function MeetTheCoaches({
   coaches,
+  reverse,
 }: {
   coaches: ICard.WithImage[]
+  reverse?: boolean
 }) {
   const options = {
     dragFree: true,
@@ -16,12 +18,19 @@ export default function MeetTheCoaches({
     startIndex: 0,
   }
 
+  const sectionBgColor = reverse ? 'bg-secondary' : 'bg-primary'
+  const headingColor = reverse ? 'text-white' : 'text-primary'
+  const headingBgColor = reverse ? 'fill-primary' : 'fill-secondary'
+
   return (
-    <Section bgColor="bg-primary" className=" pt-31 pb-43">
+    <Section
+      bgColor={sectionBgColor}
+      className={`pt-31 pb-43 ${sectionBgColor} relative`}
+    >
       <Heading
         text="meet the coaches"
-        fill="fill-white"
-        textColour="text-primary"
+        fill={headingBgColor}
+        textColour={headingColor}
       />
       <div className="relative max-h-[273px] ">
         <div className="px-45">
