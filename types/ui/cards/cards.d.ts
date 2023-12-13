@@ -1,9 +1,10 @@
 namespace ICard {
   interface BasicProps {
+    id: string
     title: string
     subTitle?: string
     description?: string
-    link?: string
+    link?: { id: string, text: string, address: string }
   }
 
   interface WithImage extends BasicProps {

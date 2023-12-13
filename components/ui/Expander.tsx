@@ -1,3 +1,4 @@
+"use client"
 import useExpander from "@/hooks/useExpander";
 import { Plus } from "@/icons";
 import { useEffect } from "react";

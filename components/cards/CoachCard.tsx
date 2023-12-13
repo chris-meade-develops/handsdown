@@ -15,7 +15,9 @@ export default function CoachCard({
       <button
         type="button"
         onClick={() => onClick && onClick()}
-        style={{ backgroundImage: `url(${coach.image.src})` }}
+        style={{
+          backgroundImage: `url(${coach.image.src.data.attributes.url ?? ''})`,
+        }}
         className={`bg-center bg-cover bg-no-repeat  overflow-hidden group relative transition-height duration-300 ${
           selected ? 'w-[224px] h-[273px]' : 'w-[208px] h-[253px] my-5'
         }`}
@@ -35,9 +37,9 @@ export default function CoachCard({
           </h3>
 
           <div className="w-53 h-25">
-            <PrimaryLink href={coach.link ? coach.link : '#'}>
+            <PrimaryLink href={coach.link?.address ? coach.link?.address : '#'}>
               <span className="text-sm font-bold uppercase tracking-[1.4px] leading-[18px] ">
-                Learn more
+                {coach.link?.text ? coach.link?.text : 'learn more'}
               </span>
             </PrimaryLink>
           </div>

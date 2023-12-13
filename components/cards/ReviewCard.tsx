@@ -1,11 +1,6 @@
 import { Quote } from '@/icons'
 import Image from 'next/image'
 
-const IS_LOCAL = process.env.NODE_ENV === 'development'
-const CMS_URL = IS_LOCAL
-  ? `${process.env.STRAPI_DEV_URL}/`
-  : `${process.env.STRAPI_URL}/`
-
 export default function ReviewCard({
   title,
   description,
@@ -14,7 +9,7 @@ export default function ReviewCard({
   reverse,
 }: ICard.WithImage) {
   const bgColor = reverse ? 'bg-primary-text' : 'bg-white'
-  const quoteColour = reverse ? 'fill-primary-text' : 'fill-white'
+  const quoteColour = reverse ? 'fill-white' :'fill-primary-text'
   const firstHoleBorder = reverse ? 'border border-[#D0A96A]' : ''
   const holeBorder = reverse ? 'border border-[#707070]' : ''
   const textColor = reverse ? 'text-white' : 'text-primary-text'

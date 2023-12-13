@@ -4,7 +4,7 @@ import Desktop from "./Desktop";
 import Mobile from "./Mobile";
 import SideDrawer from "./SideDrawer";
 
-export default function NavigationComposer({ scrollable } : { scrollable: boolean}) {
+export default function NavigationComposer({ scrollable, navData } : { scrollable: boolean, navData: INavigation.Navigation}) {
   const {
     open: drawerOpen,
     toggle: toggleDrawer,
@@ -16,7 +16,7 @@ export default function NavigationComposer({ scrollable } : { scrollable: boolea
 
   return (
     <div>
-      <Desktop scrollable={scrollable} />
+      <Desktop scrollable={scrollable} navItems={navData.attributes.items} />
       <Mobile open={drawerOpen} onClick={toggleDrawer} />
       <SideDrawer open={drawerOpen} />
     </div>
