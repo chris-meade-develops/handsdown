@@ -46,7 +46,30 @@ namespace ICms {
   }
 
   interface Link {
-    id: number; text: string; address: string 
+    id: number
+    text: string
+    address: string
+  }
+
+  interface CarouselData {
+    data: {
+      id: number
+      attributes: {
+        createdAt: string
+        updatedAt: string
+        publishedAt: string
+        heading?: string
+        title?: string
+        subTitle?: string
+        reverseColours?: boolean
+        cards: {
+          id: number
+          dataType: string | null
+          [key: string]: boolean
+          cards: ICard.WithImage[]
+        }
+      }
+    }
   }
 
   interface Footer {
@@ -63,15 +86,11 @@ namespace ICms {
   }
 
   interface Faq {
-    data: {
-      id: number
-      attributes: {
-        number: string
-        question: string
-        answer: string
-        link?: Link
-      }
-    }
+    number: number
+    id: number
+    question: string
+    answer: string
+    link?: Link
   }
 
   interface Hero {
@@ -90,12 +109,17 @@ namespace ICms {
   interface DynamicComponents {
     id: number
     __component: string
-    [key: string]: any[]
+    [key: string]: any | any[]
   }
 
   interface Body {
     text: TextSegment[]
     images: Image[]
+  }
+
+  interface Paragraph {
+    type: string
+    children: { text: string; type: string }[]
   }
 
   interface CMSCarousel<T> {
@@ -110,21 +134,19 @@ namespace ICms {
   }
 
   interface PageData {
-    data: {
-      id: number
-      attributes: {
-        createdAt: string
-        updatedAt: string
-        publishedAt: string
-        hero: Hero
-        body: Body | null
-        dynamicComponents: DynamicComponents[] | []
-        coaches_carousel: CMSCarousel<'Coaches'> | null
-        reviews_carousel: CMSCarousel<'reviews'> | null
-        classes_carousel: CMSCarousel<'Classes'> | null
-        graduates_carousel: CMSCarousel<'Graduates'> | null
-      }
-    }[] | null
+    data:
+      | {
+          id: number
+          attributes: {
+            createdAt: string
+            updatedAt: string
+            publishedAt: string
+            hero: Hero
+            body: Body | null
+            dynamicComponents: DynamicComponents[] | []
+          }
+        }[]
+      | null
   }
 
   interface Social extends Image, Link {}
@@ -134,6 +156,7 @@ namespace ICms {
     reviews: ICard.WithImage[]
     classes: ICard.WithImage[]
   }
+ 
 
   // interface ClassPage extends Omit<HomePage, 'pricing'> {
   //   graduates: ICard.WithImage[]

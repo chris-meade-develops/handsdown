@@ -1,13 +1,14 @@
 'use client'
 import Primary from '@/components/buttons/Primary'
 import { MeetTheFounders } from '@/icons'
-import { CMS_URL } from '@/helpers/nextImageLoader'
 
 export default function DefaultHero(heroData: ICms.Hero) {
   return (
     <section
       style={{
-        backgroundImage: `url(${CMS_URL}${heroData.data.attributes.image.src.data.attributes.url})`,
+        backgroundImage: `url(${
+          heroData.data.attributes.image.src.data.attributes.url ?? ''
+        })`,
       }}
       className="relative w-full h-[595px] bg-no-repeat bg-cover pt-[135px] pb-50 z-0
     "

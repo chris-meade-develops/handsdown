@@ -1,22 +1,42 @@
-import classes from '@/temporary_data/carousels/classes'
-import pricing from '@/temporary_data/callToAction/pricing'
-import reviews from '@/temporary_data/carousels/reviews'
-import HomeBody from '@/modules/home/HomeBody'
 import NavigationComposer from '@/components/navigation'
+import DynamicPage from '@/components/pages/DynamicPage'
+import getCustomPageData from '@/helpers/getCustomPageData'
+import getNavigationData from '@/helpers/getNavigationData'
 
 export default async function Home() {
-  const props = {
-    classes,
-    pricing,
-    reviews,
+  const [page, navigation] = await Promise.allSettled([
+    getCustomPageData('home'),
+    getNavigationData(),
+  ])
+
+  if (
+    page.status === 'rejected' ||
+    page.value === null ||
+    navigation.status === 'rejected' ||
+    !navigation.value
+  ) {
+    //send to 404
+    console.log('404')
+    return null
+  }
+
+  const cmsData = page.value.data?.[0]?.attributes
+
+  if (!cmsData) {
+    //send to 404
+    console.log('404')
+    return null
   }
 
   return (
     <div className="relative">
       <header>
-        <NavigationComposer scrollable={true} />
+        <NavigationComposer
+          scrollable={true}
+          navData={navigation.value.data[0]}
+        />
       </header>
-      <HomeBody {...props} />
+      <DynamicPage cmsData={cmsData} />
     </div>
   )
 }

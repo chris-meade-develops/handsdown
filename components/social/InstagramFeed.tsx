@@ -1,67 +1,16 @@
 //this will need to query the instagram api and return the images
 import ImageLink from '@/components/social/ImageLink'
 
-const images: ICms.Social[] = [
-  {
-    src: '/images/michael-grading.jpg',
-    alt: 'Michael grading',
-    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
-    text: '',
-  },
-  {
-    src: '/images/michael-grading.jpg',
-    alt: 'Michael grading',
-    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
-    text: '',
-  },
-  {
-    src: '/images/michael-grading.jpg',
-    alt: 'Michael grading',
-    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
-    text: '',
-  },
-  {
-    src: '/images/michael-grading.jpg',
-    alt: 'Michael grading',
-    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
-    text: '',
-  },
-  {
-    src: '/images/michael-grading.jpg',
-    alt: 'Michael grading',
-    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
-    text: '',
-  },
-  {
-    src: '/images/michael-grading.jpg',
-    alt: 'Michael grading',
-    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
-    text: '',
-  },
-  {
-    src: '/images/michael-grading.jpg',
-    alt: 'Michael grading',
-    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
-    text: '',
-  },
-  {
-    src: '/images/michael-grading.jpg',
-    alt: 'Michael grading',
-    href: 'https://www.instagram.com/p/CPQ4ZJ5nZ3I/',
-    text: '',
-  },
-]
-
 export default function InstagramFeed() {
   return (
     <div className="grid grid-cols-2 gap-5 mb-18 md:grid-cols-3 md:gap-10">
-      {images.map((image, index) => (
+      {/* {images.map((image, index) => (
         <ImageLink
           key={index}
           image={{ src: image.src, alt: image.alt }}
           link={image.href}
         />
-      ))}
+      ))} */}
     </div>
   )
 }

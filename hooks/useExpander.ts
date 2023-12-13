@@ -1,3 +1,4 @@
+"use client"
 import { useState, useRef, useEffect, RefObject } from "react";
 
 interface UseExpanderReturn<T extends HTMLElement> {

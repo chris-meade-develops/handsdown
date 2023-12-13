@@ -1,12 +1,17 @@
 'use client'
 import { useEffect, useState } from 'react'
 import DesktopItem from './DesktopItem'
-import navItems from '@/temporary_data/navigation'
 import Image from 'next/image'
 
-export default function Desktop({ scrollable }: { scrollable: boolean }) {
-  const firstHalf = navItems.slice(0, 3)
-  const secondHalf = navItems.slice(3, 8)
+export default function Desktop({
+  scrollable,
+  navItems,
+}: {
+  scrollable: boolean
+  navItems: INavigation.Items
+}) {
+  const firstHalf = navItems.data.slice(0, 3)
+  const secondHalf = navItems.data.slice(3, 8)
   const [scrolled, setScrolled] = useState(!scrollable)
 
   useEffect(() => {
@@ -33,17 +38,16 @@ export default function Desktop({ scrollable }: { scrollable: boolean }) {
       <ul className="flex justify-between gap-3 list-none w-1/3 max-w-[468px] items-center">
         {firstHalf.map((item) => (
           <DesktopItem
-            key={item.label}
-            label={item.label}
-            href={item.href}
-            items={item?.items ? item.items : undefined}
+            key={item.id}
+            id={item.id}
+            attributes={item.attributes}
           />
         ))}
       </ul>
       <div className={`transition-all duration-300 ${scrolled ? 'my-8' : ''}`}>
         <a href="/" className={`${scrolled ? 'block' : 'hidden'}`}>
           <Image
-            src="/uploads/nav_logo_0d594e89df.png"
+            src="https://res.cloudinary.com/dkf2b6ta5/image/upload/v1702322316/nav_logo_a34c0a09de.png"
             width={116}
             height={71}
             alt="Handsdown logo"
@@ -53,10 +57,9 @@ export default function Desktop({ scrollable }: { scrollable: boolean }) {
       <ul className="flex justify-between list-none max-w-[478px] w-1/3 items-center gap-3">
         {secondHalf.map((item) => (
           <DesktopItem
-            key={item.label}
-            label={item.label}
-            href={item.href}
-            items={item?.items ? item.items : undefined}
+            key={item.id}
+            id={item.id}
+            attributes={item.attributes}
           />
         ))}
       </ul>

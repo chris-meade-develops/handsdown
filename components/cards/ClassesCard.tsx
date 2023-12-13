@@ -11,7 +11,7 @@ export default function ClassesCard({
   return (
     <div className="w-full rounded-[30px] pt-47 relative overflow-hidden flex flex-col justify-end mb-27 h-full">
       <Image
-        src={image.src}
+        src={image.src.data.attributes.url ?? ''}
         alt={image.alt}
         className="absolute top-0 left-0 z-0 w-full h-full"
         imgPosition={imgPosition}
@@ -27,7 +27,7 @@ export default function ClassesCard({
           </p>
           <div className="h-25 w-[185px] mx-auto mb-14">
             {link && (
-              <PrimaryLink href={link}>
+              <PrimaryLink href={link.address}>
                 <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
                   learn more
                 </span>

@@ -7,14 +7,40 @@ namespace INavigation {
     open: boolean
   }
 
-  interface Item {
-    href: string
-    label: string
-    items?: Item[]
+  interface ItemAttributes {
+    order: number
+    title: string
+    url: string
+    target: string
+    createdAt: string
+    updatedAt: string
+    children: Items
   }
 
-  interface List {
-    items?: Item[]
+  interface Item {
+    id: number
+    attributes: ItemAttributes
+  }
+
+  interface Items {
+    data: NavigationItem[]
+  }
+
+  interface Attributes {
+    title: string
+    slug: string
+    createdAt: string
+    updatedAt: string
+    items: NavigationItems
+  }
+
+  interface Navigation {
+    id: number
+    attributes: Attributes
+  }
+
+  type ApiResponse = {
+    data: Navigation[]
   }
 
   interface MobileNav extends Clickable, Toggleable {}
