@@ -1,4 +1,4 @@
-import DefaultHero from '@/modules/global/DefaultHero'
+import DefaultHero from '@/components/hero/DefaultHero'
 import dynamic from 'next/dynamic'
 import Hero from '../hero'
 
