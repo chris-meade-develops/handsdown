@@ -4,11 +4,6 @@ type State = {
   [key: string]: boolean
 }
 
-type IMultiClickButton = {
-  title?: string
-  value: string
-}
-
 const useMultiClick = (initialState: State) => {
   const [state, setState] = useState<State>(initialState)
 
