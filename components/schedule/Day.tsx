@@ -13,7 +13,6 @@ export default function Day({
 }) {
   const mediaQuery = useMediaQuery("(max-width: 1024px)")
 
-
   return (
     <div className={`mx-6 mb-auto ${mediaQuery && !selected ? 'grayscale opacity-15' : ''}`}>
       <div className="min-w-[158px] md:min-w-[181px] mb-11 md:mb-22">
