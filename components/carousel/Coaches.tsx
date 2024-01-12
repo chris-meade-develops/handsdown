@@ -14,7 +14,7 @@ export default async function Coaches({ reverse }: { reverse?: boolean}) {
     dragFree: true,
     watchResize: false,
     align: 'start',
-    loop: true,
+    loop: false,
     startIndex: 0,
   }
   

@@ -16,7 +16,7 @@ export default function BookAClass(cmsData: ICms.DynamicComponents) {
         <div className="text-center mb-13">{description}</div>
 
         <IframeResizer
-          log={false}
+          
           checkOrigin={false}
           tolerance={10}
           sizeHeight={true}

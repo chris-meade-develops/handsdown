@@ -156,41 +156,4 @@ namespace ICms {
     reviews: ICard.WithImage[]
     classes: ICard.WithImage[]
   }
- 
-
-  // interface ClassPage extends Omit<HomePage, 'pricing'> {
-  //   graduates: ICard.WithImage[]
-  //   coaches: ICard.WithImage[]
-  // }
-
-  // interface AboutPage {
-  //   cmsData: Page
-  //   reviews: ICard.WithImage[]
-  // }
-
-  // interface FaqPage {
-  //   cmsData: Page
-  //   classes: ICard.WithImage[]
-  //   reviews: ICard.WithImage[]
-  //   questions: Faq[]
-  // }
-
-  // interface ContactPage {
-  //   cmsData: Page
-  //   classes: ICard.WithImage[]
-  //   reviews: ICard.WithImage[]
-  // }
-
-  // interface TimetablePage {
-  //   cmsData: Page
-  //   classes: ICard.WithImage[]
-  //   coaches: ICard.WithImage[]
-  // }
-
-  // interface CoachesPage {
-  //   cmsData: Page
-  //   coaches: ICard.WithImage[]
-  //   reviews: ICard.WithImage[]
-  //   classes: ICard.WithImage[]
-  // }
 }
