@@ -1,5 +1,5 @@
 //this will need to query the instagram api and return the images
-import ImageLink from '@/components/social/ImageLink'
+// import ImageLink from '@/components/social/ImageLink'
 
 export default function InstagramFeed() {
   return (
