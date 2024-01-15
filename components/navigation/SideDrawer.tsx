@@ -1,7 +1,6 @@
-import navItems from '@/temporary_data/navigation'
 import MobileNavItem from './MobileNavItem'
 
-export default function SideDrawer({ open }: INavigation.SideDrawer) {
+export default function SideDrawer({ open, items }: INavigation.SideDrawer) {
   return (
     <aside
       className={`w-full z-1 h-screen bg-secondary transition-all duration-300 fixed top-0 left-0 ${
@@ -10,12 +9,11 @@ export default function SideDrawer({ open }: INavigation.SideDrawer) {
     >
       <nav className="pl-24 mt-47">
         <ul className="flex flex-col w-full">
-          {navItems.map((item) => (
+          {items.data.map((item) => (
             <MobileNavItem
-              key={item.label}
-              href={item.href}
-              label={item.label}
-              items={item.items ? item.items : undefined}
+              key={item.id}
+              id={item.id}
+              attributes={item.attributes}
             />
           ))}
         </ul>
