@@ -24,13 +24,13 @@ export default function HeroBrush({
       ) : (
         <div className="h-auto z-2 md:h-55 md:w-[615px] w-[300px]">
           <h1 className=" text-[42px] leading-[100px] font-bold text-center text-white uppercase ">
-            {text?.title}
+            {text?.title as string}
           </h1>
           <h2 className="text-2xl font-bold text-center text-white uppercase md:text-3xl">
-            {text?.['sub-title']}
+            {text?.['sub-title'] as string}
           </h2>
           <p className="text-base leading-[26px] align-baseline mt-14">
-            {text?.description}
+            {text?.description as string}
           </p>
         </div>
       )}
