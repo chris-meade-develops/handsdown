@@ -5,6 +5,10 @@ import getFooterData from '@/helpers/getFooterData'
 
 export default async function Footer() {
   const data = await getFooterData()
+
+  if(!data) return null
+  if(!data.data?.attributes) return null
+
   const locations = data?.data.attributes.data.Locations
   const quickLinks = data?.data.attributes.data.quickLinks
   const imageSrc = data?.data.attributes.data.image.data.attributes.url
