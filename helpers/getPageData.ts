@@ -1,10 +1,6 @@
 'use server'
 const qs = require('qs')
-
-const IS_LOCAL = process.env.NODE_ENV === 'development'
-const CMS_URL = IS_LOCAL
-  ? `${process.env.STRAPI_DEV_URL}/api/`
-  : `${process.env.STRAPI_URL}/api/}`
+import CMS_URL from "./isLocal"
 
 export default async function getPageData(slug: string): Promise<ICms.PageData | null> {
   'use server'

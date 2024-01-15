@@ -1,5 +1,4 @@
 'use server'
-
 import CMS_URL from "./isLocal"
 
 export default async function getDataType(type: string) {
