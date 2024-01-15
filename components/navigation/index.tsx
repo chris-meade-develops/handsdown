@@ -17,8 +17,8 @@ export default function NavigationComposer({ scrollable, navData } : { scrollabl
   return (
     <div>
       <Desktop scrollable={scrollable} navItems={navData.attributes.items} />
-      <Mobile open={drawerOpen} onClick={toggleDrawer} />
-      <SideDrawer open={drawerOpen} />
+      <Mobile open={drawerOpen} onClick={toggleDrawer}  />
+      <SideDrawer open={drawerOpen} items={navData.attributes.items} />
     </div>
   );
 }
