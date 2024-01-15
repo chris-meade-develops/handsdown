@@ -23,7 +23,7 @@ namespace INavigation {
   }
 
   interface Items {
-    data: NavigationItem[]
+    data: Item[]
   }
 
   interface Attributes {
@@ -31,7 +31,7 @@ namespace INavigation {
     slug: string
     createdAt: string
     updatedAt: string
-    items: NavigationItems
+    items: Items
   }
 
   interface Navigation {
@@ -49,7 +49,9 @@ namespace INavigation {
 
   interface MobileDropDown extends Toggleable, List {}
 
-  interface SideDrawer extends Toggleable {}
+  interface SideDrawer extends Toggleable {
+    items: Items
+  }
 
   interface MobileItem extends Item, List {}
 }
