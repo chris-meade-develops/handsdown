@@ -1,5 +1,6 @@
 import PrimaryLink from '@/components/links/PrimaryLink'
 import Section from '@/components/section/Section'
+import isCommaSeparatedWords from '@/helpers/stringHelper'
 
 const learningPoints = [
   'Balance',
@@ -18,6 +19,8 @@ const learningPoints = [
 ]
 
 export default function MainText(cmsData: ICms.DynamicComponents) {
+  if (!cmsData) return null
+
   return (
     <Section
       bgColor="bg-secondary"
@@ -25,74 +28,49 @@ export default function MainText(cmsData: ICms.DynamicComponents) {
     >
       <div className="md:flex md:justify-between md:gap-[234px] font-montserrat text-lg leading-[26px] font-regular ">
         <div>
-          <div className="my-30">
-            <h2 className="font-bold leading-6 text-primary-text mb-13">
-              About the class
-            </h2>
-            <div>
-              <p>
-                HD Dragon class is an age specific programme for children aged 5
-                – 6 years. <br /> <br /> Our programme teaches not only Martial
-                Arts, it teaches children to be good citizens and prepares them
-                for adult life. Therefore units in safety and life skills, will
-                aid them in becoming well-rounded individuals, as a result of
-                developing their social, emotional, physical and intellectual
-                skills.
-              </p>
-            </div>
-          </div>
-          <div className="my-30">
-            <h2 className="font-bold leading-6 text-primary-text mb-13">
-              What we will learn
-            </h2>
+          {cmsData.questions.map(
+            (
+              question: { id: number; title: string; description: string },
+              index: number
+            ) => {
+              const { title, description } = question
+              if (isCommaSeparatedWords(question.description)) {
+                const wordArray = question.description
+                  .split(',')
+                  .map((word) => word.trim())
 
-            <ul className="grid grid-cols-3">
-              {learningPoints.map((point, index) => (
-                <li key={index}>{point}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="my-30">
-            <h2 className="font-bold leading-6 text-primary-text mb-13">
-              How it works
-            </h2>
-            <div>
-              <p>
-                The HD Dragon Programme runs on a 10 week cycle. In each cycle
-                your child will learn a life skill and a safety skill. They will
-                learn Martial Arts techniques relevant to their grade in the HD
-                Dragon syllabus. At the end of each cycle they will be take part
-                in a grading. As a result each student who enters the grading
-                will earn their next grade and receive the appropriate belt and
-                certificate.
-              </p>
-              <br />
-              <br />
-              <p>
-                The first two lessons is an introduction to the course and after
-                the second week, your child will have earned their first belt:
-                The white belt.
-              </p>
-              <br />
-              <br />
-              <p>
-                The total length of the course will be approximately 12 months.
-                Their belts will all be white belts with a different colour
-                stripe through each one. The colour order is as follows: white,
-                red, green, yellow, brown, HD Dragon Black Belt.
-              </p>
-              <br />
-              <br />
-              <p>
-                When your child completes the HD Dragon Programme they will then
-                be promoted into Children’s Class. Children (ages 7-9)
-              </p>
-            </div>
-          </div>
+                return (
+                  <div className="my-30">
+                    <h2 className="font-bold leading-6 text-primary-text mb-13">
+                      {title}
+                    </h2>
+
+                    <ul className="grid grid-cols-3">
+                      {wordArray.map((point, index) => (
+                        <li key={index}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )
+              }
+              return (
+                <div className="my-30">
+                  <h2 className="font-bold leading-6 text-primary-text mb-13">
+                    {title}
+                  </h2>
+                  <div>
+                    <p>{description}</p>
+                  </div>
+                </div>
+              )
+            }
+          )}
 
           <div className="w-[305px] h-27">
             <PrimaryLink href="/timetable">
-              <span className="text-white uppercase font-montserrat font-extrabold leading-[19px] text-base tracking-widest">view timetable</span>
+              <span className="text-white uppercase font-montserrat font-extrabold leading-[19px] text-base tracking-widest">
+                view timetable
+              </span>
             </PrimaryLink>
           </div>
         </div>
