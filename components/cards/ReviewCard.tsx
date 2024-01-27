@@ -16,7 +16,7 @@ export default function ReviewCard({
 
   return (
     <div
-      className={`${bgColor} ${textColor} min-w-0 w-full rounded-[15px] relative overflow-hidden flex flex-col pt-16 pb-25 px-15 font-montserrat text-base font-medium`}
+      className={`${bgColor} ${textColor} min-w-0 w-full rounded-[15px] relative overflow-hidden flex flex-col pt-16 pb-25 px-15 font-montserrat text-base font-medium h-full items-center justify-between`}
     >
       <div
         className={`${firstHoleBorder} absolute w-6 h-6 rounded-full bg-primary-text top-6 left-6`}
@@ -33,7 +33,7 @@ export default function ReviewCard({
 
       <Quote className={`w-auto mb-8 h-18 top-6 left-6 ${quoteColour}`} />
 
-      <p className="mb-8 leading-6 text-center">{description}</p>
+      <p className="block mb-8 overflow-hidden leading-6 text-center">{description}</p>
 
       <div className="flex justify-center w-full">
         <div className="relative mr-6 overflow-hidden rounded-full h-26 w-26">
