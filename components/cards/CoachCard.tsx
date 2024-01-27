@@ -37,7 +37,16 @@ export default function CoachCard({
           </h3>
 
           <div className="w-53 h-25">
-            <PrimaryLink href={coach.link?.address ? coach.link?.address : '#'}>
+            <PrimaryLink
+              href={
+                coach.link?.address
+                  ? `${coach.link?.address}#${coach.image.alt.replaceAll(
+                      ' ',
+                      ''
+                    )}`
+                  : '#'
+              }
+            >
               <span className="text-sm font-bold uppercase tracking-[1.4px] leading-[18px] ">
                 {coach.link?.text ? coach.link?.text : 'learn more'}
               </span>
