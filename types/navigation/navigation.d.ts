@@ -47,7 +47,9 @@ namespace INavigation {
 
   interface BurgerMenu extends Clickable, Toggleable {}
 
-  interface MobileDropDown extends Toggleable, List {}
+  interface MobileDropDown {
+    items: INavigation.Items
+  }
 
   interface SideDrawer extends Toggleable {
     items: Items

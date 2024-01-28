@@ -6,7 +6,7 @@ export default function PricingCard({
   footer,
 }: ICard.CallToAction) {
   return (
-    <div className="w-full rounded-[15px] relative overflow-hidden flex flex-col justify-between mb-19 md:mb-0 bg-white md:max-h-[336px]">
+    <div className="w-full rounded-[15px] relative overflow-hidden flex flex-col justify-between mb-19 md:mb-0 bg-white">
       <div className="relative flex-col justify-center w-full text-center pt-25 md:pt-28 px-17 font-montserrat">
         {highlight && (
           <div className="absolute top-0 z-0 py-4 text-white capitalize -translate-x-1/2 border-b-2 left-1/2 px-14 border-accent bg-primary-text">

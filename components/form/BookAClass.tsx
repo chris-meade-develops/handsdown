@@ -4,7 +4,7 @@ import IframeResizer from 'iframe-resizer-react'
 import Heading from '../ui/Heading'
 
 export default function BookAClass(cmsData: ICms.DynamicComponents) {
-  const { title, description } = cmsData
+  const { title, description, url } = cmsData
   return (
     <div id="#booking-form">
       <Section
@@ -22,7 +22,7 @@ export default function BookAClass(cmsData: ICms.DynamicComponents) {
           sizeHeight={true}
           heightCalculationMethod="lowestElement"
           minHeight={300}
-          src="https://app.glofox.com/portal/#/branch/6516e5ccc24b6fedbd0eb61a/classes-week-view"
+          src={url}
           style={{ width: '1px', minWidth: '100%' }}
         />
         <div

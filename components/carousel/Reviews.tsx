@@ -4,6 +4,15 @@ import PrimaryLink from '@/components/links/PrimaryLink'
 import Heading from '@/components/ui/Heading'
 import ReviewCard from '@/components/cards/ReviewCard'
 import getCarouselData from '@/helpers/getCarouselData'
+import { EmblaOptionsType } from 'embla-carousel-react'
+
+const mobileCarouselOptions: EmblaOptionsType = {
+  align: 'start',
+  slidesToScroll: 1,
+  containScroll: 'trimSnaps',
+  loop: true,
+  dragFree: true,
+}
 
 export default async function Reviews({
   reverse,
@@ -43,9 +52,9 @@ export default async function Reviews({
         </PrimaryLink>
       </div>
       <div className="md:hidden">
-        <Carousel>
+        <Carousel displayButtons={false} displayDots >
           {reviewsData.data.attributes.cards.cards.map((item, index) => (
-            <div key={index * Math.random()} className="embla_slide flex-[0_0_100%] mb-19">
+            <div key={index * Math.random()} className="embla_slide flex-[0_0_100%] mb-19 h-full">
               <ReviewCard {...item} reverse={reverse} />
             </div>
           ))}

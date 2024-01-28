@@ -9,7 +9,7 @@ export default function ClassesCard({
   imgPosition,
 }: ICard.WithImage) {
   return (
-    <div className="w-full rounded-[30px] pt-47 relative overflow-hidden flex flex-col justify-end mb-27 h-full">
+    <div className="w-full rounded-[30px] pt-47 relative overflow-hidden flex flex-col justify-end h-full">
       <Image
         src={image.src.data.attributes.url ?? ''}
         alt={image.alt}
@@ -19,10 +19,10 @@ export default function ClassesCard({
       />
       <div className="relative w-full pt-8 px-25 bg-tertiary/75 z-1">
         <div className="md:mb-25">
-          <h3 className="mt-8 text-2xl font-bold text-center text-white uppercase font-montserrat">
+          <h3 className="sm:mt-8 text-[22px] sm:text-2xl font-bold text-center text-white uppercase font-montserrat whitespace-nowrap">
             {title}
           </h3>
-          <p className="mt-4 mb-6 text-base font-normal text-center text-white font-montserrat">
+          <p className="mt-2 mb-6 text-base font-normal text-center text-white sm:mt-4 font-montserrat">
             {description}
           </p>
           <div className="h-25 w-[185px] mx-auto mb-14">

@@ -72,7 +72,7 @@ export default function Carousel({
           {renderChildren()}
         </div>
       </div>
-      <div className="flex justify-center mt-20 mb-7">
+      <div className="flex justify-center">
         {displayDots &&
           scrollSnaps.map((_, index) => (
             <DotButton

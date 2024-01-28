@@ -3,7 +3,7 @@ import MobileNavItem from './MobileNavItem'
 export default function SideDrawer({ open, items }: INavigation.SideDrawer) {
   return (
     <aside
-      className={`w-full z-1 h-screen bg-secondary transition-all duration-300 fixed top-0 left-0 ${
+      className={`w-full z-2 h-full bg-secondary transition-all duration-300 fixed top-0 left-0 ${
         open ? 'translate-x-0' : '-translate-x-full'
       } `}
     >

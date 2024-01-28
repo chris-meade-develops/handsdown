@@ -9,12 +9,6 @@ module.exports = {
     './modules/**/**/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
-      rotate: {
-        30: '30deg',
-        60: '60deg',
-      },
-    },
     screens: {
       sm: '768px',
       md: '1024px',
@@ -116,6 +110,10 @@ module.exports = {
       55: '200px',
     },
     extend: {
+      rotate: {
+        30: '30deg',
+        60: '60deg',
+      },
       colors: {
         primary: '#000000',
         secondary: '#F5F5F5',
@@ -144,6 +142,6 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwindcss-3d')({ legacy: true }),
-    require('tailwindcss-labeled-groups')(['links', 'buttons'])
+    require('tailwindcss-labeled-groups')(['links', 'buttons']),
   ],
 }

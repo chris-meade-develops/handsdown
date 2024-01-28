@@ -5,10 +5,10 @@ import Heading from '@/components/ui/Heading'
 import getCarouselData from '@/helpers/getCarouselData'
 
 const tiltMap = {
-  '0': 'tilted-left',
-  '1': 'tilted-right',
-  '2': 'tilted-right',
-  '3': 'tilted-left',
+  '0': 'sm:tilted-left',
+  '1': 'sm:tilted-right',
+  '2': 'sm:tilted-right',
+  '3': 'sm:tilted-left',
 }
 
 export default async function Classes() {
@@ -28,7 +28,7 @@ export default async function Classes() {
       className="relative pl-8 pr-10 text-base font-medium leading-7 md:px-40 bg-primary py-23 font-montserrat text-tertiary-text"
     >
       <Heading
-        text={heading ?? "EXPLORE OUR OTHER CLASSES"}
+        text={heading ?? "OUR CLASSES"}
         fill="fill-white"
         textColour="text-primary-text"
       />
@@ -39,19 +39,19 @@ export default async function Classes() {
         </p>
       )}
 
-      <div className="flex flex-col mx-auto md:flex md:flex-row md:justify-center md:gap-24 md:h-[456px]">
+      <div className="flex flex-col flex-wrap items-center justify-center mx-auto sm:flex sm:flex-row sm:gap-24 ">
         {data.cards.map((item: ICard.WithImage, index: number) => (
           <div
             key={item.title}
             className={
-              tiltMap[String(index) as keyof typeof tiltMap] + ' max-w-[272px]'
+              tiltMap[String(index) as keyof typeof tiltMap] + ' w-full sm:max-w-[272px] h-[314px] sm:h-[456px] mb-27'
             }
           >
             <ClassesCard {...item} />
           </div>
         ))}
       </div>
-      <div className="md:w-[305px] md:h-27 mx-auto mt-25 mb-20">
+      <div className="w-[305px] h-27 mx-auto mt-25 mb-20 hidden sm:block">
         <PrimaryLink href="/timetable">
           <span className="text-white">View Timetables</span>
         </PrimaryLink>
