@@ -5,6 +5,7 @@ import Heading from '../ui/Heading'
 
 export default function BookAClass(cmsData: ICms.DynamicComponents) {
   const { title, description, url } = cmsData
+
   return (
     <div id="#booking-form">
       <Section
