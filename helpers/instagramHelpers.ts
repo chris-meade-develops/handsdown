@@ -146,8 +146,6 @@ export async function getInstagramPosts({
       },
     })
 
-    console.log('response', response)
-
     const data: IInstagram.GetMediaResponse = await response.json()
 
     return { data: data.data, success: true }
@@ -169,7 +167,6 @@ export async function refreshLongLivedToken({
     const refreshUrl = `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${encodeURIComponent(token)}`
 
     const response = await fetch(refreshUrl)
-    console.log('response', response)
 
     const data: IInstagram.GetTokenResponse = await response.json()
 
