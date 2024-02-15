@@ -43,8 +43,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
           scrollable={false}
           navData={navigation.value.data[0]}
         />
-        <DefaultPage cmsData={cmsData} />
       </header>
+        <DefaultPage cmsData={cmsData} />
     </>
   )
 }

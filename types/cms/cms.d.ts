@@ -106,6 +106,23 @@ namespace ICms {
     }
   }
 
+  interface InstagramTokenResponse {
+    data: InstagramToken[]
+  }
+  interface InstagramToken {
+      id: number
+      attributes: {
+        accessToken: string
+        userId: string
+        lastRefreshed: Date | null
+        expiresIn: number
+        createdAt: Date
+        updatedAt: Date
+        publishedAt: Date
+      }
+    
+  }
+
   interface DynamicComponents {
     id: number
     __component: string
