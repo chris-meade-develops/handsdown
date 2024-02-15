@@ -1,7 +1,6 @@
 import {
   checkTokenExpiry,
   getInstagramPosts,
-  getInstagramToken,
 } from '@/helpers/instagramHelpers'
 import ImageLink from './ImageLink'
 import Section from '../section/Section'
