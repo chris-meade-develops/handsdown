@@ -4,15 +4,7 @@ import PrimaryLink from '@/components/links/PrimaryLink'
 import Heading from '@/components/ui/Heading'
 import ReviewCard from '@/components/cards/ReviewCard'
 import getCarouselData from '@/helpers/getCarouselData'
-import { EmblaOptionsType } from 'embla-carousel-react'
-
-const mobileCarouselOptions: EmblaOptionsType = {
-  align: 'start',
-  slidesToScroll: 1,
-  containScroll: 'trimSnaps',
-  loop: true,
-  dragFree: true,
-}
+import SeeMoreReviews from '../ui/SeeMoreReviews'
 
 export default async function Reviews({
   reverse,
@@ -37,19 +29,8 @@ export default async function Reviews({
         fill={headingBg}
         textColour={headingText}
       />
-      <div className="hidden grid-cols-3 md:grid gap-11">
-        {reviewsData.data.attributes.cards.cards.map((item, index) => (
-          <div key={index} className="max-w-[436px]">
-            <ReviewCard {...item} reverse={reverse} />
-          </div>
-        ))}
-      </div>
-      <div className="hidden md:block mx-auto max-w-[305px] h-[55px] mt-40 mb-15">
-        <PrimaryLink href="/reviews">
-          <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
-            read more
-          </span>
-        </PrimaryLink>
+      <div className="mx-auto w-fit">
+        <SeeMoreReviews {...reviewsData} />
       </div>
       <div className="md:hidden">
         <Carousel displayButtons={false} displayDots >

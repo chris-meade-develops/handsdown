@@ -5,6 +5,7 @@ import Image from 'next/image'
 export default function ImageLink(post: IInstagram.Media) {
   return (
     <Link
+      target="_blank"
       href={post.permalink}
       className="relative block w-full h-auto pb-[50%] min-h-[156px] md:min-h-[334px] md:max-w-[350px] overflow-hidden mx-auto"
     >

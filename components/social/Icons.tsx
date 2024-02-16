@@ -3,17 +3,21 @@ import { Twitter, Instagram, Facebook } from '../../icons'
 
 const iconMap: { [key: string]: any } = {
   facebook: (href: string) => (
-    <Link href={href} className="w-auto group h-15 md:h-16">
+    <Link href={href} target="_blank" className="w-auto group h-15 md:h-16">
       <Facebook className="w-full h-full fill-white group-hover:fill-accent" />
     </Link>
   ),
   instagram: (href: string) => (
-    <Link href={href} className="w-auto group h-19 md:h-22 ml-25 mr-25">
+    <Link
+      href={href}
+      target="_blank"
+      className="w-auto group h-19 md:h-22 ml-25 mr-25"
+    >
       <Instagram className="w-full h-full fill-white group-hover:fill-accent" />
     </Link>
   ),
   twitter: (href: string) => (
-    <Link href={href} className="w-auto group h-19 md:h-22">
+    <Link href={href} target="_blank" className="w-auto group h-19 md:h-22">
       <Twitter className="w-full h-full fill-white group-hover:fill-accent" />
     </Link>
   ),

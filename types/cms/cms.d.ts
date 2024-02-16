@@ -65,8 +65,8 @@ namespace ICms {
         cards: {
           id: number
           dataType: string | null
-          [key: string]: boolean
           cards: ICard.WithImage[]
+          [key: string]: boolean
         }
       }
     }
