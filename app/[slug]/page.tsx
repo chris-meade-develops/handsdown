@@ -2,7 +2,7 @@ import NavigationComposer from '@/components/navigation'
 import DefaultPage from '@/components/pages/DynamicPage'
 import getCustomPageData from '@/helpers/getCustomPageData'
 import getNavigationData from '@/helpers/getNavigationData'
-import NotFound from '../not-found'
+import { notFound } from 'next/navigation'
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const [page, navigation] = await Promise.allSettled([
@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     !navigation.value
   ) {
     //send to 404
-    return <NotFound />
+    return notFound()
   }
 
   if (
@@ -26,12 +26,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
     !page.value.data[0].attributes
   ) {
     //send to 404
-    return <NotFound />
+    return notFound()
   }
 
   if (!navigation.value.data || !navigation.value.data[0]) {
     //send to 404
-    return <NotFound />
+    return notFound()
   }
 
   const cmsData = page.value.data?.[0]?.attributes
