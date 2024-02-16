@@ -40,7 +40,7 @@ export default function MainText(cmsData: ICms.DynamicComponents) {
                   .map((word) => word.trim())
 
                 return (
-                  <div className="my-30">
+                  <div className="my-30" key={title}>
                     <h2 className="font-bold leading-6 text-primary-text mb-13">
                       {title}
                     </h2>
@@ -54,7 +54,7 @@ export default function MainText(cmsData: ICms.DynamicComponents) {
                 )
               }
               return (
-                <div className="my-30">
+                <div className="my-30" key={title}>
                   <h2 className="font-bold leading-6 text-primary-text mb-13">
                     {title}
                   </h2>

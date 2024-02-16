@@ -16,7 +16,7 @@ export default async function Locations(data: ICms.DynamicComponents) {
       className="relative pl-8 pr-10 text-base font-medium leading-7 md:px-40 bg-primary py-23 font-montserrat"
     >
       {locationInfo.map((item: any, index: number) => (
-        <div className="flex flex-col items-center px-12 mb-12">
+        <div className="flex flex-col items-center px-12 mb-12" key={item.id}>
           <Heading
             text={item.location}
             fill="fill-white"
