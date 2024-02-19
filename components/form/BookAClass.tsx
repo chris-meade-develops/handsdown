@@ -6,15 +6,24 @@ import { useState } from 'react'
 import Primary from '../buttons/Primary'
 import ArrowButton from '../carousel/ArrowButton'
 
+const backupAcademyUrls: {[key:string] : string} = {
+  epsom: "https://app.glofox.com/portal/#/branch/6516e6b29c2da3b1150d021d/memberships/6523d292a12c8de5610cbc87/plan/1696846438941/buy",
+  cobham: "https://app.glofox.com/portal/#/branch/6516e5ccc24b6fedbd0eb61a/memberships/6523da5830e704df92098a42/plan/1696848389099/buy"
+}
+
 export default function BookAClass(cmsData: ICms.DynamicComponents) {
   const { title, description, url, academyUrls } = cmsData
   const [formUrl, setFormUrl] = useState<string | null>(null)
 
   const handleAcademySelect = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name } = e.currentTarget
-    console.log("academyUrls", academyUrls, name, academyUrls[name])
-    const url = academyUrls[name]
-    setFormUrl(url)
+    if(academyUrls){
+        const url = academyUrls[name]
+        setFormUrl(url)
+    } else {
+        const url = backupAcademyUrls[name]
+        setFormUrl(url)
+    }
   }
 
   return (
