@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${futura.variable} ${montserrat.variable} ${openSans.variable} ${deadIsland.variable}`}
+      className={`${futura.variable} ${montserrat.variable} ${openSans.variable} ${deadIsland.variable} overflow-x-hidden`}
     >
       <body className="overflow-x-hidden">
         {children}

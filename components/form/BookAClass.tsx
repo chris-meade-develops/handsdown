@@ -4,7 +4,6 @@ import IframeResizer from 'iframe-resizer-react'
 import Heading from '../ui/Heading'
 import { useState } from 'react'
 import Primary from '../buttons/Primary'
-import Arrow from '@/icons/Arrow'
 import ArrowButton from '../carousel/ArrowButton'
 
 export default function BookAClass(cmsData: ICms.DynamicComponents) {
