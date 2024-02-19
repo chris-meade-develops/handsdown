@@ -23,7 +23,7 @@ export default async function Page() {
 
         <div className="w-55 h-25">
           <PrimaryLink
-            href={`https://api.instagram.com/oauth/authorize?client_id=${process.env.INSTAGRAM_APP_ID}&redirect_uri=https://5c85-90-254-96-172.ngrok-free.app/auth/instagram-callback&scope=user_profile,user_media&response_type=code
+            href={`https://api.instagram.com/oauth/authorize?client_id=${process.env.INSTAGRAM_APP_ID}&redirect_uri=https://handsdownacademies.co.uk/auth/instagram-callback&scope=user_profile,user_media&response_type=code
           `}
           >
             Authorise
