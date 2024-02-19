@@ -7,7 +7,7 @@ export default function BookAClass(cmsData: ICms.DynamicComponents) {
   const { title, description, url } = cmsData
 
   return (
-    <div id="#booking-form">
+    <div id="#book-class">
       <Section
         bgColor="bg-secondary"
         className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 font-montserrat text-tertiary-text md:px-[25%]"
