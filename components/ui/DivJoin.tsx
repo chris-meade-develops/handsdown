@@ -9,7 +9,7 @@ export default function DivJoin({ color }: { color: string }) {
   );
 
   return (
-    <div className="bg-transparent w-[110%] overflow-hidden h-[15px] flex absolute -top-[7px] left-0">
+    <div className="bg-transparent w-full overflow-hidden h-[15px] flex absolute -top-[7px] left-0">
       {numSquares.map((_, i) => (
         <Square key={i} color={color} />
       ))}

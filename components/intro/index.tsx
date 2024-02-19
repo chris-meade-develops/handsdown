@@ -12,7 +12,7 @@ export default function Intro(data: ICms.DynamicComponents) {
       bgColor="bg-secondary"
       className="relative pl-8 pr-10 text-base font-medium leading-7 bg-secondary py-23 md:pt-40 md:pb-43 font-montserrat text-tertiary-text"
     >
-      <div className="md:bg-[url('/images/Grunge_texture.png')]">
+      <div className="md:bg-[url('/images/Grunge_texture.png')] max-w-[100%] overflow-x-hidden overflow-hidden">
         <Heading
           text={data.title}
           fill="fill-primary"
@@ -36,10 +36,8 @@ export default function Intro(data: ICms.DynamicComponents) {
             </span>
           </PrimaryLink>
         </div>
-      </div>
-      <div className="hidden md:block">
-        <Kalon />
-        <Michael />
+          <Kalon />
+          <Michael />
       </div>
     </Section>
   )

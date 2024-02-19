@@ -7,9 +7,11 @@ export default function Section({
   ...props
 }: ISection.Props) {
   return (
-    <section className={className} {...props}>
+    <section className={"max-w-screen " + className} {...props}>
       <DivJoin color={bgColor} />
-      {children}
+      <div className="overflow-hidden max-w-screen">
+        {children}
+      </div>
     </section>
   );
 }

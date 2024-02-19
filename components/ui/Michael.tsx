@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function Michael() {
   return (
-    <div className="absolute -right-[200px] top-[33%]">
+    <div className=" hidden md:block absolute right-0 -mr-[200px] top-[33%]">
       <Image
         src="/images/Michael-cut-out.png"
         width={600}
