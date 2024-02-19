@@ -33,7 +33,7 @@ export default async function MeetTheCoaches(cmsData: ICms.DynamicComponents) {
             index,
             name: card.title,
             description: card.description ?? '',
-            imgSrc: card.image.src.data.attributes.url ?? '',
+            imgSrc: card.image.src.data?.attributes?.url ? card.image.src.data.attributes?.url : '',
             lastCoach: index === lastIndex,
           }
           return <Coach {...coachProps} key={card.id} />
