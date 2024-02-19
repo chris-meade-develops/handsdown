@@ -50,7 +50,7 @@ export async function getLongLivedAccessToken({
 }): Promise<IApiResponse<IInstagram.GetTokenResponse & { user_id: string }>> {
   const client_id = process.env.INSTAGRAM_APP_ID as string
   const client_secret = process.env.INSTAGRAM_APP_SECRET as string
-  const redirect_uri = PROD ? "https://handsdownacademies.com/auth/instagram-callback" :
+  const redirect_uri = PROD ? "https://handsdownacademies.co.uk/auth/instagram-callback" :
     'https://5c85-90-254-96-172.ngrok-free.app/auth/instagram-callback'
 
   try {
