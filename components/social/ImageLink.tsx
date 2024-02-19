@@ -10,12 +10,14 @@ export default function ImageLink(post: IInstagram.Media) {
       className="relative block w-full h-auto pb-[50%] min-h-[156px] md:min-h-[334px] md:max-w-[350px] overflow-hidden mx-auto"
     >
       <StackedSquares className="absolute w-15 h-15 right-2 top-2 stroke-transparent fill-white z-2" />
-      <Image
+      <img
         src={post.media_url}
         alt={post.caption}
         className="w-full h-full overflow-hidden"
-        fill={true}
-        objectFit="cover"
+        style={{
+          objectFit: 'cover',
+          objectPosition: 'center',
+        }}
       />
     </Link>
   )
