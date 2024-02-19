@@ -12,6 +12,7 @@ export default function BookAClass(cmsData: ICms.DynamicComponents) {
 
   const handleAcademySelect = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name } = e.currentTarget
+    console.log("academyUrls", academyUrls, name, academyUrls[name])
     const url = academyUrls[name]
     setFormUrl(url)
   }
