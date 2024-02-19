@@ -74,6 +74,8 @@ export async function getLongLivedAccessToken({
 
     const data = await response.json()
 
+    console.log("data", data)
+
     if (!data.access_token) {
       throw new Error('Failed to obtain short-lived access token')
     }
