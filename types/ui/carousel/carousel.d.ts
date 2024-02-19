@@ -13,8 +13,7 @@ namespace ICarousel {
     onClick: () => void;
   };
 
-  interface ArrowButton extends Pick<Props, "reverseColors"> {
+  interface ArrowButton extends Pick<Props, "reverseColors">, React.ButtonHTMLAttributes<HTMLButtonElement> {
     type: "next" | "prev"
-    onClick: () => void
   }
 }

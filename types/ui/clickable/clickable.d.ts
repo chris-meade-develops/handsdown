@@ -1,7 +1,6 @@
 namespace IButton {
-  interface Props {
+  interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
-    onClick?: () => void;
     type: "button" | "submit" | "reset";
   }
 }

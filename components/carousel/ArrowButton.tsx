@@ -7,6 +7,7 @@ export default function ArrowButton({
 }: ICarousel.ArrowButton) {
   return (
     <button
+      type="button"
       className={`flex items-center justify-center w-16 h-16 rounded-full ${
         reverseColors ? 'bg-white' : 'bg-primary'
       }`}
