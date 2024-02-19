@@ -31,10 +31,8 @@ export default function useExpander<T extends HTMLElement>(
   }
 
   useEffect(() => {
-    console.log('ref.current before if', ref.current)
     if (ref.current) {
       if (isExpanded) {
-        console.log('ref.current', ref.current)
         let totalHeight = ref.current.scrollHeight
         Array.from(ref.current.children).forEach((child) => {
           const style = getComputedStyle(child as HTMLElement)
