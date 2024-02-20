@@ -26,7 +26,7 @@ export default async function Footer() {
         </div>
       </div>
 
-      <div className="mr-33">
+      <div className="md:mr-33">
         <h4 className="text-[22px] leading-7 font-extrabold mb-10 mt-21">
           Quick Links
         </h4>
@@ -39,7 +39,7 @@ export default async function Footer() {
         </div>
       </div>
 
-      <div>
+      <div className='flex flex-col items-center justify-center md:block'>
         <NextImage
           src={imageSrc!}
           alt="Hands Down logo"

@@ -22,7 +22,7 @@ export default function DefaultHero(heroData: ICms.Hero) {
         </h1>
       </div>
 
-      <div className="max-w-[565px] mx-auto">
+      <div className="max-w-[565px] mx-auto px-10 md:px-0">
         <p className="relative text-lg font-medium leading-6 text-center text-white font-montserrat z-3">
           {heroData.data.attributes.description}
         </p>
