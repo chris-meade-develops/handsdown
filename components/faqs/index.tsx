@@ -8,7 +8,7 @@ export default function Faqs(cmsData: ICms.DynamicComponents) {
   return (
     <Section
       bgColor="bg-offBlack"
-      className="relative pl-49 pt-49 pb-52 bg-offBlack"
+      className="relative px-10 py-41 md:pl-49 md:pt-49 md:pb-52 bg-offBlack"
     >
       <div className="flex justify-between">
         <div>
@@ -17,7 +17,7 @@ export default function Faqs(cmsData: ICms.DynamicComponents) {
           ))}
         </div>
 
-        <div>
+        <div className='hidden md:block'>
           {image && (
             <div
               className="h-[472px] w-[440px] bg-no-repeat bg-center bg-cover"
