@@ -17,7 +17,7 @@ export default function DefaultHero(heroData: ICms.Hero) {
 
       <div className="relative mx-auto mb-10 w-fit">
         <MeetTheFounders className="absolute w-[230%] max-w-[100vw] mx-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 z-3" />
-        <h1 className=" text-4xl md:text-[42px] text-white font-montserrat z-3 relative leading-[100px] font-extrabold uppercase whitespace-nowrap mx-5">
+        <h1 className=" text-4xl md:text-[42px] text-white font-montserrat z-3 relative md:leading-[100px] font-extrabold uppercase whitespace-nowrap mx-5">
           {heroData.data.attributes.title}
         </h1>
       </div>
@@ -36,7 +36,7 @@ export default function DefaultHero(heroData: ICms.Hero) {
               ?.scrollIntoView({ behavior: 'smooth' })
           }}
         >
-          <span className="text-sm font-bold leading-6 text-white uppercase  md:text-base font-montserrat">
+          <span className="text-sm font-bold leading-6 text-white uppercase md:text-base font-montserrat">
             {heroData.data.attributes.link.text}
           </span>
         </Primary>
