@@ -1,6 +1,5 @@
 'use client'
-import CMS_URL from '@/helpers/isLocal'
-import { HeroLogo, Phone } from '@/icons'
+import { Phone } from '@/icons'
 import BurgerMenu from './BurgerMenu'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'

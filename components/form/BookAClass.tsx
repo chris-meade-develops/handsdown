@@ -6,9 +6,11 @@ import { useState } from 'react'
 import Primary from '../buttons/Primary'
 import ArrowButton from '../carousel/ArrowButton'
 
-const backupAcademyUrls: {[key:string] : string} = {
-  epsom: "https://app.glofox.com/portal/#/branch/6516e6b29c2da3b1150d021d/memberships/6523d292a12c8de5610cbc87/plan/1696846438941/buy",
-  cobham: "https://app.glofox.com/portal/#/branch/6516e5ccc24b6fedbd0eb61a/memberships/6523da5830e704df92098a42/plan/1696848389099/buy"
+const backupAcademyUrls: { [key: string]: string } = {
+  epsom:
+    'https://app.glofox.com/portal/#/branch/6516e6b29c2da3b1150d021d/lead-register/membership/6523d292a12c8de5610cbc87/plan/1696846438941?requires_password=false',
+  cobham:
+    'https://app.glofox.com/portal/#/branch/6516e5ccc24b6fedbd0eb61a/lead-register/membership/6523da5830e704df92098a42/plan/1696848389099?requires_password=false',
 }
 
 export default function BookAClass(cmsData: ICms.DynamicComponents) {
@@ -17,12 +19,12 @@ export default function BookAClass(cmsData: ICms.DynamicComponents) {
 
   const handleAcademySelect = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name } = e.currentTarget
-    if(academyUrls){
-        const url = academyUrls[name]
-        setFormUrl(url)
+    if (academyUrls) {
+      const url = academyUrls[name]
+      setFormUrl(url)
     } else {
-        const url = backupAcademyUrls[name]
-        setFormUrl(url)
+      const url = backupAcademyUrls[name]
+      setFormUrl(url)
     }
   }
 
