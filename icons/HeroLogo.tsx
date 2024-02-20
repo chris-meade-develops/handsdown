@@ -1,4 +1,4 @@
-export default function HeroLogo({ className} : SvgProps) {
+export default function HeroLogo({ className } : SvgProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

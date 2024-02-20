@@ -43,9 +43,13 @@ namespace INavigation {
     data: Navigation[]
   }
 
-  interface MobileNav extends Clickable, Toggleable {}
+  interface MobileNav extends Clickable, Toggleable {
+    scrolled: boolean
+  }
 
-  interface BurgerMenu extends Clickable, Toggleable {}
+  interface BurgerMenu extends Clickable, Toggleable {
+    scrolled: boolean
+  }
 
   interface MobileDropDown {
     items: INavigation.Items

@@ -4,28 +4,14 @@ import DesktopItem from './DesktopItem'
 import Image from 'next/image'
 
 export default function Desktop({
-  scrollable,
+  scrolled,
   navItems,
 }: {
-  scrollable: boolean
+  scrolled: boolean
   navItems: INavigation.Items
 }) {
   const firstHalf = navItems.data.slice(0, 3)
   const secondHalf = navItems.data.slice(3, 8)
-  const [scrolled, setScrolled] = useState(!scrollable)
-
-  useEffect(() => {
-    if (!scrollable) return
-    const handleScroll = () => {
-      if (window.scrollY > 130) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  })
 
   return (
     <nav

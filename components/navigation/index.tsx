@@ -4,6 +4,7 @@ import Desktop from './Desktop'
 import Mobile from './Mobile'
 import SideDrawer from './SideDrawer'
 import { useEffect } from 'react'
+import useScrolled from '@/hooks/useScrolled'
 
 export default function NavigationComposer({
   scrollable,
@@ -15,11 +16,11 @@ export default function NavigationComposer({
   const {
     open: drawerOpen,
     toggle: toggleDrawer,
-    handleOpen: openDrawer,
-    handleClose: closeDrawer,
   } = useToggle({
     initial: false,
   })
+
+  const scrolled = useScrolled({ scrollable })
 
   useEffect(() => {
     // if drawerOpen is true, aprevent scrolling on the body
@@ -32,8 +33,8 @@ export default function NavigationComposer({
 
   return (
     <div>
-      <Desktop scrollable={scrollable} navItems={navData.attributes.items} />
-      <Mobile open={drawerOpen} onClick={toggleDrawer} />
+      <Desktop scrolled={scrolled} navItems={navData.attributes.items} />
+      <Mobile open={drawerOpen} onClick={toggleDrawer} scrolled={scrolled} />
       <SideDrawer open={drawerOpen} items={navData.attributes.items} />
     </div>
   )
