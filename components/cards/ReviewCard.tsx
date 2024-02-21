@@ -37,7 +37,7 @@ export default function ReviewCard({
 
       <div className="flex justify-center w-full">
         <div className="relative mr-6 overflow-hidden rounded-full h-26 w-26">
-          {image.src.data.attributes.url && (
+          {image.src.data?.attributes?.url && (
             <Image src={image.src.data.attributes.url} alt={image.alt} fill />
           )}
         </div>
