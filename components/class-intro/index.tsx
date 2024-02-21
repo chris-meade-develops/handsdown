@@ -2,22 +2,6 @@ import PrimaryLink from '@/components/links/PrimaryLink'
 import Section from '@/components/section/Section'
 import isCommaSeparatedWords from '@/helpers/stringHelper'
 
-const learningPoints = [
-  'Balance',
-  'Coordination',
-  'Discipline',
-  'Fitness',
-  'Focus',
-  'Co-operation',
-  'Listening',
-  'Respect',
-  'Independence',
-  'Confidence',
-  'Memory',
-  'Teamwork',
-  'Safety',
-]
-
 export default function MainText(cmsData: ICms.DynamicComponents) {
   if (!cmsData) return null
 
@@ -76,12 +60,12 @@ export default function MainText(cmsData: ICms.DynamicComponents) {
         </div>
         <div className="hidden md:block">
           <div
-            style={{ backgroundImage: 'url("/images/dragons.jpg")' }}
+            style={{ backgroundImage: `url("${cmsData.images.data[0].attributes.url}")` }}
             className="w-[440px] h-[472px] bg-cover bg-no-repeat bg-center overflow-hidden ml-auto mb-47"
           />
 
           <div
-            style={{ backgroundImage: 'url("/images/dragon-certificate.jpg")' }}
+            style={{ backgroundImage: `url("${cmsData.images.data[1].attributes.url}")` }}
             className="w-[387px] h-[472px] bg-cover bg-no-repeat bg-center overflow-hidden ml-auto"
           />
         </div>
