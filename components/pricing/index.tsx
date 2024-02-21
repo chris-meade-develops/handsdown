@@ -22,16 +22,18 @@ export default function Pricing(data: ICms.DynamicComponents) {
         {data.subTitle}
       </p>
       <div className="flex flex-col md:flex-row md:gap-30 md:px-51 md:mb-34">
-        {pricingCards.map((item: ICard.CallToAction , index: number) => (
+        {pricingCards.map((item: ICard.CallToAction, index: number) => (
           <PricingCard key={item.id} {...item} />
         ))}
       </div>
       <div className="h-25 w-[269px] md:w-[305px] md:h-[55px] mx-auto mb-14 z-1 relative">
-        <PrimaryLink href={data.link.address}>
-          <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
-            {data.link.text}
-          </span>
-        </PrimaryLink>
+        {data.link && (
+          <PrimaryLink href={data.link.address}>
+            <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
+              {data.link.text}
+            </span>
+          </PrimaryLink>
+        )}
       </div>
     </Section>
   )
