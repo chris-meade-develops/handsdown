@@ -1,5 +1,3 @@
-import useMediaQuery from '@/hooks/useMediaQuery'
-import Class from './Class'
 import Day from './Day'
 import MobileTimetable from './MobileTimetable'
 

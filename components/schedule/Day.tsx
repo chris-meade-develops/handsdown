@@ -23,7 +23,7 @@ export default function Day({
         </h2>
       </div>
       {academyData.map((classes: TimeTableClass) => {
-        if (classes.dayName === day) {
+        if (classes.dayName.trim() === day.trim()) {
           return (
             <div className="flex flex-col w-full gap-9" key={classes.id}>
               {classes.classes.map((classItem: Classes) => {
