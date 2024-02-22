@@ -1,1 +1,4 @@
-Sitemap: https://handsdown-postgres-cms-production.up.railway.app/api/sitemap/index.xml
+User-agent: *
+Disallow:
+
+Sitemap: https://handsdownacademies.co.uk/sitemap.xml
