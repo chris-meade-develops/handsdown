@@ -44,7 +44,7 @@ export default function Coach({
               <div className="h-20 w-fit">
                 <Primary type="button" onClick={handleToggle}>
                   <span className="flex items-center justify-center px-10 text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text sm:text-base sm:tracking-widest">
-                    Read More
+                    {isExpanded ? 'Read Less' : 'Read More'}
                   </span>
                 </Primary>
               </div>
@@ -77,7 +77,7 @@ export default function Coach({
             <div className="h-20 w-fit">
               <Primary type="button" onClick={handleToggle}>
                 <span className="flex items-center justify-center px-10 text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text sm:text-base sm:tracking-widest">
-                  Read More
+                  {isExpanded ? 'Read Less' : 'Read More'}
                 </span>
               </Primary>
             </div>
