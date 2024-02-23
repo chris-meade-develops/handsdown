@@ -11,11 +11,12 @@ interface UseExpanderReturn<T extends HTMLElement> {
 }
 
 export default function useExpander<T extends HTMLElement>(
-  initialState: boolean = false
+  initialState: boolean = false,
+  minHeight: string = '0px'
 ): UseExpanderReturn<T> {
   const ref = useRef<T>(null)
   const [isExpanded, setIsExpanded] = useState<boolean>(initialState)
-  const [maxHeight, setMaxHeight] = useState<string>('0px')
+  const [maxHeight, setMaxHeight] = useState<string>(minHeight)
 
   const handleToggle = () => {
     if (isExpanded) handleClose()
@@ -43,10 +44,10 @@ export default function useExpander<T extends HTMLElement>(
         })
         setMaxHeight(`${totalHeight}px`)
       } else {
-        setMaxHeight('0px')
+        setMaxHeight(minHeight)
       }
     }
-  }, [ref, isExpanded])
+  }, [ref, isExpanded, minHeight])
 
   return { ref, isExpanded, handleToggle, maxHeight, handleOpen, handleClose }
 }

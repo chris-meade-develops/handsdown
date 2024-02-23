@@ -20,14 +20,14 @@ export default async function MeetTheCoaches(cmsData: ICms.DynamicComponents) {
   return (
     <section className="pb-48 pt-26 bg-secondary">
       <ClientHelperComponent />
-      <div className=" mb-43">
+      <div className="mb-21 md:mb-43">
         <Heading
           text="meet the coaches"
           fill="fill-black"
           textColour="text-white"
         />
       </div>
-      <div className="flex flex-col max-w-[992px] mx-auto text-primary-text text-lg">
+      <div className="flex flex-col max-w-[992px] px-10 mx-auto text-primary-text text-lg">
         {cards.map((card, index) => {
           const coachProps: ICoach = {
             index,
