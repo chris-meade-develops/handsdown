@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   title: 'Hands Down Martial Arts, Boxing, Kickboxing in Cobham & Epsom',
   description:
     'Hands Down martial arts, boxing and kickboxing in Cobham and Epsom, Surrey. Classes suitable for all ages. Great way to get fit & learn',
+  metadataBase: new URL('https://handsdownacademies.co.uk'),
 }
 
 export default function RootLayout({
