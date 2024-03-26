@@ -6,6 +6,7 @@ namespace ICarousel {
     displayDots?: boolean
     selectableChildren?: boolean
     reverseColors?: boolean
+    overflowHidden?: boolean
   }
   
   interface ButtonProps {

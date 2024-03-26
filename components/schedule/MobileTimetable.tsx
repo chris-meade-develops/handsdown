@@ -19,11 +19,12 @@ export default function MobileTimetable({
   return (
     <div className="flex">
       <div className="flex-1" />
-      <div className="overflow-hidden max-w-[158px]">
+      <div className="max-w-[158px]">
         <Carousel
           options={options}
           selectableChildren={true}
           displayButtons={false}
+          overflowHidden={false}
         >
           {days.map((day: string, index: number) => (
             <Day

@@ -12,6 +12,7 @@ export default function Carousel({
   displayDots = false,
   selectableChildren = false,
   reverseColors = false,
+  overflowHidden = true,
 }: ICarousel.Props) {
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -67,7 +68,10 @@ export default function Carousel({
 
   return (
     <>
-      <div className="overflow-hidden embla" ref={emblaRef}>
+      <div
+        className={`embla ${overflowHidden ? 'overflow-hidden' : ''}`}
+        ref={emblaRef}
+      >
         <div className="flex items-center embla-container">
           {renderChildren()}
         </div>
@@ -85,10 +89,18 @@ export default function Carousel({
       {displayButtons && (
         <>
           <div className="absolute left-23 top-1/2">
-            <ArrowButton type="prev" onClick={scrollPrev} reverseColors={reverseColors} />
+            <ArrowButton
+              type="prev"
+              onClick={scrollPrev}
+              reverseColors={reverseColors}
+            />
           </div>
           <div className="absolute right-23 top-1/2">
-            <ArrowButton type="next" onClick={scrollNext} reverseColors={reverseColors}  />
+            <ArrowButton
+              type="next"
+              onClick={scrollNext}
+              reverseColors={reverseColors}
+            />
           </div>
         </>
       )}
