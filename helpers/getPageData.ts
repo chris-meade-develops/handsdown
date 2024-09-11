@@ -1,9 +1,9 @@
 'use server'
 const qs = require('qs')
+import { headers } from "./cacheHeaders"
 import CMS_URL from "./isLocal"
 
 export default async function getPageData(slug: string): Promise<ICms.PageData | null> {
-  'use server'
   const query = {
     filters: {
       slug: slug,
@@ -121,7 +121,7 @@ export default async function getPageData(slug: string): Promise<ICms.PageData |
 
   try {
     const convertedQuery = qs.stringify(query, { encodeValuesOnly: true })
-    const pageData = await fetch(`${CMS_URL}custompages?${convertedQuery}`)
+    const pageData = await fetch(`${CMS_URL}custompages?${convertedQuery}`, headers)
     const page: ICms.PageData = await pageData.json()
 
     if (!page || !page.data?.length) throw new Error('Page data not found')

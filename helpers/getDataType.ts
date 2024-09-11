@@ -1,11 +1,13 @@
 'use server'
-import CMS_URL from "./isLocal"
+import { headers } from './cacheHeaders'
+import CMS_URL from './isLocal'
 
 export default async function getDataType(type: string) {
   try {
     if (!type) throw new Error('Data type not found')
 
-    const res = await fetch(`${CMS_URL}${type}?populate=deep`)
+    const res = await fetch(`${CMS_URL}${type}?populate=deep`, headers)
+
     const data = await res.json()
     if (!data) throw new Error('Data not found')
 
