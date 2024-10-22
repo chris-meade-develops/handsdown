@@ -14,7 +14,7 @@ const tiltMap = {
 export default async function Classes() {
   const classesData = await getCarouselData('class')
 
-  if(!classesData) return null
+  if (!classesData) return null
 
   const {
     title: heading,
@@ -28,7 +28,7 @@ export default async function Classes() {
       className="relative pl-8 pr-10 text-base font-medium leading-7 md:px-40 bg-primary py-23 font-montserrat text-tertiary-text"
     >
       <Heading
-        text={heading ?? "OUR CLASSES"}
+        text={heading ?? 'OUR CLASSES'}
         fill="fill-white"
         textColour="text-primary-text"
       />
@@ -44,7 +44,8 @@ export default async function Classes() {
           <div
             key={item.title}
             className={
-              tiltMap[String(index) as keyof typeof tiltMap] + ' w-full sm:max-w-[272px] h-[314px] sm:h-[456px] mb-27'
+              tiltMap[String(index) as keyof typeof tiltMap] +
+              ' w-full sm:max-w-[272px] h-[314px] sm:h-[456px] mb-27'
             }
           >
             <ClassesCard {...item} />
@@ -52,9 +53,7 @@ export default async function Classes() {
         ))}
       </div>
       <div className="w-[305px] h-27 mx-auto mt-25 mb-20 hidden sm:block">
-        <PrimaryLink href="/timetable">
-          <span className="text-white">View Timetables</span>
-        </PrimaryLink>
+        <PrimaryLink href="/timetable">View Timetables</PrimaryLink>
       </div>
     </Section>
   )

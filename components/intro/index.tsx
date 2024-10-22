@@ -30,14 +30,10 @@ export default function Intro(data: ICms.DynamicComponents) {
         </div>
 
         <div className="h-25 w-[270px] mx-auto mt-15 mb-40">
-          <PrimaryLink href={data.link.address}>
-            <span className="font-montserrat font-extrabold text-white text-lg leading-[1.4px] uppercase">
-              {data.link.text}
-            </span>
-          </PrimaryLink>
+          <PrimaryLink href={data.link.address}>{data.link.text}</PrimaryLink>
         </div>
-          <Kalon />
-          <Michael />
+        <Kalon />
+        <Michael />
       </div>
     </Section>
   )

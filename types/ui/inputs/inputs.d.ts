@@ -1,25 +1,21 @@
-namespace IInputs {
-  interface Props {
-    type?: InputHTMLAttributes.type;
-    placeholder?: string;
-    value?: string;
-    onChange?: (e: React.ChangeEvent<T>) => void;
-    name: string;
-    label?: string;
-  }
-  
-  interface Radio extends Omit<Props, 'label'> {
-    label: string;
+import { ActionMeta, SingleValue } from 'react-select'
+
+export namespace IInputs {
+  export interface Props extends React.HTMLProps<HTMLInputElement> {
+    label: string
+    type?: InputHTMLAttributes.type
   }
 
-  interface SelectOption {
-    value: string;
-    label: string;
+  export interface SelectOption {
+    value: string
+    label: string
   }
-  
-  interface Select extends Omit<Props, 'onChange'> {
-    onChange: (T) => void;
-    options: { value: string; label: string }[];
-    selectValue: SelectOption;
+
+  export interface Select<Option> extends Omit<Props, 'onChange'> {
+    onChange: (option: Option | null, actionMeta: ActionMeta<Option>) => void
+    options: Option[]
+    selectValue: Option
+    instanceId?: string
+    error?: boolean
   }
 }

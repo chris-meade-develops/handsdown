@@ -1,43 +1,47 @@
-import { default as LibSelect, ActionMeta, SingleValue } from "react-select";
+import { type GroupBase, default as LibSelect } from 'react-select'
+import { type IInputs } from '@/types/ui/inputs/inputs'
 
-export default function Select({
+export default function Select<Option>({
   selectValue,
   onChange,
   name,
   label,
   options,
-}: IInputs.Select) {
-  
-  function handleSelectChange(
-    newValue: SingleValue<IInputs.SelectOption>,
-    actionMeta: ActionMeta<IInputs.SelectOption>
-  ) {
-    console.log(newValue, actionMeta);
-    onChange(newValue);
-
-    return null;
-  }
-
+  instanceId,
+  placeholder,
+  error,
+}: IInputs.Select<Option>) {
   return (
     <label className="flex flex-col w-full mb-6">
-      <span className=" text-tertiary-text mb-[3px]">{label}</span>
+      <span
+        className={`text-base font-normal leading-5 mb-[3px] ${
+          error ? '!text-red-500' : ''
+        }`}
+      >
+        {label}
+      </span>
       <LibSelect
         name={name}
         options={options}
         unstyled
         classNamePrefix=""
-        onChange={handleSelectChange}
-        placeholder="Select a course..."
+        onChange={onChange}
+        value={selectValue}
+        instanceId={instanceId}
+        placeholder={placeholder}
         classNames={{
-          control: (state) =>
-            `w-full border form-input h-27 py-9 px-11 ${
-              state.isFocused &&
-              "border-primary-text border-accent border-2 outline-none ring-transparent"
-            }`,
-            menu: (state) => `w-full bg-white border h-fit`,
-            option: (state) => `w-full bg-white h-fit py-9 px-6 hover:bg-accent hover:text-white cursor-pointer`,
+          control: (state) => {
+            return `w-full form-input h-27 py-9 px-11 rounded-md ${
+              state.isFocused
+                ? 'border-accent border-2 outline-none ring-transparent'
+                : error ? 'border-2 border-red-500' : 'border-primary-text border'
+            }`
+          },
+          menu: (state) => `w-full bg-white border h-fit`,
+          option: (state) =>
+            `w-full bg-white h-fit py-9 px-6 hover:bg-accent hover:text-white cursor-pointer`,
         }}
       />
     </label>
-  );
+  )
 }

@@ -26,13 +26,7 @@ export default function ClassesCard({
             {description}
           </p>
           <div className="h-25 w-[185px] mx-auto mb-14">
-            {link && (
-              <PrimaryLink href={link.address}>
-                <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
-                  learn more
-                </span>
-              </PrimaryLink>
-            )}
+            {link && <PrimaryLink href={link.address}>learn more</PrimaryLink>}
           </div>
         </div>
       </div>

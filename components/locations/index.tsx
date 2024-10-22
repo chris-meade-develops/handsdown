@@ -49,11 +49,7 @@ export default async function Locations(data: ICms.DynamicComponents) {
           </Link>
 
           <div className="h-25 w-[270px] mx-auto mt-15 mb-40">
-            <PrimaryLink href="/timetable">
-              <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
-                View Timetable
-              </span>
-            </PrimaryLink>
+            <PrimaryLink href="/timetable">View Timetable</PrimaryLink>
           </div>
         </div>
       ))}

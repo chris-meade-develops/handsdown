@@ -4,7 +4,6 @@ import localFont from 'next/font/local'
 import { Metadata } from 'next'
 import Footer from '@/components/footer'
 
-
 const futura = localFont({
   src: '../fonts/Futura.otf',
   variable: '--font-futura',

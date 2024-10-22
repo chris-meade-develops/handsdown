@@ -51,21 +51,21 @@ export default function MainText(cmsData: ICms.DynamicComponents) {
           )}
 
           <div className="w-[305px] h-27 mb-28 md:mb-0">
-            <PrimaryLink href="/timetable">
-              <span className="text-white uppercase font-montserrat font-extrabold leading-[19px] text-base tracking-widest">
-                view timetable
-              </span>
-            </PrimaryLink>
+            <PrimaryLink href="/timetable">view timetable</PrimaryLink>
           </div>
         </div>
         <div className="hidden md:block">
           <div
-            style={{ backgroundImage: `url("${cmsData.images.data[0].attributes.url}")` }}
+            style={{
+              backgroundImage: `url("${cmsData.images.data[0].attributes.url}")`,
+            }}
             className="w-[440px] h-[472px] bg-cover bg-no-repeat bg-center overflow-hidden ml-auto mb-47"
           />
 
           <div
-            style={{ backgroundImage: `url("${cmsData.images.data[1].attributes.url}")` }}
+            style={{
+              backgroundImage: `url("${cmsData.images.data[1].attributes.url}")`,
+            }}
             className="w-[387px] h-[472px] bg-cover bg-no-repeat bg-center overflow-hidden ml-auto"
           />
         </div>

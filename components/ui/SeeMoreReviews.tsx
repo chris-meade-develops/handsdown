@@ -26,9 +26,7 @@ export default function SeeMoreReviews(data: ICms.CarouselData) {
       {visibleReviews < data.data.attributes.cards.cards.length && (
         <div className="hidden md:block mx-auto max-w-[305px] h-[55px] mt-40 mb-15">
           <Primary onClick={loadMoreReviews} type="button">
-            <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
-              Read more
-            </span>
+            Read more
           </Primary>
         </div>
       )}

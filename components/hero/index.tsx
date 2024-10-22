@@ -26,7 +26,7 @@ export default function Hero() {
           type="button"
           onClick={() => {
             document
-              .getElementById('#book-class')
+              .getElementById('#booking-form')
               ?.scrollIntoView({ behavior: 'smooth' })
           }}
         >

@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin')
 
 module.exports = {
+  darkMode: ['class'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -137,11 +137,17 @@ module.exports = {
       backgroundImage: {
         'hero-pattern': "url('/images/HandsdownHero.png')",
       },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
     },
   },
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwindcss-3d')({ legacy: true }),
     require('tailwindcss-labeled-groups')(['links', 'buttons']),
+    require('tailwindcss-animate'),
   ],
 }

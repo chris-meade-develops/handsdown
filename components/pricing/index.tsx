@@ -28,11 +28,7 @@ export default function Pricing(data: ICms.DynamicComponents) {
       </div>
       <div className="h-25 w-[269px] md:w-[305px] md:h-[55px] mx-auto mb-14 z-1 relative">
         {data.link && (
-          <PrimaryLink href={data.link.address}>
-            <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
-              {data.link.text}
-            </span>
-          </PrimaryLink>
+          <PrimaryLink href={data.link.address}>{data.link.text}</PrimaryLink>
         )}
       </div>
     </Section>

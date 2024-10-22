@@ -1,4 +1,9 @@
-export default function Primary({ children, onClick, type, ...props }: IButton.Props) {
+export default function Primary({
+  children,
+  onClick,
+  type,
+  ...props
+}: IButton.Props) {
   return (
     <button
       type={type}
@@ -7,7 +12,9 @@ export default function Primary({ children, onClick, type, ...props }: IButton.P
       {...props}
     >
       <span className="absolute w-full h-full border border-accent rounded-[28px] top-0 left-0 transition-transform duration-300 group-buttons-hover:-translate-y-[4px]" />
-      {children}
+      <span className="text-sm font-extrabold tracking-wide text-center uppercase text-secondary-text">
+        {children}
+      </span>
     </button>
   )
 }
