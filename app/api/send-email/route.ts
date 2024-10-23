@@ -86,13 +86,7 @@ export async function POST(request: NextRequest) {
       html: emailContent,
     }
 
-    const info = await transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        throw new Error(error.message)
-      }
-
-      return info
-    })
+    const info = await transporter.sendMail(mailOptions)
 
     return NextResponse.json({
       success: true,

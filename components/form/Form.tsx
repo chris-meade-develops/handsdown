@@ -196,6 +196,8 @@ export default function Form() {
           throw new Error(data.errorMessage)
         }
 
+        console.log('data: ', data)
+
         setFormState({ ...formState, success: true })
       } catch (error) {
         console.log('error: ', error)
