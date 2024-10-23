@@ -31,12 +31,14 @@ export async function sendCodeToStrapi({
     const data: ICms.InstagramToken = await response.json()
 
     return {
+      status: response.status,
       success: true,
       data,
     }
   } catch (error) {
     console.error(error)
     return {
+      status: 500,
       success: false,
       errorMessage: `Failed to send code to Strapi: ${error}`,
     }
@@ -50,8 +52,9 @@ export async function getLongLivedAccessToken({
 }): Promise<IApiResponse<IInstagram.GetTokenResponse & { user_id: string }>> {
   const client_id = process.env.INSTAGRAM_APP_ID as string
   const client_secret = process.env.INSTAGRAM_APP_SECRET as string
-  const redirect_uri = PROD ? "https://handsdownacademies.co.uk/auth/instagram-callback" :
-    'https://5c85-90-254-96-172.ngrok-free.app/auth/instagram-callback'
+  const redirect_uri = PROD
+    ? 'https://handsdownacademies.co.uk/auth/instagram-callback'
+    : 'https://5c85-90-254-96-172.ngrok-free.app/auth/instagram-callback'
 
   try {
     // Step 1: Exchange the code for a short-lived access token
@@ -91,6 +94,7 @@ export async function getLongLivedAccessToken({
     }
 
     return {
+      status: response.status,
       success: true,
       data: {
         ...longLivedTokenData,
@@ -100,6 +104,7 @@ export async function getLongLivedAccessToken({
   } catch (error) {
     console.error(error)
     return {
+      status: 500,
       success: false,
       errorMessage: `Failed to obtain long-lived access token: ${error}`,
     }
@@ -122,10 +127,11 @@ export async function getInstagramToken(): Promise<
     const lastToken = data.data[data.data.length - 1]
 
     // return the last object in the data array
-    return { data: lastToken, success: true }
+    return { data: lastToken, success: true, status: response.status }
   } catch (error) {
     console.error(error)
     return {
+      status: 500,
       success: false,
       errorMessage: `Failed to obtain Instagram access token: ${error}`,
     }
@@ -150,10 +156,11 @@ export async function getInstagramPosts({
 
     const data: IInstagram.GetMediaResponse = await response.json()
 
-    return { data: data.data, success: true }
+    return { data: data.data, success: true, status: response.status }
   } catch (error) {
     console.error(error)
     return {
+      status: 500,
       success: false,
       errorMessage: `Failed to obtain Instagram posts: ${error}`,
     }
@@ -166,7 +173,9 @@ export async function refreshLongLivedToken({
   token: string
 }): Promise<IApiResponse<IInstagram.GetTokenResponse>> {
   try {
-    const refreshUrl = `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${encodeURIComponent(token)}`
+    const refreshUrl = `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${encodeURIComponent(
+      token
+    )}`
 
     const response = await fetch(refreshUrl)
 
@@ -177,12 +186,14 @@ export async function refreshLongLivedToken({
     }
 
     return {
+      status: response.status,
       data,
       success: true,
     }
   } catch (error) {
     console.error(error)
     return {
+      status: 500,
       success: false,
       errorMessage: `Failed to refresh long-lived access token: ${error}`,
     }
@@ -232,13 +243,14 @@ export async function checkTokenExpiry(): Promise<
             `Failed to update token in Strapi: ${token.errorMessage}`
           )
 
-        return { success: true, data: token.data }
+        return { success: true, data: token.data, status: 200 }
       }
     }
-    return { success: true, data: instagramToken.data }
+    return { success: true, data: instagramToken.data, status: 200 }
   } catch (error) {
     console.error(error)
     return {
+      status: 500,
       success: false,
       errorMessage: `Failed to check and update token expiry: ${error}`,
     }

@@ -6,7 +6,7 @@ export default function MobileTimetable({
   academyData,
 }: {
   days: string[]
-  academyData: TimeTableClass[]
+  academyData: Classes[]
 }) {
   const options = {
     dragFree: false,

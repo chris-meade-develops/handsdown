@@ -20,11 +20,101 @@ import { Input } from '../ui/input'
 import StudentSelector from './StudentSelector'
 import { Plus } from 'lucide-react'
 import { Minus } from '@/icons'
-import { getTimetableApiReq } from '@/helpers/fetchCalls'
+import { getTimetableApiReq, submitFormData } from '@/helpers/fetchCalls'
 import { handleNoClassOptionsOrLoading } from '@/helpers/formHelpers'
+import LoadingOverlay from '../ui/LoadingOverlay'
+
+const StudentSchema = z.object({
+  studentName: z.string().optional(),
+  course: z.string().optional(),
+  class: z.string().optional(),
+})
+
+const FormSchema = z
+  .object({
+    customer: z.string(),
+    location: z.string().min(1, 'Location is required'),
+    name: z.string().optional(),
+    parentName: z.string().optional(),
+    telephone: z.string().min(11, 'Invalid phone number'),
+    email: z.string().email('Invalid email'),
+    course: z.string().optional(),
+    class: z.string().optional(),
+    students: z.array(StudentSchema).optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.customer === 'student') {
+      if (!data.name) {
+        ctx.addIssue({
+          path: ['name'],
+          message: 'Name is required',
+          code: 'custom',
+        })
+      }
+      if (!data.course) {
+        ctx.addIssue({
+          path: ['course'],
+          message: 'Course is required',
+          code: 'custom',
+        })
+      }
+
+      if (!data.class) {
+        ctx.addIssue({
+          path: ['class'],
+          message: 'Class is required',
+          code: 'custom',
+        })
+      }
+    }
+
+    if (data.customer === 'parent') {
+      if (!data.parentName) {
+        ctx.addIssue({
+          path: ['parentName'],
+          message: 'Parent name is required',
+          code: 'custom',
+        })
+      }
+      if (!data.students?.length) {
+        ctx.addIssue({
+          path: ['students'],
+          message: 'At least one student is required',
+          code: 'custom',
+        })
+      }
+
+      data?.students?.forEach((student, index) => {
+        if (!student.studentName) {
+          ctx.addIssue({
+            path: ['students', index, 'studentName'],
+            message: 'Student name is required',
+            code: 'custom',
+          })
+        }
+
+        if (!student.course) {
+          ctx.addIssue({
+            path: ['students', index, 'course'],
+            message: 'Course is required for the student',
+            code: 'custom',
+          })
+        }
+
+        if (!student.class) {
+          ctx.addIssue({
+            path: ['students', index, 'class'],
+            message: 'Class is required for the student',
+            code: 'custom',
+          })
+        }
+      })
+    }
+  })
+
+export type Form = z.infer<typeof FormSchema>
 
 const classFetchUrl = '/api/form?type=class'
-const timetableFetchUrl = '/api/timetable'
 
 const radioClassNames =
   'relative rounded-full text-tertiary-text h-9 w-9 form-radio border-tertiary-text focus:ring-transparent data-[state=checked]:bg-primary data-[state=checked]:after:absolute data-[state=checked]:after:-translate-x-1/2 data-[state=checked]:after:-translate-y-1/2 data-[state=checked]:after:top-1/2 data-[state=checked]:after:left-1/2 data-[state=checked]:after:w-[7px] data-[state=checked]:after:h-[7px] data-[state=checked]:after:rounded-full data-[state=checked]:after:bg-white'
@@ -37,100 +127,15 @@ const createDropdownOptions = (data: ICms.CarouselData) =>
   })
 
 export default function Form() {
+  const [formState, setFormState] = useState({
+    loading: false,
+    error: false,
+    success: false,
+  })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [courseOptions, setCourseOptions] = useState<IInputs.SelectOption[]>([])
   const [classOptions, setClassOptions] = useState<IInputs.SelectOption[]>([])
-
-  const StudentSchema = z.object({
-    studentName: z.string().optional(),
-    course: z.string().optional(),
-    class: z.string().optional(),
-  })
-
-  const FormSchema = z
-    .object({
-      customer: z.string(),
-      location: z.string().min(1, 'Location is required'),
-      name: z.string().optional(),
-      parentName: z.string().optional(),
-      telephone: z.string().min(11, 'Invalid phone number'),
-      email: z.string().email('Invalid email'),
-      course: z.string().optional(),
-      class: z.string().optional(),
-      students: z.array(StudentSchema).optional(),
-    })
-    .superRefine((data, ctx) => {
-      if (data.customer === 'student') {
-        if (!data.name) {
-          ctx.addIssue({
-            path: ['name'],
-            message: 'Name is required',
-            code: 'custom',
-          })
-        }
-        if (!data.course) {
-          ctx.addIssue({
-            path: ['course'],
-            message: 'Course is required',
-            code: 'custom',
-          })
-        }
-
-        if (!data.class) {
-          ctx.addIssue({
-            path: ['class'],
-            message: 'Class is required',
-            code: 'custom',
-          })
-        }
-      }
-
-      if (data.customer === 'parent') {
-        if (!data.parentName) {
-          ctx.addIssue({
-            path: ['parentName'],
-            message: 'Parent name is required',
-            code: 'custom',
-          })
-        }
-        if (!data.students?.length) {
-          ctx.addIssue({
-            path: ['students'],
-            message: 'At least one student is required',
-            code: 'custom',
-          })
-        }
-
-        data?.students?.forEach((student, index) => {
-          if (!student.studentName) {
-            ctx.addIssue({
-              path: ['students', index, 'studentName'],
-              message: 'Student name is required',
-              code: 'custom',
-            })
-          }
-
-          if (!student.course) {
-            ctx.addIssue({
-              path: ['students', index, 'course'],
-              message: 'Course is required for the student',
-              code: 'custom',
-            })
-          }
-
-          if (!student.class) {
-            ctx.addIssue({
-              path: ['students', index, 'class'],
-              message: 'Class is required for the student',
-              code: 'custom',
-            })
-          }
-        })
-      }
-    })
-
-  type Form = z.infer<typeof FormSchema>
 
   const form = useForm<Form>({
     resolver: zodResolver(FormSchema),
@@ -154,8 +159,6 @@ export default function Form() {
     handleSubmit,
     formState: { errors },
   } = form
-
-  console.log('errors: ', errors)
 
   const watchedFields = watch(['customer', 'location', 'course', 'students'])
   const isParent = watchedFields[0] === 'parent'
@@ -181,6 +184,28 @@ export default function Form() {
       setLoading(false)
     }
   }, [courseSelected, locationValue, setLoading, setError, setClassOptions])
+
+  const wrappedHandleSubmit = useCallback(
+    async (form: Form) => {
+      try {
+        setFormState({ ...formState, loading: true })
+
+        const data: IApiResponse<any> = await submitFormData(form)
+
+        if (!data.success) {
+          throw new Error(data.errorMessage)
+        }
+
+        setFormState({ ...formState, success: true })
+      } catch (error) {
+        console.log('error: ', error)
+        setFormState({ ...formState, error: true })
+      } finally {
+        setFormState({ ...formState, loading: false })
+      }
+    },
+    [formState, setFormState]
+  )
 
   useEffect(() => {
     if (courseSelected) {
@@ -259,8 +284,10 @@ export default function Form() {
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
-                {errors.students && errors.students[index] && (
-                  <FormMessage>{errors.students[index].message}</FormMessage>
+                {errors && errors.students && errors.students[index] && (
+                  <FormMessage>
+                    {errors?.students?.[index]?.message}
+                  </FormMessage>
                 )}
               </FormItem>
             )}
@@ -283,12 +310,10 @@ export default function Form() {
   return (
     <ShadForm {...form}>
       <form
-        className="flex flex-col w-full text-base font-medium font-montserrat"
-        onSubmit={handleSubmit(
-          (data: Form) => console.log(data),
-          (errors) => console.log('Validation Errors:', errors)
-        )}
+        className="relative flex flex-col w-full text-base font-medium font-montserrat"
+        onSubmit={handleSubmit(wrappedHandleSubmit)}
       >
+        {formState.loading ? <LoadingOverlay /> : null}
         <FormField
           control={control}
           name="customer"

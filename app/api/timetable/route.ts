@@ -126,6 +126,14 @@ function getClassSchedules(
       for (let i = 0; i < numWeeks; i++) {
         const classDate = getNextClassDate(dayName, i) // Get date for the class
         // Format the day as 26th, 27th, etc. and month as Oct, Nov, etc.
+
+        const { startTime } = cls
+
+        const hours = Math.floor(startTime)
+        const minutes = Math.round((startTime - hours) * 100)
+        // Set the class time using the calculated hour and minutes
+        classDate.setHours(hours, minutes, 0, 0)
+
         const dayWithOrdinal = getOrdinalSuffix(classDate.getDate())
         const day = classDate.toLocaleString('en-GB', { weekday: 'long' })
         const monthAbbreviation = classDate.toLocaleString('en-GB', {

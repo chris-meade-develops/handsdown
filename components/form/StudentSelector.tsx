@@ -71,9 +71,6 @@ export default function StudentSelector({
     }
   }, [courseSelected, fetchTimetable, locationSelected])
 
-  useEffect(() => {
-    console.log('errors: ', errors)
-  }, [errors])
 
   return (
     <>
@@ -98,7 +95,7 @@ export default function StudentSelector({
               />
             </FormControl>
             {errors.students && errors.students[index] && (
-              <FormMessage>{errors.students[index].message}</FormMessage>
+              <FormMessage>{errors?.students?.[index]?.message}</FormMessage>
             )}
           </FormItem>
         )}
@@ -126,7 +123,7 @@ export default function StudentSelector({
               />
             </FormControl>
             {errors.students && errors.students[index] && (
-              <FormMessage>{errors.students[index].message}</FormMessage>
+              <FormMessage>{errors?.students?.[index]?.message}</FormMessage>
             )}
           </FormItem>
         )}

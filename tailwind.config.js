@@ -110,6 +110,9 @@ module.exports = {
       55: '200px',
     },
     extend: {
+      animation: {
+        'spin-fast': 'spin 0.75s linear infinite',
+      },
       rotate: {
         30: '30deg',
         60: '60deg',

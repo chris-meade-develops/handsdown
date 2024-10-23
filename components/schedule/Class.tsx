@@ -1,4 +1,4 @@
-export default function Class({ classItem }: { classItem: Classes }) {
+export default function Class({ classItem }: { classItem: Class }) {
   return (
     <div className="text-[13px] md:text-base">
       <div className="md:pt-8 bg-accent md:pb-7 py-7">

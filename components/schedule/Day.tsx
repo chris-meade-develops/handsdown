@@ -8,13 +8,19 @@ export default function Day({
   selected,
 }: {
   day: string
-  academyData: TimeTableClass[]
+  academyData: Classes[]
   selected?: boolean
 }) {
-  const mediaQuery = useMediaQuery("(max-width: 1024px)")
+  const mediaQuery = useMediaQuery('(max-width: 1024px)')
+
+  console.log('academyData: ', academyData)
 
   return (
-    <div className={`mx-6 mb-auto ${mediaQuery && !selected ? 'grayscale opacity-15' : ''}`}>
+    <div
+      className={`mx-6 mb-auto ${
+        mediaQuery && !selected ? 'grayscale opacity-15' : ''
+      }`}
+    >
       <div className="min-w-[158px] md:min-w-[181px] mb-11 md:mb-22">
         <h2
           className={`font-semibold text-center uppercase font-montserrat mb-auto md:mb-0 `}
@@ -22,16 +28,18 @@ export default function Day({
           {day}
         </h2>
       </div>
-      {academyData.map((classes: TimeTableClass) => {
-        if (classes.dayName.trim() === day.trim()) {
+      {academyData.map((data: Classes) => {
+        if (data.dayName.trim() === day.trim()) {
           return (
-            <div className="flex flex-col w-full gap-9" key={classes.id}>
-              {classes.classes.map((classItem: Classes) => {
-                const key = classItem.id * Math.random() + ' ' + classItem.name
-                return <Class classItem={classItem} key={key} />
+            <div className="flex flex-col w-full gap-9" key={data.id}>
+              {data.classes.map((dayClass: Class) => {
+                const key = dayClass.id + ' ' + dayClass.name
+                return <Class classItem={dayClass} key={key} />
               })}
             </div>
           )
+        } else {
+          return null
         }
       })}
     </div>

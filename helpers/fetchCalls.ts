@@ -1,4 +1,7 @@
+import { Form } from '@/components/form/Form'
+
 const timetableFetchUrl = '/api/timetable'
+const submitFormUrl = '/api/send-email'
 
 interface FetchArgs {
   courseSelected: string
@@ -19,6 +22,25 @@ export const getTimetableApiReq = async ({
   const { data, errorMessage, success }: any = await res.json()
 
   if (!success || !data) throw new Error(errorMessage)
+
+  return data
+}
+
+export const submitFormData = async (
+  form: Form
+): Promise<IApiResponse<any>> => {
+  const res: Response = await fetch(submitFormUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(form),
+  })
+
+  if (!res.ok) {
+    throw new Error(`Error: ${res.status} ${res.statusText}`)
+  }
+  const data = await res.json()
 
   return data
 }
