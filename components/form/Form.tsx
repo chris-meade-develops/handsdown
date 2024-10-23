@@ -23,6 +23,7 @@ import { Minus } from '@/icons'
 import { getTimetableApiReq, submitFormData } from '@/helpers/fetchCalls'
 import { handleNoClassOptionsOrLoading } from '@/helpers/formHelpers'
 import LoadingOverlay from '../ui/LoadingOverlay'
+import SuccessOverlay from './SuccessOverlay'
 
 const StudentSchema = z.object({
   studentName: z.string().optional(),
@@ -126,12 +127,10 @@ const createDropdownOptions = (data: ICms.CarouselData) =>
     return { value: card.title, label: card.title }
   })
 
-export default function Form() {
-  const [formState, setFormState] = useState({
-    loading: false,
-    error: false,
-    success: false,
-  })
+export default function Form({ formState, setFormState } : {
+  formState: { loading: boolean; error: boolean; success: boolean }
+  setFormState: React.Dispatch<React.SetStateAction<{ loading: boolean; error: boolean; success: boolean }>>
+}) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [courseOptions, setCourseOptions] = useState<IInputs.SelectOption[]>([])
@@ -201,7 +200,7 @@ export default function Form() {
         setFormState({ ...formState, success: true })
       } catch (error) {
         console.log('error: ', error)
-        setFormState({ ...formState, error: true })
+        setFormState({ ...formState, error: true})
       } finally {
         setFormState({ ...formState, loading: false })
       }
@@ -316,6 +315,9 @@ export default function Form() {
         onSubmit={handleSubmit(wrappedHandleSubmit)}
       >
         {formState.loading ? <LoadingOverlay /> : null}
+        {formState.success ? (
+          <SuccessOverlay message="" />
+        ) : null}
         <FormField
           control={control}
           name="customer"
