@@ -127,9 +127,14 @@ const createDropdownOptions = (data: ICms.CarouselData) =>
     return { value: card.title, label: card.title }
   })
 
-export default function Form({ formState, setFormState } : {
+export default function Form({
+  formState,
+  setFormState,
+}: {
   formState: { loading: boolean; error: boolean; success: boolean }
-  setFormState: React.Dispatch<React.SetStateAction<{ loading: boolean; error: boolean; success: boolean }>>
+  setFormState: React.Dispatch<
+    React.SetStateAction<{ loading: boolean; error: boolean; success: boolean }>
+  >
 }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -195,14 +200,10 @@ export default function Form({ formState, setFormState } : {
           throw new Error(data.errorMessage)
         }
 
-        console.log('data: ', data)
-
-        setFormState({ ...formState, success: true })
+        setFormState({ ...formState, success: true, loading: false })
       } catch (error) {
         console.log('error: ', error)
-        setFormState({ ...formState, error: true})
-      } finally {
-        setFormState({ ...formState, loading: false })
+        setFormState({ ...formState, error: true, loading: false })
       }
     },
     [formState, setFormState]
@@ -315,9 +316,7 @@ export default function Form({ formState, setFormState } : {
         onSubmit={handleSubmit(wrappedHandleSubmit)}
       >
         {formState.loading ? <LoadingOverlay /> : null}
-        {formState.success ? (
-          <SuccessOverlay message="" />
-        ) : null}
+        {formState.success ? <SuccessOverlay message="" /> : null}
         <FormField
           control={control}
           name="customer"
