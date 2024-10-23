@@ -11,6 +11,7 @@ export default async function InstagramFeed(data: ICms.DynamicComponents) {
   const instagramAccessData = await checkTokenExpiry()
 
   if (!instagramAccessData.success || !instagramAccessData.data) {
+    console.error('InstagramFeed error: ', instagramAccessData.errorMessage)
     return <Error {...data}  />
   }
 
@@ -24,6 +25,7 @@ export default async function InstagramFeed(data: ICms.DynamicComponents) {
 
 
   if (!instagramPosts.success || !instagramPosts.data) {
+    console.error('InstagramFeed error: ', instagramPosts.errorMessage)
     return (
       <Error {...data} />
     )
