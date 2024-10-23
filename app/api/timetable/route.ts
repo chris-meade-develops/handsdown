@@ -1,16 +1,13 @@
 import getDataType from '@/helpers/getDataType'
 import { NextRequest, NextResponse } from 'next/server'
 
-
-
 export async function GET(
   request: NextRequest
 ): Promise<NextResponse<IApiResponse<ClassObject[]>>> {
+  const { searchParams } = request.nextUrl
+  const classSelected = searchParams.get('class')
+  const locationSelected = searchParams.get('location')
   try {
-    const { searchParams } = request.nextUrl
-    const classSelected = searchParams.get('class')
-    const locationSelected = searchParams.get('location')
-
     if (!classSelected || !locationSelected)
       throw new Error('Missing required parameters')
 

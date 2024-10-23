@@ -4,9 +4,9 @@ import getCarouselData from '@/helpers/getCarouselData'
 export async function GET(
   request: NextRequest
 ): Promise<NextResponse<IApiResponse<ICms.CarouselData>>> {
+  const { searchParams } = request.nextUrl
+  const type = searchParams.get('type')
   try {
-    const { searchParams } = request.nextUrl
-    const type = searchParams.get('type')
     if (!type) throw new Error('Data type not found')
 
     const data = await getCarouselData(type)
