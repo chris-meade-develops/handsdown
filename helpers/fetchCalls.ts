@@ -1,4 +1,5 @@
 import { Form } from '@/components/form/Form'
+import { headers } from './cacheHeaders'
 
 const timetableFetchUrl = '/api/timetable'
 const submitFormUrl = '/api/send-email'
@@ -13,7 +14,7 @@ export const getTimetableApiReq = async ({
   locationSelected,
 }: FetchArgs): Promise<ClassObject[]> => {
   const url = `${timetableFetchUrl}?class=${courseSelected}&location=${locationSelected}`
-  const res: Response = await fetch(url)
+  const res: Response = await fetch(url, headers)
 
   if (!res.ok) {
     throw new Error(`Error: ${res.status} ${res.statusText}`)
