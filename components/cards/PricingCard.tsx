@@ -4,6 +4,7 @@ export default function PricingCard({
   action,
   description,
   footer,
+  subTitle
 }: ICard.CallToAction) {
   return (
     <div className="w-full rounded-[15px] relative overflow-hidden flex flex-col justify-between mb-19 md:mb-0 bg-white">
@@ -22,7 +23,7 @@ export default function PricingCard({
           <span className="text-5xl md:text-[51px] font-semibold ">
             {action}
           </span>
-          <span className="text-xl font-medium md:text-2xl">/month</span>
+          <span className="text-xl font-medium md:text-2xl">/{subTitle}</span>
         </div>
         <p className="mt-8 text-base font-semibold text-center mb-9 text-primary-text">
           {description}

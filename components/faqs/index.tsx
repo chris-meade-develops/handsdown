@@ -13,7 +13,7 @@ export default function Faqs(cmsData: ICms.DynamicComponents) {
       <div className="flex justify-between">
         <div>
           {questions.map((question: ICms.Faq, index: number) => (
-            <FaqCard key={index} {...{ ...question, number: index }} />
+            <FaqCard key={index} {...{ ...question, number: index + 1 }} />
           ))}
         </div>
 
