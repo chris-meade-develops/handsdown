@@ -24,7 +24,7 @@ import { handleNoClassOptionsOrLoading } from '@/helpers/formHelpers'
 import LoadingOverlay from '../ui/LoadingOverlay'
 import SuccessOverlay from './SuccessOverlay'
 
-const StudentSchema = z.object({
+export const StudentSchema = z.object({
   studentName: z.string().optional(),
   course: z.string().optional(),
   class: z.string().optional(),
