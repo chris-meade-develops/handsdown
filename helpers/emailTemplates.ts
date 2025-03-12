@@ -191,9 +191,9 @@ export const confirmationEmailContent = ({
   </html>
   `
 
-function formatClass(classTime?: string, includeClass?: boolean): string {
+function formatClass(classTime?: string, removeClass?: boolean): string {
   if (!classTime) return ''
-  return `<p>${includeClass && 'Class'}: ${new Date(
+  return `<p>${removeClass ? '' : 'Class'}: ${new Date(
     classTime
   ).toLocaleDateString('en-GB', {
     weekday: 'long', // Full weekday (e.g., Monday)
