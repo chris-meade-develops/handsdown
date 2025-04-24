@@ -1,4 +1,4 @@
-import { Form } from '@/components/form/Form'
+import { Form, FormSchema } from '@/components/form/Form'
 import {
   defaultEmailContent,
   parentEmailContent,
@@ -20,7 +20,9 @@ export async function POST(request: NextRequest) {
     if (!MJ_API || !MJ_SECRET) throw new Error('Email credentials not found')
 
     const data: Form = await request.json()
-    if (!data) throw new Error('No data received')
+    const result = FormSchema.safeParse(data)
+
+    if (!data || !result.success) throw new Error('No data received')
 
     const {
       customer,
@@ -32,7 +34,10 @@ export async function POST(request: NextRequest) {
       course,
       class: studentClass,
       students,
-    } = data
+      pot,
+    } = result.data
+
+    if (pot) throw new Error('Invalid request')
 
     const transporter = nodemailer.createTransport({
       host: 'in-v3.mailjet.com',
