@@ -30,7 +30,7 @@ export const StudentSchema = z.object({
   class: z.string().optional(),
 })
 
-const FormSchema = z
+export const FormSchema = z
   .object({
     customer: z.string(),
     location: z.string().min(1, 'Location is required'),
@@ -41,6 +41,7 @@ const FormSchema = z
     course: z.string().optional(),
     class: z.string().optional(),
     students: z.array(StudentSchema).optional(),
+    pot: z.string().optional(),
   })
   .superRefine((data, ctx) => {
     if (data.customer === 'student') {
@@ -126,17 +127,15 @@ const createDropdownOptions = (data: ICms.CarouselData) =>
     return { value: card.title, label: card.title }
   })
 
-export default function Form({
-  formState,
-  setFormState,
-}: {
-  formState: { loading: boolean; error: boolean; success: boolean }
-  setFormState: React.Dispatch<
-    React.SetStateAction<{ loading: boolean; error: boolean; success: boolean }>
-  >
-}) {
-  const [loading, setLoading] = useState(false)
+enum LoadingOptions {
+  options = 'options',
+  form = 'form',
+}
+
+export default function Form({ description }: { description?: string }) {
+  const [loading, setLoading] = useState<LoadingOptions[]>([])
   const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false)
   const [courseOptions, setCourseOptions] = useState<IInputs.SelectOption[]>([])
   const [classOptions, setClassOptions] = useState<IInputs.SelectOption[]>([])
 
@@ -145,13 +144,15 @@ export default function Form({
     defaultValues: {
       customer: 'parent',
       location: 'epsom',
-      name: '',
-      parentName: '',
-      telephone: '',
-      email: '',
-      course: '',
-      class: '',
-      students: [{ studentName: '', course: '', class: '' }],
+      name: undefined,
+      parentName: undefined,
+      telephone: undefined,
+      email: undefined,
+      course: undefined,
+      class: undefined,
+      students: [
+        { studentName: undefined, course: undefined, class: undefined },
+      ],
     },
   })
 
@@ -171,7 +172,11 @@ export default function Form({
 
   const fetchTimetable = useCallback(async () => {
     try {
-      setLoading(true)
+      setLoading((prev) =>
+        prev.includes(LoadingOptions.options)
+          ? [...prev, LoadingOptions.options]
+          : prev
+      )
       if (!courseSelected) throw new Error('Course is required')
 
       const data = await getTimetableApiReq({
@@ -181,32 +186,35 @@ export default function Form({
 
       setClassOptions(data)
     } catch (error) {
-      setError(true)
       console.log('fetchClasses error: ', error)
     } finally {
-      setLoading(false)
+      setLoading((prev) => prev.filter((i) => i !== LoadingOptions.options))
     }
-  }, [courseSelected, locationValue, setLoading, setError, setClassOptions])
+  }, [courseSelected, locationValue, setLoading, setClassOptions])
 
-  const wrappedHandleSubmit = useCallback(
-    async (form: Form) => {
-      try {
-        setFormState({ ...formState, loading: true })
+  const wrappedHandleSubmit = useCallback(async (form: Form) => {
+    try {
+      if (form.pot) return
 
-        const data: IApiResponse<any> = await submitFormData(form)
+      setLoading((prev) =>
+        prev.includes(LoadingOptions.form)
+          ? [...prev, LoadingOptions.form]
+          : prev
+      )
+      const data: IApiResponse<any> = await submitFormData(form)
 
-        if (!data.success) {
-          throw new Error(data.errorMessage)
-        }
-
-        setFormState({ ...formState, success: true, loading: false })
-      } catch (error) {
-        console.log('error: ', error)
-        setFormState({ ...formState, error: true, loading: false })
+      if (!data.success) {
+        throw new Error(data.errorMessage)
       }
-    },
-    [formState, setFormState]
-  )
+
+      setSuccess(true)
+    } catch (error) {
+      console.log('error: ', error)
+      setError(true)
+    } finally {
+      setLoading((prev) => prev.filter((i) => i !== LoadingOptions.form))
+    }
+  }, [])
 
   useEffect(() => {
     if (courseSelected) {
@@ -234,7 +242,11 @@ export default function Form({
 
   const fetchCourseOptions = useCallback(async () => {
     try {
-      setLoading(true)
+      setLoading((prev) =>
+        prev.includes(LoadingOptions.options)
+          ? [...prev, LoadingOptions.options]
+          : prev
+      )
       const res: Response = await fetch(classFetchUrl)
 
       if (!res.ok) {
@@ -251,12 +263,12 @@ export default function Form({
       setError(true)
       console.log('fetchClasses error: ', error)
     } finally {
-      setLoading(false)
+      setLoading((prev) => prev.filter((i) => i !== LoadingOptions.options))
     }
   }, [])
 
   const handleAddStudent = useCallback(() => {
-    append({ studentName: '', course: '', class: '' })
+    append({ studentName: undefined, course: undefined, class: undefined })
   }, [append])
 
   const handleRemoveStudent = useCallback(() => {
@@ -309,254 +321,284 @@ export default function Form({
   }, [fields, courseOptions, control, errors])
 
   return (
-    <ShadForm {...form}>
-      <form
-        className="relative flex flex-col w-full text-base font-medium font-montserrat"
-        onSubmit={handleSubmit(wrappedHandleSubmit)}
-      >
-        {formState.loading ? <LoadingOverlay /> : null}
-        {formState.success ? <SuccessOverlay message="" /> : null}
-        <FormField
-          control={control}
-          name="customer"
-          render={({ field }) => (
-            <>
-              <h2 className="font-bold mb-7 opacity-[0.85]">I am the</h2>
-              <FormItem>
-                <FormControl>
-                  <RadioGroup
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                  >
-                    <div className="flex gap-10 mb-20 md:gap-20">
-                      <FormItem className="flex items-center h-9 w-fit">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="parent"
-                            id="parent"
-                            className={radioClassNames}
-                          />
-                        </FormControl>
-                        <FormLabel
-                          className={textInputLabelClassNames + ' ml-4'}
-                        >
-                          Parent
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center h-9 w-fit">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="student"
-                            id="student"
-                            className={radioClassNames}
-                          />
-                        </FormControl>
-                        <FormLabel
-                          className={textInputLabelClassNames + ' ml-4'}
-                        >
-                          Student
-                        </FormLabel>
-                      </FormItem>
-                    </div>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </>
-          )}
-        />
+    <>
+      <div className="text-center mb-13">
+        {loading.includes(LoadingOptions.form) &&
+          !error &&
+          !success &&
+          'Loading...'}
+        {success &&
+          'Success! A member of our team will be in touch to confirm your booking.'}
+        {error && (
+          <span className="text-accent">
+            Something went wrong. Please try again later or give us a call on
+            03300589474.
+          </span>
+        )}
+        {!loading && !error && !success && description}
+      </div>
+      <ShadForm {...form}>
+        <form
+          className="relative flex flex-col w-full text-base font-medium font-montserrat"
+          onSubmit={handleSubmit(wrappedHandleSubmit)}
+        >
+          {loading.includes(LoadingOptions.form) ? <LoadingOverlay /> : null}
+          {success ? <SuccessOverlay message="" /> : null}
+          <FormField
+            control={control}
+            name="customer"
+            render={({ field }) => (
+              <>
+                <h2 className="font-bold mb-7 opacity-[0.85]">I am the</h2>
+                <FormItem>
+                  <FormControl>
+                    <RadioGroup
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                    >
+                      <div className="flex gap-10 mb-20 md:gap-20">
+                        <FormItem className="flex items-center h-9 w-fit">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="parent"
+                              id="parent"
+                              className={radioClassNames}
+                            />
+                          </FormControl>
+                          <FormLabel
+                            className={textInputLabelClassNames + ' ml-4'}
+                          >
+                            Parent
+                          </FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center h-9 w-fit">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="student"
+                              id="student"
+                              className={radioClassNames}
+                            />
+                          </FormControl>
+                          <FormLabel
+                            className={textInputLabelClassNames + ' ml-4'}
+                          >
+                            Student
+                          </FormLabel>
+                        </FormItem>
+                      </div>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              </>
+            )}
+          />
 
-        <FormField
-          control={control}
-          name="location"
-          render={({ field }) => (
-            <>
-              <h2 className="font-bold mb-7 opacity-[0.85]">
-                Preferred location
-              </h2>
-              <FormItem>
-                <FormControl>
-                  <RadioGroup
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                  >
-                    <div className="flex gap-10 mb-20 md:gap-20">
-                      <FormItem className="flex items-center h-9 w-fit">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="epsom"
-                            id="epsom"
-                            className={radioClassNames}
-                          />
-                        </FormControl>
-                        <FormLabel
-                          className={textInputLabelClassNames + ' ml-4'}
-                        >
-                          Epsom
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center h-9 w-fit">
-                        <FormControl>
-                          <RadioGroupItem
-                            value="cobham"
-                            id="cobham"
-                            className={radioClassNames}
-                          />
-                        </FormControl>
-                        <FormLabel
-                          className={textInputLabelClassNames + ' ml-4'}
-                        >
-                          Cobham
-                        </FormLabel>
-                      </FormItem>
-                    </div>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </>
-          )}
-        />
+          <FormField
+            control={control}
+            name="location"
+            render={({ field }) => (
+              <>
+                <h2 className="font-bold mb-7 opacity-[0.85]">
+                  Preferred location
+                </h2>
+                <FormItem>
+                  <FormControl>
+                    <RadioGroup
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                    >
+                      <div className="flex gap-10 mb-20 md:gap-20">
+                        <FormItem className="flex items-center h-9 w-fit">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="epsom"
+                              id="epsom"
+                              className={radioClassNames}
+                            />
+                          </FormControl>
+                          <FormLabel
+                            className={textInputLabelClassNames + ' ml-4'}
+                          >
+                            Epsom
+                          </FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center h-9 w-fit">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="cobham"
+                              id="cobham"
+                              className={radioClassNames}
+                            />
+                          </FormControl>
+                          <FormLabel
+                            className={textInputLabelClassNames + ' ml-4'}
+                          >
+                            Cobham
+                          </FormLabel>
+                        </FormItem>
+                      </div>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              </>
+            )}
+          />
 
-        <div className="mb-10">
-          <h2 className="font-bold mb-7 opacity-[0.85]">
-            {isParent ? "Parent's details" : "Student's details"}
-          </h2>
-          <div className="md:grid md:grid-cols-2 md:gap-10">
-            <FormField
-              control={control}
-              name={isParent ? 'parentName' : 'name'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={textInputLabelClassNames}>
-                    Your name
-                  </FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={control}
-              name="telephone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={textInputLabelClassNames}>
-                    Phone number
-                  </FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={textInputLabelClassNames}>
-                    Email
-                  </FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <div className="mb-10">
+            <h2 className="font-bold mb-7 opacity-[0.85]">
+              {isParent ? "Parent's details" : "Student's details"}
+            </h2>
+            <div className="md:grid md:grid-cols-2 md:gap-10">
+              <FormField
+                control={control}
+                name={isParent ? 'parentName' : 'name'}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className={textInputLabelClassNames}>
+                      Your name
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={control}
+                name="telephone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className={textInputLabelClassNames}>
+                      Phone number
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className={textInputLabelClassNames}>
+                      Email
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
-        </div>
 
-        {isParent ? (
-          <>
-            {renderStudentFields()}
-            <div className="flex justify-between border-y border-tertiary-text py-9">
-              {studentValues && studentValues?.length > 1 ? (
+          <FormField
+            control={control}
+            name="pot"
+            render={({ field }) => (
+              <FormItem className="hidden">
+                <FormControl>
+                  <Input tabIndex={-1} autoComplete="off" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {isParent ? (
+            <>
+              {renderStudentFields()}
+              <div className="flex justify-between border-y border-tertiary-text py-9">
+                {studentValues && studentValues?.length > 1 ? (
+                  <button
+                    type="button"
+                    onClick={handleRemoveStudent}
+                    className={`flex items-center w-1/2`}
+                  >
+                    <Minus
+                      className={`cursor-pointer transition-all duration-200 w-10 h-10 mr-6 fill-offBlack`}
+                    />
+                    Remove student
+                  </button>
+                ) : (
+                  <div className="w-1/2" />
+                )}
                 <button
                   type="button"
-                  onClick={handleRemoveStudent}
+                  onClick={handleAddStudent}
                   className={`flex items-center w-1/2`}
                 >
-                  <Minus
+                  <Plus
                     className={`cursor-pointer transition-all duration-200 w-10 h-10 mr-6 fill-offBlack`}
                   />
-                  Remove student
+                  Add another student
                 </button>
-              ) : (
-                <div className="w-1/2" />
-              )}
-              <button
-                type="button"
-                onClick={handleAddStudent}
-                className={`flex items-center w-1/2`}
-              >
-                <Plus
-                  className={`cursor-pointer transition-all duration-200 w-10 h-10 mr-6 fill-offBlack`}
-                />
-                Add another student
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <FormField
-              control={control}
-              name="course"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Select<{ label: string; value: string }>
-                      label="Select your course"
-                      placeholder="Select a course..."
-                      options={courseOptions}
-                      onChange={(selectedOption) =>
-                        field.onChange(selectedOption?.value)
-                      }
-                      selectValue={
-                        courseOptions.find(
-                          (options) => options.value === field.value
-                        ) || { value: '', label: '' }
-                      }
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+              </div>
+            </>
+          ) : (
+            <>
+              <FormField
+                control={control}
+                name="course"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Select<{ label: string; value: string }>
+                        label="Select your course"
+                        placeholder="Select a course..."
+                        options={courseOptions}
+                        onChange={(selectedOption) =>
+                          field.onChange(selectedOption?.value)
+                        }
+                        selectValue={
+                          courseOptions.find(
+                            (options) => options.value === field.value
+                          ) || { value: '', label: '' }
+                        }
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={control}
-              name="class"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Select<{ label: string; value: string }>
-                      label="Select your class"
-                      options={classOptions}
-                      onChange={(selectedOption) =>
-                        field.onChange(selectedOption?.value)
-                      }
-                      selectValue={handleNoClassOptionsOrLoading({
-                        fieldValue: field.value,
-                        loading,
-                        error,
-                        classOptions,
-                      })}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </>
-        )}
+              <FormField
+                control={control}
+                name="class"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Select<{ label: string; value: string }>
+                        label="Select your class"
+                        options={classOptions}
+                        onChange={(selectedOption) =>
+                          field.onChange(selectedOption?.value)
+                        }
+                        selectValue={handleNoClassOptionsOrLoading({
+                          fieldValue: field.value,
+                          loading: loading.includes(LoadingOptions.options),
+                          error,
+                          classOptions,
+                        })}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </>
+          )}
 
-        <div className="w-9/12 mx-auto h-26 mt-14 mb-41 md:w-[302px] md:h-[55px] ">
-          <Primary type="submit">Submit</Primary>
-        </div>
-      </form>
-    </ShadForm>
+          <div className="w-9/12 mx-auto h-26 mt-14 mb-41 md:w-[302px] md:h-[55px] ">
+            <Primary type="submit">Submit</Primary>
+          </div>
+        </form>
+      </ShadForm>
+    </>
   )
 }
