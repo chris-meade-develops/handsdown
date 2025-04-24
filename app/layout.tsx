@@ -43,6 +43,13 @@ export default function RootLayout({
       lang="en"
       className={`${futura.variable} ${montserrat.variable} ${openSans.variable} ${deadIsland.variable} overflow-x-hidden`}
     >
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/HandsdownHero.png"
+        />
+      </head>
       <body className="overflow-x-hidden">
         {children}
         <Footer />
