@@ -20,9 +20,9 @@ export async function POST(request: NextRequest) {
     if (!MJ_API || !MJ_SECRET) throw new Error('Email credentials not found')
 
     const data: Form = await request.json()
-    const result = FormSchema.safeParse(data)
+    // const result = FormSchema.safeParse(data)
 
-    if (!data || !result.success) throw new Error('No data received')
+    if (!data) throw new Error('No data received')
 
     const {
       customer,
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       class: studentClass,
       students,
       pot,
-    } = result.data
+    } = data
 
     if (pot) throw new Error('Invalid request')
 
