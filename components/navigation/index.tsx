@@ -9,14 +9,13 @@ import useScrolled from '@/hooks/useScrolled'
 export default function NavigationComposer({
   scrollable,
   navData,
+  promoBlock,
 }: {
   scrollable: boolean
   navData: INavigation.Navigation
+  promoBlock: ICms.Announcement | null
 }) {
-  const {
-    open: drawerOpen,
-    toggle: toggleDrawer,
-  } = useToggle({
+  const { open: drawerOpen, toggle: toggleDrawer } = useToggle({
     initial: false,
   })
 
@@ -33,8 +32,17 @@ export default function NavigationComposer({
 
   return (
     <div>
-      <Desktop scrolled={scrolled} navItems={navData.attributes.items} />
-      <Mobile open={drawerOpen} onClick={toggleDrawer} scrolled={scrolled} />
+      <Desktop
+        scrolled={scrolled}
+        navItems={navData.attributes.items}
+        promoBlock={promoBlock}
+      />
+      <Mobile
+        open={drawerOpen}
+        onClick={toggleDrawer}
+        scrolled={scrolled}
+        promoBlock={promoBlock}
+      />
       <SideDrawer open={drawerOpen} items={navData.attributes.items} />
     </div>
   )
