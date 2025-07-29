@@ -1,11 +1,9 @@
-import { Form, FormSchema } from '@/components/form/Form'
-import {
-  defaultEmailContent,
-  parentEmailContent,
-  confirmationEmailContent,
-} from '@/helpers/emailTemplates'
+import { Form } from '@/components/form/Form'
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { render } from '@react-email/render'
+import NewLeadEmail from '@/emails/LeadEmail'
+import CustomerConfirmationEmail from '@/emails/CustomerConfirmation'
 
 const { MJ_API, MJ_SECRET } = process.env
 
@@ -49,51 +47,32 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    let leadEmailContent: string
-    let confirmationContent: string
-
-    if (customer === 'parent') {
-      if (!parentName) throw new Error('Parent name not found')
-      if (!students) throw new Error('Students not found')
-
-      leadEmailContent = parentEmailContent({
-        telephone,
-        email,
-        parentName,
-        students,
-        location,
-      })
-
-      confirmationContent = confirmationEmailContent({
-        telephone,
-        email,
-        parentName,
-        students,
-        location,
-      })
-    } else {
-      if (!name) throw new Error('Name not found')
-      if (!studentClass) throw new Error('Class not found')
-      if (!course) throw new Error('Course not found')
-
-      leadEmailContent = defaultEmailContent({
-        name,
-        telephone,
-        email,
-        location,
-        course,
-        studentClass,
-      })
-
-      confirmationContent = confirmationEmailContent({
-        name,
-        telephone,
-        email,
-        location,
-        course,
-        studentClass,
-      })
-    }
+    const [leadEmailContent, confirmationContent] = await Promise.all([
+      render(
+        NewLeadEmail({
+          parentName,
+          name,
+          telephone,
+          email,
+          location,
+          students,
+          course,
+          studentClass,
+        })
+      ),
+      render(
+        CustomerConfirmationEmail({
+          parentName,
+          name,
+          location,
+          students,
+          course,
+          studentClass,
+          email,
+          telephone,
+        })
+      ),
+    ])
 
     const leadMailOptions = {
       from: fromAddress,
