@@ -4,6 +4,7 @@ import getCustomPageData from '@/helpers/getCustomPageData'
 import getNavigationData from '@/helpers/getNavigationData'
 import NotFound from './not-found'
 import { Metadata } from 'next'
+import getDataType from '@/helpers/getDataType'
 
 export const metadata: Metadata = {
   openGraph: {
@@ -25,9 +26,10 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  const [page, navigation] = await Promise.allSettled([
+  const [page, navigation, promoResponse] = await Promise.allSettled([
     getCustomPageData('home'),
     getNavigationData(),
+    getDataType<ICms.Announcement>('global-config'),
   ])
 
   if (
@@ -52,14 +54,34 @@ export default async function Home() {
     return <NotFound />
   }
   const navData = navigation.value.data[0]
-  const cmsData = page.value.data?.[0]?.attributes
+  const { hero, dynamicComponents } = page.value.data?.[0]?.attributes
+  let promoBlock = null
+
+  if (
+    promoResponse.status === 'fulfilled' &&
+    promoResponse.value &&
+    promoResponse.value.data &&
+    promoResponse.value.data.attributes
+  ) {
+    const { enabled, End } = promoResponse.value.data.attributes.Announcement[0]
+    const now = new Date().setHours(0, 0, 0, 0)
+    const end = End ? new Date(End).setHours(0, 0, 0, 0) : undefined
+    if (enabled && (!end || now <= end)) {
+      promoBlock = promoResponse.value
+    }
+  }
 
   return (
     <div className="relative">
       <header>
-        <NavigationComposer scrollable={true} navData={navData} />
+        <NavigationComposer
+          scrollable={true}
+          navData={navData}
+          promoBlock={promoBlock}
+        />
       </header>
-      <DynamicPage cmsData={cmsData} />
+
+      <DynamicPage cmsData={{ hero, dynamicComponents }} />
     </div>
   )
 }
