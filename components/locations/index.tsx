@@ -8,7 +8,7 @@ import { Fragment } from 'react'
 
 export default async function Locations(data: ICms.DynamicComponents) {
   const dataType = data.dataType
-  const locationData = await getDataType(dataType)
+  const locationData = await getDataType<any>(dataType)
   const locationInfo = locationData.data.attributes.locationInfo
 
   return (
