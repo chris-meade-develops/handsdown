@@ -2,7 +2,7 @@
 import { headers } from './cacheHeaders'
 import CMS_URL from './isLocal'
 
-export default async function getDataType(type: string) {
+export default async function getDataType<T>(type: string): Promise<T | null> {
   try {
     if (!type) throw new Error('Data type not found')
 
