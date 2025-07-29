@@ -45,6 +45,7 @@ namespace INavigation {
 
   interface MobileNav extends Clickable, Toggleable {
     scrolled: boolean
+    promoBlock: ICms.Announcement | null
   }
 
   interface BurgerMenu extends Clickable, Toggleable {

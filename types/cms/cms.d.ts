@@ -72,6 +72,32 @@ namespace ICms {
     }
   }
 
+  interface Announcement {
+    data: {
+      id: number
+      meta: {}
+      attributes: {
+      createdAt: string
+      updatedAt: string
+      publishedAt: string
+        Announcement: {
+          id: number
+          enabled: boolean | null
+          message: string | null
+          Start: string | null
+          End: string | null
+          image: Src | null
+          link: Link | null
+          session: {
+            Date: string | null
+            Start: string | null
+            End: string | null
+          }[]
+        }[]
+      }
+    }
+  }
+
   interface Footer {
     location: string
     address: string
@@ -110,17 +136,16 @@ namespace ICms {
     data: InstagramToken[]
   }
   interface InstagramToken {
-      id: number
-      attributes: {
-        accessToken: string
-        userId: string
-        lastRefreshed: Date | null
-        expiresIn: number
-        createdAt: Date
-        updatedAt: Date
-        publishedAt: Date
-      }
-    
+    id: number
+    attributes: {
+      accessToken: string
+      userId: string
+      lastRefreshed: Date | null
+      expiresIn: number
+      createdAt: Date
+      updatedAt: Date
+      publishedAt: Date
+    }
   }
 
   interface DynamicComponents {
