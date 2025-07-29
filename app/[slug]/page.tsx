@@ -1,6 +1,7 @@
 import NavigationComposer from '@/components/navigation'
 import DefaultPage from '@/components/pages/DynamicPage'
 import getCustomPageData from '@/helpers/getCustomPageData'
+import getDataType from '@/helpers/getDataType'
 import getNavigationData from '@/helpers/getNavigationData'
 import { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -23,20 +24,28 @@ const pageDescriptions: { [key: string]: string } = {
   adults: 'Hands Down Adults - martial arts for adults',
   default:
     'Hands Down martial arts, boxing and kickboxing in Cobham and Epsom, Surrey. Classes suitable for all ages. Great way to get fit & learn',
-    faqs: 'Frequently asked questions about Hands Down martial arts',
+  faqs: 'Frequently asked questions about Hands Down martial arts',
 }
 
 const keywordMap: { [key: string]: string } = {
-  coaches: 'expert martial arts coaches Surrey, top kickboxing trainers Epsom, professional kickboxing instructors Cobham, martial arts coaching team',
-  about: 'our mission martial arts, history of boxing in Surrey, about kickboxing classes Cobham, learn martial arts Epsom, our martial arts philosophy',
-  contact: 'contact Hands Down Academies, sign up for martial arts Surrey, boxing class enrollment Epsom, kickboxing training inquiries Cobham',
-  dragons: 'Dragons martial arts for kids, children martial arts classes Surrey, starting martial arts young, kids self-defense courses Cobham, martial arts for children Epsom',
-  children: 'Children martial arts training, kids boxing classes Epsom, young kickboxing courses Surrey, best martial arts for kids Cobham, children self-defense lessons',
-  juniors: 'Juniors martial arts program, teenage boxing training Surrey, youth kickboxing classes Cobham, martial arts for teens Epsom, adolescent self-defense skills',
-  adults: 'Adults martial arts classes, boxing for beginners and advanced Epsom, adult kickboxing training Surrey, self-defense courses for men and women Cobham',
-  default: 'martial arts classes Surrey, boxing training Epsom, kickboxing lessons Cobham, self-defense classes for all ages, improve fitness with martial arts',
+  coaches:
+    'expert martial arts coaches Surrey, top kickboxing trainers Epsom, professional kickboxing instructors Cobham, martial arts coaching team',
+  about:
+    'our mission martial arts, history of boxing in Surrey, about kickboxing classes Cobham, learn martial arts Epsom, our martial arts philosophy',
+  contact:
+    'contact Hands Down Academies, sign up for martial arts Surrey, boxing class enrollment Epsom, kickboxing training inquiries Cobham',
+  dragons:
+    'Dragons martial arts for kids, children martial arts classes Surrey, starting martial arts young, kids self-defense courses Cobham, martial arts for children Epsom',
+  children:
+    'Children martial arts training, kids boxing classes Epsom, young kickboxing courses Surrey, best martial arts for kids Cobham, children self-defense lessons',
+  juniors:
+    'Juniors martial arts program, teenage boxing training Surrey, youth kickboxing classes Cobham, martial arts for teens Epsom, adolescent self-defense skills',
+  adults:
+    'Adults martial arts classes, boxing for beginners and advanced Epsom, adult kickboxing training Surrey, self-defense courses for men and women Cobham',
+  default:
+    'martial arts classes Surrey, boxing training Epsom, kickboxing lessons Cobham, self-defense classes for all ages, improve fitness with martial arts',
   faq: 'martial arts FAQs, boxing and kickboxing questions answered, choosing the right martial arts class Surrey, what to expect from your first martial arts class Epsom, martial arts training benefits Cobham',
-};
+}
 
 export async function generateMetadata(
   { params, searchParams }: Props,
@@ -63,13 +72,14 @@ export async function generateMetadata(
       ],
     },
     keywords: keywordMap[params.slug] || keywordMap.default,
-    }
   }
+}
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const [page, navigation] = await Promise.allSettled([
+  const [page, navigation, promoResponse] = await Promise.allSettled([
     getCustomPageData(params.slug!),
     getNavigationData(),
+    getDataType<ICms.Announcement>('global-config'),
   ])
 
   if (
@@ -98,12 +108,29 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   const cmsData = page.value.data?.[0]?.attributes
 
+  let promoBlock = null
+
+  if (
+    promoResponse.status === 'fulfilled' &&
+    promoResponse.value &&
+    promoResponse.value.data &&
+    promoResponse.value.data.attributes
+  ) {
+    const { enabled, End } = promoResponse.value.data.attributes.Announcement[0]
+    const now = new Date().setHours(0, 0, 0, 0)
+    const end = End ? new Date(End).setHours(0, 0, 0, 0) : undefined
+    if (enabled && (!end || now <= end)) {
+      promoBlock = promoResponse.value
+    }
+  }
+
   return (
     <>
       <header>
         <NavigationComposer
           scrollable={false}
           navData={navigation.value.data[0]}
+          promoBlock={promoBlock}
         />
       </header>
       <DefaultPage cmsData={cmsData} />
