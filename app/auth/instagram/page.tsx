@@ -13,7 +13,11 @@ export default async function Page() {
   return (
     <>
       <header>
-        <NavigationComposer scrollable={false} navData={navigation?.data[0]} />
+        <NavigationComposer
+          scrollable={false}
+          navData={navigation?.data[0]}
+          promoBlock={null}
+        />
       </header>
 
       <div className="pt-55">
