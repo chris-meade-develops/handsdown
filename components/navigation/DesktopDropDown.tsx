@@ -6,7 +6,7 @@ export default function DesktopDropDown({
   items: INavigation.Items
 }) {
   return (
-    <div className="absolute hidden pt-6 -translate-x-1/2 group-hover:block left-1/2">
+    <div className="absolute hidden pt-6 -translate-x-1/2 group-hover:block left-1/2 z-1">
       <ul className="border-t border-accent bg-primary-text w-fit ">
         {data.map((item: INavigation.Item) => {
           const {
