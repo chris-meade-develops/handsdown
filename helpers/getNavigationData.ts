@@ -21,7 +21,7 @@ export default async function getNavigationData(): Promise<INavigation.ApiRespon
 
     return navData
   } catch (error) {
-    console.log('getNavDataError: ', error)
+    console.error('getNavDataError: ', error)
 
     return null
   }

@@ -20,7 +20,7 @@ export default async function getFooterData(): Promise<IFooter.ApiResponse | nul
 
     return footer
   } catch (error) {
-    console.log('getFooterData error: ', error)
+    console.error('getFooterData error: ', error)
 
     return null
   }

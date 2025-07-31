@@ -186,7 +186,7 @@ export default function Form({ description }: { description?: string }) {
 
       setClassOptions(data)
     } catch (error) {
-      console.log('fetchClasses error: ', error)
+      console.error('fetchClasses error: ', error)
     } finally {
       setLoading((prev) => prev.filter((i) => i !== LoadingOptions.options))
     }
@@ -209,7 +209,7 @@ export default function Form({ description }: { description?: string }) {
 
       setSuccess(true)
     } catch (error) {
-      console.log('error: ', error)
+      console.error('error: ', error)
       setError(true)
     } finally {
       setLoading((prev) => prev.filter((i) => i !== LoadingOptions.form))
@@ -261,7 +261,7 @@ export default function Form({ description }: { description?: string }) {
       setCourseOptions(createDropdownOptions(data))
     } catch (error) {
       setError(true)
-      console.log('fetchClasses error: ', error)
+      console.error('fetchClasses error: ', error)
     } finally {
       setLoading((prev) => prev.filter((i) => i !== LoadingOptions.options))
     }

@@ -128,7 +128,7 @@ export default async function getPageData(slug: string): Promise<ICms.PageData |
 
     return page
   } catch (error) {
-    console.log('getPageData error: ', error)
+    console.error('getPageData error: ', error)
 
     return null
   }

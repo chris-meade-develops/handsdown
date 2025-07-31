@@ -13,8 +13,6 @@ export default function Day({
 }) {
   const mediaQuery = useMediaQuery('(max-width: 1024px)')
 
-  console.log('academyData: ', academyData)
-
   return (
     <div
       className={`mx-6 mb-auto ${

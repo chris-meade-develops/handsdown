@@ -13,7 +13,7 @@ export default async function getDataType<T>(type: string): Promise<T | null> {
 
     return data
   } catch (error) {
-    console.log('getDataType error: ', error)
+    console.error('getDataType error: ', error)
 
     return null
   }

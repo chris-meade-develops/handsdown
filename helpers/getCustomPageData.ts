@@ -25,7 +25,7 @@ export default async function getCustomPageData(
 
     return page
   } catch (error) {
-    console.log('getPageData error: ', error)
+    console.error('getPageData error: ', error)
 
     return null
   }

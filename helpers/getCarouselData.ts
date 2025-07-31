@@ -13,7 +13,7 @@ export default async function getCarouselData(type: string): Promise<ICms.Carous
 
     return carouselData
   } catch (error) {
-    console.log('getcarouselData error: ', error)
+    console.error('getcarouselData error: ', error)
 
     return null
   }

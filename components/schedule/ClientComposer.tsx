@@ -1,4 +1,5 @@
 'use client'
+
 import { createInitialState, useMultiClick } from '@/hooks/useMultiClick'
 import AcademyButtons from './AcademyButtons'
 import TimeTable from './TimeTable'
@@ -15,7 +16,6 @@ export default function ClientComposer({
       !key.includes('publishedAt')
   )
   const [state, handleClick] = useMultiClick(createInitialState(academies))
-
 
   return (
     <>

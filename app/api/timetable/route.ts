@@ -31,7 +31,7 @@ export async function GET(
 
     return NextResponse.json({ status: 200, success: true, data })
   } catch (error: unknown) {
-    console.log('getDataType error: ', error)
+    console.error('getDataType error: ', error)
     const errorMessage =
       error instanceof Error ? error.message : 'An error occurred'
 

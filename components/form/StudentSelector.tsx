@@ -59,7 +59,7 @@ export default function StudentSelector({
       setClassOptions(data)
     } catch (error) {
       setError(true)
-      console.log('fetchClasses error: ', error)
+      console.error('fetchClasses error: ', error)
     } finally {
       setLoading(false)
     }
@@ -70,7 +70,6 @@ export default function StudentSelector({
       fetchTimetable()
     }
   }, [courseSelected, fetchTimetable, locationSelected])
-
 
   return (
     <>
