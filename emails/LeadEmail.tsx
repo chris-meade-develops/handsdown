@@ -61,7 +61,7 @@ export const NewLeadEmail = ({
         <Container>
           <Section style={logo}>
             <Img
-              src={`${URL}/nav_logo.png`}
+              src={`${URL}/HDEmailLogoWhite.png`}
               alt="Handsdown Logo"
               style={{ margin: '0 0 auto' }}
             />

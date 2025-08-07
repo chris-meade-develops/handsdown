@@ -8,9 +8,8 @@ const { MJ_API, MJ_SECRET } = process.env
 
 const fromAddress = 'no-reply@handsdownacademies.co.uk'
 const leadRecipients = [
-  // 'info@handsdownacademies.co.uk',
-  // 'vicky.frisby@handsdownacademies.co.uk',
-  'chris.meade1989@gmail.com'
+  'info@handsdownacademies.co.uk',
+  'vicky.frisby@handsdownacademies.co.uk',
 ]
 
 export async function POST(request: NextRequest) {
@@ -22,14 +21,8 @@ export async function POST(request: NextRequest) {
 
     if (!data) throw new Error('No data received')
 
-    const {
-      name,
-      email,
-      telephone,
-      session,
-      message,
-      honeypot,
-    } = data
+    const { name, studentName, email, telephone, session, message, honeypot } =
+      data
 
     if (honeypot) throw new Error('Invalid request')
 
@@ -44,25 +37,30 @@ export async function POST(request: NextRequest) {
     })
 
     const [leadEmailContent, customerConfirmationContent] = await Promise.all([
-      render(NewLeadEmail({
-        name,
-        telephone,
-        email,
-        course: 'Summer Camp',
-        studentClass: session ,
-        location: 'Cobham',
-        message,
-      })),
-      render(CustomerConfirmationEmail({
-        name,
-        telephone,
-        email,
-        course: 'Summer Camp',
-        studentClass: session,
-        location: 'Cobham'
-      }))
+      render(
+        NewLeadEmail({
+          name,
+          telephone,
+          email,
+          students: [{ studentName }],
+          course: 'Summer Camp',
+          studentClass: session,
+          location: 'Cobham',
+          message,
+        })
+      ),
+      render(
+        CustomerConfirmationEmail({
+          name,
+          telephone,
+          email,
+          students: [{ studentName }],
+          course: 'Summer Camp',
+          studentClass: session,
+          location: 'Cobham',
+        })
+      ),
     ])
-
 
     const leadMailOptions = {
       from: fromAddress,

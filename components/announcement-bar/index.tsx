@@ -32,7 +32,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 const API_URL = '/api/announcement'
 
 const announcementFormSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
+  name: z.string().trim().min(1, 'Name is required'),
+  studentName: z.string().trim().min(1, "Child's name is required"),
   email: z.string().email('Invalid email address'),
   telephone: z.string().regex(/^[\d+\s()\-]{7,20}$/, 'Invalid phone number'),
   session: z.string().min(1, 'Please select a session'),
@@ -372,6 +373,21 @@ export default function AnnouncementBar({
                             }
                           />
                         </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="flex gap-4">
+                  <FormField
+                    name="studentName"
+                    render={({ field }) => (
+                      <FormItem className="w-full">
+                        <FormLabel>Child&apos;s name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your child's name" {...field} />
+                        </FormControl>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />

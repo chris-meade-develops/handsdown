@@ -25,19 +25,19 @@ import LoadingOverlay from '../ui/LoadingOverlay'
 import SuccessOverlay from './SuccessOverlay'
 
 export const StudentSchema = z.object({
-  studentName: z.string().optional(),
-  course: z.string().optional(),
-  class: z.string().optional(),
+  studentName: z.string().trim().optional(),
+  course: z.string().trim().optional(),
+  class: z.string().trim().optional(),
 })
 
 export const FormSchema = z
   .object({
     customer: z.string(),
     location: z.string().min(1, 'Location is required'),
-    name: z.string().optional(),
-    parentName: z.string().optional(),
-    telephone: z.string().min(11, 'Invalid phone number'),
-    email: z.string().email('Invalid email'),
+    name: z.string().trim().optional(),
+    parentName: z.string().trim().optional(),
+    telephone: z.string().trim().min(11, 'Invalid phone number'),
+    email: z.string().trim().email('Invalid email'),
     course: z.string().optional(),
     class: z.string().optional(),
     students: z.array(StudentSchema).optional(),
@@ -45,7 +45,7 @@ export const FormSchema = z
   })
   .superRefine((data, ctx) => {
     if (data.customer === 'student') {
-      if (!data.name) {
+      if (!data.name || !data.name.trim()) {
         ctx.addIssue({
           path: ['name'],
           message: 'Name is required',
@@ -70,7 +70,10 @@ export const FormSchema = z
     }
 
     if (data.customer === 'parent') {
-      if (!data.parentName) {
+      if (!data.parentName || !data.parentName.trim()) {
+        console.log(data.customer)
+        console.log(data.parentName)
+        console.log('super refine running')
         ctx.addIssue({
           path: ['parentName'],
           message: 'Parent name is required',
@@ -451,21 +454,40 @@ export default function Form({ description }: { description?: string }) {
               {isParent ? "Parent's details" : "Student's details"}
             </h2>
             <div className="md:grid md:grid-cols-2 md:gap-10">
-              <FormField
-                control={control}
-                name={isParent ? 'parentName' : 'name'}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className={textInputLabelClassNames}>
-                      Your name
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              {isParent ? (
+                <FormField
+                  control={control}
+                  name={'parentName'}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className={textInputLabelClassNames}>
+                        Your name
+                      </FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ) : (
+                <FormField
+                  control={control}
+                  name={'name'}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className={textInputLabelClassNames}>
+                        Your name
+                      </FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
               <FormField
                 control={control}
                 name="telephone"
