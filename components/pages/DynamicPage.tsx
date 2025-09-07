@@ -8,11 +8,16 @@ export default function DynamicPage({ cmsData }: IPage.Props) {
   return (
     <main>
       {hero.data ? <DefaultHero {...hero} /> : <Hero />}
-      {dynamicComponents?.map((component: ICms.DynamicComponents) => {
+      {dynamicComponents?.map((component: ICms.DynamicComponents, i) => {
         const componentName = component.__component.split('.')[1]
         const Component = dynamic(() => import(`@/components/${componentName}`))
 
-        return <Component key={component.id * Math.random()} {...component} />
+        return (
+          <Component
+            key={component.id + ' ' + componentName + i}
+            {...component}
+          />
+        )
       })}
     </main>
   )
