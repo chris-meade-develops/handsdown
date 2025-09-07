@@ -15,6 +15,7 @@ export async function GET(
       throw new Error('Invalid location')
 
     const timetable = await getDataType('timetable')
+    console.log('🚀 ~ GET ~ timetable:', timetable)
 
     if (!timetable) throw new Error('Data not found')
 
@@ -102,6 +103,8 @@ function getClassSchedules(
     return results
   }
 
+
+
   const locationData = data?.data?.attributes?.[normalizedLocation]
 
   if (!locationData) {
@@ -114,9 +117,15 @@ function getClassSchedules(
     const dayName = classesOnDay.dayName
 
     // Filter classes that match the selected class name
-    const matchingClasses = classesOnDay.classes.filter((cls: Class) =>
-      cls.name.toLowerCase().includes(classSelected.toLowerCase())
-    )
+    const matchingClasses = classesOnDay.classes.filter((cls: Class) => {
+      const lowerClassName = cls.name.toLowerCase();
+      // First check that it doesn't contain "fight" or "fight training"
+      if (lowerClassName.includes("fight")) {
+      return false;
+      }
+      // Then check that it matches the selected class
+      return lowerClassName.includes(classSelected.toLowerCase());
+    });
 
     // For each matching class, create dates for the next 'numWeeks' worth of occurrences
     matchingClasses.forEach((cls: Class) => {
