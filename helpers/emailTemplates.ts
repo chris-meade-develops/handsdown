@@ -44,6 +44,7 @@ export const parentEmailContent = ({
             return ''
           return `
             <p>Student Name: ${student.studentName}</p>
+            ${student.studentDateOfBirth ? `<p>Student Age: ${student.studentDateOfBirth}</p>` : ''}
             <p>Course: ${student.course}</p>
             ${formatClass(student.class)}
             <br />

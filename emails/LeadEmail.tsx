@@ -12,6 +12,8 @@ import {
   Preview,
 } from '@react-email/components'
 
+import { differenceInYears, format } from 'date-fns'
+
 import {
   main,
   logo,
@@ -104,6 +106,20 @@ export const NewLeadEmail = ({
                     {students?.map((s) => (
                       <Section key={s.studentName}>
                         <Text>{s.studentName}</Text>
+                        {s.studentDateOfBirth && (
+                          <>
+                            <Text>
+                              D.O.B: {format(s.studentDateOfBirth, 'PPP')}
+                            </Text>
+                            <Text>
+                              Age:{' '}
+                              {differenceInYears(
+                                new Date(),
+                                s.studentDateOfBirth
+                              )}
+                            </Text>
+                          </>
+                        )}
                         <Text>{s.course}</Text>
                         <Text>{formatClass(s.class, true)}</Text>
                       </Section>

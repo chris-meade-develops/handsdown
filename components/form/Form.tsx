@@ -12,20 +12,27 @@ import {
   FormMessage,
   Form as ShadForm,
 } from '../ui/form'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select'
+import { DatePicker } from '../ui/date-picker'
 import { RadioGroup, RadioGroupItem } from '@radix-ui/react-radio-group'
-import Select from '../inputs/CustomSelect'
 import { type IInputs } from '@/types/ui/inputs/inputs'
 import { Input } from '../ui/input'
 import StudentSelector from './StudentSelector'
 import { Plus } from 'lucide-react'
 import { Minus } from '@/icons'
 import { getTimetableApiReq, submitFormData } from '@/helpers/fetchCalls'
-import { handleNoClassOptionsOrLoading } from '@/helpers/formHelpers'
 import LoadingOverlay from '../ui/LoadingOverlay'
 import SuccessOverlay from './SuccessOverlay'
 
 export const StudentSchema = z.object({
   studentName: z.string().trim().optional(),
+  studentDateOfBirth: z.string().trim().optional(),
   course: z.string().trim().optional(),
   class: z.string().trim().optional(),
 })
@@ -97,6 +104,26 @@ export const FormSchema = z
           })
         }
 
+        if (!student.studentDateOfBirth) {
+          ctx.addIssue({
+            path: ['students', index, 'studentDateOfBirth'],
+            message: 'Student date of birth is required',
+            code: 'custom',
+          })
+        } else {
+          // Validate minimum age based on location
+          const age = calculateAge(student.studentDateOfBirth)
+          const minimumAge = data.location === 'epsom' ? 7 : 5
+
+          if (age < minimumAge) {
+            ctx.addIssue({
+              path: ['students', index, 'studentDateOfBirth'],
+              message: `Student must be at least ${minimumAge} years old for ${data.location === 'epsom' ? 'Epsom' : 'Cobham'}`,
+              code: 'custom',
+            })
+          }
+        }
+
         if (!student.course) {
           ctx.addIssue({
             path: ['students', index, 'course'],
@@ -130,6 +157,47 @@ const createDropdownOptions = (data: ICms.CarouselData) =>
     return { value: card.title, label: card.title }
   })
 
+// Helper function to calculate age from date of birth
+const calculateAge = (dateOfBirth: string): number => {
+  const today = new Date()
+  const birthDate = new Date(dateOfBirth)
+  let age = today.getFullYear() - birthDate.getFullYear()
+  const monthDiff = today.getMonth() - birthDate.getMonth()
+
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && today.getDate() < birthDate.getDate())
+  ) {
+    age--
+  }
+
+  return age
+}
+
+// Helper function to get minimum date based on location and minimum age
+const getMinimumDate = (location: string): string => {
+  const today = new Date()
+  const minimumAge = location === 'epsom' ? 7 : 5
+  const minDate = new Date(
+    today.getFullYear() - minimumAge - 1,
+    today.getMonth(),
+    today.getDate()
+  )
+  return minDate.toISOString().split('T')[0]
+}
+
+// Helper function to get maximum date (for minimum age)
+const getMaximumDate = (location: string): string => {
+  const today = new Date()
+  const minimumAge = location === 'epsom' ? 7 : 5
+  const maxDate = new Date(
+    today.getFullYear() - minimumAge,
+    today.getMonth(),
+    today.getDate()
+  )
+  return maxDate.toISOString().split('T')[0]
+}
+
 enum LoadingOptions {
   options = 'options',
   form = 'form',
@@ -154,7 +222,12 @@ export default function Form({ description }: { description?: string }) {
       course: undefined,
       class: undefined,
       students: [
-        { studentName: undefined, course: undefined, class: undefined },
+        {
+          studentName: undefined,
+          studentDateOfBirth: undefined,
+          course: undefined,
+          class: undefined,
+        },
       ],
     },
   })
@@ -163,6 +236,7 @@ export default function Form({ description }: { description?: string }) {
     control,
     watch,
     reset,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = form
@@ -271,7 +345,12 @@ export default function Form({ description }: { description?: string }) {
   }, [])
 
   const handleAddStudent = useCallback(() => {
-    append({ studentName: undefined, course: undefined, class: undefined })
+    append({
+      studentName: undefined,
+      studentDateOfBirth: undefined,
+      course: undefined,
+      class: undefined,
+    })
   }, [append])
 
   const handleRemoveStudent = useCallback(() => {
@@ -288,7 +367,7 @@ export default function Form({ description }: { description?: string }) {
         <h2 className="font-bold mb-7 opacity-[0.85]">
           Student&apos;s details
         </h2>
-        <div className="md:grid md:grid-cols-2 md:gap-10">
+        <div className="mb-6 md:grid md:grid-cols-2 md:gap-10">
           <FormField
             control={control}
             name={`students.${index}.studentName`}
@@ -308,12 +387,69 @@ export default function Form({ description }: { description?: string }) {
               </FormItem>
             )}
           />
+          <FormField
+            control={control}
+            name={`students.${index}.studentDateOfBirth`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-normal leading-5 mb-[3px]">
+                  Student date of birth
+                </FormLabel>
+                <FormControl>
+                  <DatePicker
+                    value={field.value || ''}
+                    onChange={field.onChange}
+                    placeholder="Select date of birth..."
+                    min={getMinimumDate(locationValue)}
+                    disabled={false}
+                    className={
+                      !!(errors.students && errors.students[index])
+                        ? 'border-2 border-red-500'
+                        : ''
+                    }
+                  />
+                </FormControl>
+                {errors.students && errors.students[index] && (
+                  <FormMessage>
+                    {errors?.students?.[index]?.message}
+                  </FormMessage>
+                )}
+                {field.value && (
+                  <p className="mt-1 text-sm text-gray-600">
+                    Age: {calculateAge(field.value)} years old
+                    {locationValue === 'epsom' &&
+                      calculateAge(field.value) < 7 && (
+                        <span className="ml-2 text-red-500">
+                          (Minimum age for Epsom is 7)
+                        </span>
+                      )}
+                    {locationValue === 'cobham' &&
+                      calculateAge(field.value) < 5 && (
+                        <span className="ml-2 text-red-500">
+                          (Minimum age for Cobham is 5)
+                        </span>
+                      )}
+                  </p>
+                )}
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="md:grid md:grid-cols-2 md:gap-10">
           {courseOptions.length ? (
             <StudentSelector
               control={control}
               index={index}
               courseOptions={courseOptions}
               errors={errors}
+              studentAge={
+                watch(`students.${index}.studentDateOfBirth`)
+                  ? calculateAge(
+                      watch(`students.${index}.studentDateOfBirth`) as string
+                    )
+                  : undefined
+              }
+              setValue={setValue}
             />
           ) : (
             <span className="flex items-center h-full">Loading...</span>
@@ -321,7 +457,7 @@ export default function Form({ description }: { description?: string }) {
         </div>
       </div>
     ))
-  }, [fields, courseOptions, control, errors])
+  }, [fields, control, courseOptions, errors, watch, setValue, locationValue])
 
   return (
     <>
@@ -571,20 +707,25 @@ export default function Form({ description }: { description?: string }) {
                 name="course"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel className="text-base font-normal leading-5 mb-[3px]">
+                      Select your course
+                    </FormLabel>
                     <FormControl>
-                      <Select<{ label: string; value: string }>
-                        label="Select your course"
-                        placeholder="Select a course..."
-                        options={courseOptions}
-                        onChange={(selectedOption) =>
-                          field.onChange(selectedOption?.value)
-                        }
-                        selectValue={
-                          courseOptions.find(
-                            (options) => options.value === field.value
-                          ) || { value: '', label: '' }
-                        }
-                      />
+                      <Select
+                        value={field.value || ''}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a course..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {courseOptions.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </FormControl>
                   </FormItem>
                 )}
@@ -595,20 +736,49 @@ export default function Form({ description }: { description?: string }) {
                 name="class"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel className="text-base font-normal leading-5 mb-[3px]">
+                      Select your class
+                    </FormLabel>
                     <FormControl>
-                      <Select<{ label: string; value: string }>
-                        label="Select your class"
-                        options={classOptions}
-                        onChange={(selectedOption) =>
-                          field.onChange(selectedOption?.value)
-                        }
-                        selectValue={handleNoClassOptionsOrLoading({
-                          fieldValue: field.value,
-                          loading: loading.includes(LoadingOptions.options),
-                          error,
-                          classOptions,
-                        })}
-                      />
+                      <Select
+                        value={field.value || ''}
+                        onValueChange={field.onChange}
+                        disabled={loading.includes(LoadingOptions.options)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue
+                            placeholder={
+                              loading.includes(LoadingOptions.options)
+                                ? 'Loading classes...'
+                                : 'Select a class...'
+                            }
+                          />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {loading.includes(LoadingOptions.options) ? (
+                            <>
+                              <SelectItem value="loading-1" disabled>
+                                ● ● ● Loading...
+                              </SelectItem>
+                              <SelectItem value="loading-2" disabled>
+                                ● ● ● Loading...
+                              </SelectItem>
+                              <SelectItem value="loading-3" disabled>
+                                ● ● ● Loading...
+                              </SelectItem>
+                            </>
+                          ) : (
+                            classOptions.map((option) => (
+                              <SelectItem
+                                key={option.value}
+                                value={option.value}
+                              >
+                                {option.label}
+                              </SelectItem>
+                            ))
+                          )}
+                        </SelectContent>
+                      </Select>
                     </FormControl>
                   </FormItem>
                 )}
