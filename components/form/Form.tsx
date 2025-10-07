@@ -179,7 +179,7 @@ const getMinimumDate = (location: string): string => {
   const today = new Date()
   const minimumAge = location === 'epsom' ? 7 : 5
   const minDate = new Date(
-    today.getFullYear() - minimumAge - 1,
+    today.getFullYear() - minimumAge,
     today.getMonth(),
     today.getDate()
   )
