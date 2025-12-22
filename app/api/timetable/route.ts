@@ -11,6 +11,7 @@ export async function GET(
     if (!classSelected || !locationSelected)
       throw new Error('Missing required parameters')
 
+
     if (!isTypeOfIncomingLocation(locationSelected))
       throw new Error('Invalid location')
 
@@ -23,7 +24,8 @@ export async function GET(
       timetable as TimetableData,
       locationSelected,
       classSelected,
-      2
+      4,
+      new Date('2026-01-05T00:00:00')
     )
 
     const data = classes.sort((a, b) => {
@@ -91,7 +93,8 @@ function getClassSchedules(
   data: TimetableData,
   locationSelected: 'epsom' | 'cobham',
   classSelected: string,
-  numWeeks: number = 2
+  numWeeks: number = 2,
+  cutoffDate?: Date
 ): ClassObject[] {
   const results: ClassObject[] = []
 
@@ -102,8 +105,6 @@ function getClassSchedules(
     console.error(`Location "${locationSelected}" not found in the data.`)
     return results
   }
-
-
 
   const locationData = data?.data?.attributes?.[normalizedLocation]
 
@@ -118,20 +119,25 @@ function getClassSchedules(
 
     // Filter classes that match the selected class name
     const matchingClasses = classesOnDay.classes.filter((cls: Class) => {
-      const lowerClassName = cls.name.toLowerCase();
+      const lowerClassName = cls.name.toLowerCase()
       // First check that it doesn't contain "fight" or "fight training"
-      if (lowerClassName.includes("fight")) {
-      return false;
+      if (lowerClassName.includes('fight')) {
+        return false
       }
       // Then check that it matches the selected class
-      return lowerClassName.includes(classSelected.toLowerCase());
-    });
+      return lowerClassName.includes(classSelected.toLowerCase())
+    })
 
     // For each matching class, create dates for the next 'numWeeks' worth of occurrences
     matchingClasses.forEach((cls: Class) => {
       for (let i = 0; i < numWeeks; i++) {
         const classDate = getNextClassDate(dayName, i) // Get date for the class
+
         // Format the day as 26th, 27th, etc. and month as Oct, Nov, etc.
+
+        if (cutoffDate && classDate < cutoffDate) {
+          continue
+        }
 
         const { startTime } = cls
 
