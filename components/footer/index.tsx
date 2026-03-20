@@ -6,8 +6,8 @@ import getFooterData from '@/helpers/getFooterData'
 export default async function Footer() {
   const data = await getFooterData()
 
-  if(!data) return null
-  if(!data.data?.attributes) return null
+  if (!data) return null
+  if (!data.data?.attributes) return null
 
   const locations = data?.data.attributes.data.Locations
   const quickLinks = data?.data.attributes.data.quickLinks
@@ -39,7 +39,7 @@ export default async function Footer() {
         </div>
       </div>
 
-      <div className='flex flex-col items-center justify-center md:block'>
+      <div className="flex flex-col items-center justify-center md:block">
         <NextImage
           src={imageSrc!}
           alt="Hands Down logo"

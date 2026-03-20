@@ -30,6 +30,7 @@ type TimetableData = {
     attributes: {
       Cobham: Classes[]
       Epsom: Classes[]
+      Esher: Classes[]
       createdAt: string
       updatedAt: string
       publishedAt: string

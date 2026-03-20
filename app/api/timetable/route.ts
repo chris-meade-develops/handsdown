@@ -2,7 +2,7 @@ import getDataType from '@/helpers/getDataType'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
-  request: NextRequest
+  request: NextRequest,
 ): Promise<NextResponse<IApiResponse<ClassObject[]>>> {
   const { searchParams } = request.nextUrl
   const classSelected = searchParams.get('class')
@@ -11,12 +11,10 @@ export async function GET(
     if (!classSelected || !locationSelected)
       throw new Error('Missing required parameters')
 
-
     if (!isTypeOfIncomingLocation(locationSelected))
       throw new Error('Invalid location')
 
     const timetable = await getDataType('timetable')
-    console.log('🚀 ~ GET ~ timetable:', timetable)
 
     if (!timetable) throw new Error('Data not found')
 
@@ -25,7 +23,7 @@ export async function GET(
       locationSelected,
       classSelected,
       4,
-      new Date('2026-01-05T00:00:00')
+      new Date('2026-01-05T00:00:00'),
     )
 
     const data = classes.sort((a, b) => {
@@ -43,13 +41,15 @@ export async function GET(
 }
 
 function isTypeOfIncomingLocation(
-  location: string
-): location is 'epsom' | 'cobham' {
-  return ['epsom', 'cobham'].includes(location)
+  location: string,
+): location is 'epsom' | 'cobham' | 'esher' {
+  return ['epsom', 'cobham', 'esher'].includes(location)
 }
 
-function isTypeOfLocation(location: string): location is 'Epsom' | 'Cobham' {
-  return ['Epsom', 'Cobham'].includes(location)
+function isTypeOfLocation(
+  location: string,
+): location is 'Epsom' | 'Cobham' | 'Esher' {
+  return ['Epsom', 'Cobham', 'Esher'].includes(location)
 }
 
 function getOrdinalSuffix(day: number): string {
@@ -91,10 +91,10 @@ function convertTimeToAmPm(time: number): string {
 
 function getClassSchedules(
   data: TimetableData,
-  locationSelected: 'epsom' | 'cobham',
+  locationSelected: 'epsom' | 'cobham' | 'esher',
   classSelected: string,
   numWeeks: number = 2,
-  cutoffDate?: Date
+  cutoffDate?: Date,
 ): ClassObject[] {
   const results: ClassObject[] = []
 
@@ -133,8 +133,15 @@ function getClassSchedules(
       for (let i = 0; i < numWeeks; i++) {
         const classDate = getNextClassDate(dayName, i) // Get date for the class
 
-        // Format the day as 26th, 27th, etc. and month as Oct, Nov, etc.
+        // For Esher, only allow dates from 13th April 2026 onwards
+        if (normalizedLocation.toLowerCase() === 'esher') {
+          const esherStartDate = new Date('2026-04-13T00:00:00')
+          if (classDate < esherStartDate) {
+            continue
+          }
+        }
 
+        // Format the day as 26th, 27th, etc. and month as Oct, Nov, etc.
         if (cutoffDate && classDate < cutoffDate) {
           continue
         }

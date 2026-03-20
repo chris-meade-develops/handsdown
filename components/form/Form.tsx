@@ -78,9 +78,6 @@ export const FormSchema = z
 
     if (data.customer === 'parent') {
       if (!data.parentName || !data.parentName.trim()) {
-        console.log(data.customer)
-        console.log(data.parentName)
-        console.log('super refine running')
         ctx.addIssue({
           path: ['parentName'],
           message: 'Parent name is required',
@@ -181,21 +178,9 @@ const getMinimumDate = (location: string): string => {
   const minDate = new Date(
     today.getFullYear() - minimumAge,
     today.getMonth(),
-    today.getDate()
+    today.getDate(),
   )
   return minDate.toISOString().split('T')[0]
-}
-
-// Helper function to get maximum date (for minimum age)
-const getMaximumDate = (location: string): string => {
-  const today = new Date()
-  const minimumAge = location === 'epsom' ? 7 : 5
-  const maxDate = new Date(
-    today.getFullYear() - minimumAge,
-    today.getMonth(),
-    today.getDate()
-  )
-  return maxDate.toISOString().split('T')[0]
 }
 
 enum LoadingOptions {
@@ -252,7 +237,7 @@ export default function Form({ description }: { description?: string }) {
       setLoading((prev) =>
         prev.includes(LoadingOptions.options)
           ? [...prev, LoadingOptions.options]
-          : prev
+          : prev,
       )
       if (!courseSelected) throw new Error('Course is required')
 
@@ -276,7 +261,7 @@ export default function Form({ description }: { description?: string }) {
       setLoading((prev) =>
         prev.includes(LoadingOptions.form)
           ? [...prev, LoadingOptions.form]
-          : prev
+          : prev,
       )
       const data: IApiResponse<any> = await submitFormData(form)
 
@@ -322,7 +307,7 @@ export default function Form({ description }: { description?: string }) {
       setLoading((prev) =>
         prev.includes(LoadingOptions.options)
           ? [...prev, LoadingOptions.options]
-          : prev
+          : prev,
       )
       const res: Response = await fetch(classFetchUrl)
 
@@ -417,12 +402,13 @@ export default function Form({ description }: { description?: string }) {
                 {field.value && (
                   <p className="mt-1 text-sm text-gray-600">
                     Age: {calculateAge(field.value)} years old
-                    {locationValue === 'epsom' &&
-                      calculateAge(field.value) < 7 && (
-                        <span className="ml-2 text-red-500">
-                          (Minimum age for Epsom is 7)
-                        </span>
-                      )}
+                    {locationValue === 'epsom' ||
+                      (locationValue === 'esher' &&
+                        calculateAge(field.value) < 7 && (
+                          <span className="ml-2 text-red-500">
+                            (Minimum age for Epsom is 7)
+                          </span>
+                        ))}
                     {locationValue === 'cobham' &&
                       calculateAge(field.value) < 5 && (
                         <span className="ml-2 text-red-500">
@@ -445,7 +431,7 @@ export default function Form({ description }: { description?: string }) {
               studentAge={
                 watch(`students.${index}.studentDateOfBirth`)
                   ? calculateAge(
-                      watch(`students.${index}.studentDateOfBirth`) as string
+                      watch(`students.${index}.studentDateOfBirth`) as string,
                     )
                   : undefined
               }
@@ -574,6 +560,20 @@ export default function Form({ description }: { description?: string }) {
                             className={textInputLabelClassNames + ' ml-4'}
                           >
                             Cobham
+                          </FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center h-9 w-fit">
+                          <FormControl>
+                            <RadioGroupItem
+                              value="esher"
+                              id="esher"
+                              className={radioClassNames}
+                            />
+                          </FormControl>
+                          <FormLabel
+                            className={textInputLabelClassNames + ' ml-4'}
+                          >
+                            Esher (opening April 13th)
                           </FormLabel>
                         </FormItem>
                       </div>

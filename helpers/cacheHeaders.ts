@@ -1,6 +1,6 @@
 export const headers: RequestInit = {
   headers: {
-    'Cache-Control': 'public, max-age=86400',
+    'Cache-Control': 'no-store',
   },
-  cache: 'force-cache',
+  cache: 'no-store',
 }

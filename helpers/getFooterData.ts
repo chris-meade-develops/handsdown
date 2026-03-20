@@ -11,7 +11,7 @@ export default async function getFooterData(): Promise<IFooter.ApiResponse | nul
     const convertedQuery = qs.stringify(query, { encodeValuesOnly: true })
     const footerData = await fetch(
       `${CMS_URL}website-footer?${convertedQuery}`,
-      headers
+      headers,
     )
 
     if (!footerData) throw new Error('Footer data not found')
