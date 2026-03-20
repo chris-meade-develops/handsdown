@@ -8,9 +8,10 @@ import getDataType from '@/helpers/getDataType'
 
 export const metadata: Metadata = {
   openGraph: {
-    title: 'Hands Down Martial Arts, Boxing, Kickboxing in Cobham & Epsom',
+    title:
+      'Hands Down Martial Arts, Boxing, Kickboxing in Cobham, Epsom & Esher',
     description:
-      'Hands Down martial arts, boxing and kickboxing in Cobham and Epsom, Surrey. Classes suitable for all ages. Great way to get fit & learn',
+      'Hands Down martial arts, boxing and kickboxing in Cobham, Epsom, and Esher, Surrey. Classes suitable for all ages. Great way to get fit & learn',
     type: 'website',
     images: [
       {
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     ],
   },
   keywords:
-    'martial arts classes Surrey, boxing training Epsom, kickboxing lessons Cobham, self-defense classes for all ages, improve fitness with martial arts',
+    'martial arts classes Surrey, boxing training Epsom, kickboxing lessons Cobham, self-defense classes for all ages, improve fitness with martial arts, martial arts Esher, boxing Esher, kickboxing Esher',
 }
 
 export default async function Home() {

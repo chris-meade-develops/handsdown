@@ -4,6 +4,8 @@ export default function Class({ classItem }: { classItem: Class }) {
       <div className="md:pt-8 bg-accent md:pb-7 py-7">
         <p className="font-bold text-center text-white font-montserrat ">
           {classItem.startTime.toFixed(2)} - {classItem.endTime.toFixed(2)}
+          <br />
+          {classItem.comingSoon ? ' (Coming Soon)' : null}
         </p>
       </div>
       <div className="pb-8 bg-white md:pt-21 md:pb-28 pt-11">

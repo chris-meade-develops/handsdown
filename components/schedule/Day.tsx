@@ -31,8 +31,9 @@ export default function Day({
           return (
             <div className="flex flex-col w-full gap-9" key={data.id}>
               {data.classes.map((dayClass: Class) => {
+                const classItem = { ...dayClass, comingSoon: data.coming_soon }
                 const key = dayClass.id + ' ' + dayClass.name
-                return <Class classItem={dayClass} key={key} />
+                return <Class classItem={classItem} key={key} />
               })}
             </div>
           )

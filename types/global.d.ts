@@ -5,7 +5,6 @@ interface IApiResponse<T> {
   status: number
 }
 
-
 type ClassObject = {
   label: string
   value: string
@@ -16,12 +15,14 @@ type Class = {
   endTime: number
   startTime: number
   name: string
+  comingSoon?: boolean
 }
 
 type Classes = {
   id: number
   dayName: string
   classes: Class[]
+  coming_soon?: boolean
 }
 
 type TimetableData = {
