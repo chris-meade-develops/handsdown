@@ -5,7 +5,7 @@ export default function Class({ classItem }: { classItem: Class }) {
         <p className="font-bold text-center text-white font-montserrat ">
           {classItem.startTime.toFixed(2)} - {classItem.endTime.toFixed(2)}
           <br />
-          {classItem.comingSoon ? ' (Coming Soon)' : null}
+          {classItem.comingSoon ? ' (Starting from April 13th)' : null}
         </p>
       </div>
       <div className="pb-8 bg-white md:pt-21 md:pb-28 pt-11">
