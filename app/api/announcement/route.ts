@@ -43,11 +43,11 @@ export async function POST(request: NextRequest) {
           telephone,
           email,
           students: [{ studentName }],
-          course: 'Summer Camp',
+          course: 'Esher Handsdown Free Trial',
           studentClass: session,
-          location: 'Cobham',
+          location: 'Esher',
           message,
-        })
+        }),
       ),
       render(
         CustomerConfirmationEmail({
@@ -55,10 +55,10 @@ export async function POST(request: NextRequest) {
           telephone,
           email,
           students: [{ studentName }],
-          course: 'Summer Camp',
+          course: 'Esher Handsdown Free Trial',
           studentClass: session,
-          location: 'Cobham',
-        })
+          location: 'Esher',
+        }),
       ),
     ])
 
