@@ -573,7 +573,7 @@ export default function Form({ description }: { description?: string }) {
                           <FormLabel
                             className={textInputLabelClassNames + ' ml-4'}
                           >
-                            Esher (opening April 13th)
+                            Esher
                           </FormLabel>
                         </FormItem>
                       </div>
