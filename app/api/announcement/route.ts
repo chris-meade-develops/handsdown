@@ -7,10 +7,7 @@ import nodemailer from 'nodemailer'
 const { MJ_API, MJ_SECRET } = process.env
 
 const fromAddress = 'no-reply@handsdownacademies.co.uk'
-const leadRecipients = [
-  'info@handsdownacademies.co.uk',
-  'vicky.frisby@handsdownacademies.co.uk',
-]
+const leadRecipients = ['info@handsdownacademies.co.uk']
 
 export async function POST(request: NextRequest) {
   try {

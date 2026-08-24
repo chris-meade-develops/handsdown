@@ -10,7 +10,6 @@ const { MJ_API, MJ_SECRET } = process.env
 const fromAddress = 'no-reply@handsdownacademies.co.uk'
 const leadRecipients = [
   'info@handsdownacademies.co.uk',
-  'vicky.frisby@handsdownacademies.co.uk',
   // 'chris.meade1989@gmail.com'
 ]
 
@@ -59,7 +58,7 @@ export async function POST(request: NextRequest) {
           students,
           course,
           studentClass,
-        })
+        }),
       ),
       render(
         CustomerConfirmationEmail({
@@ -71,7 +70,7 @@ export async function POST(request: NextRequest) {
           studentClass,
           email,
           telephone,
-        })
+        }),
       ),
     ])
 

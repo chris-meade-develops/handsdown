@@ -79,7 +79,7 @@ export const NewLeadEmail = ({
                     textAlign: 'center',
                   }}
                 >
-                  New Class Booking Request Recieved,
+                  New Class Booking Request Received,
                 </Heading>
                 <Heading
                   as="h2"
@@ -115,7 +115,7 @@ export const NewLeadEmail = ({
                               Age:{' '}
                               {differenceInYears(
                                 new Date(),
-                                s.studentDateOfBirth
+                                s.studentDateOfBirth,
                               )}
                             </Text>
                           </>
