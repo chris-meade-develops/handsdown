@@ -121,7 +121,7 @@ function getClassSchedules(
     const matchingClasses = classesOnDay.classes.filter((cls: Class) => {
       const lowerClassName = cls.name.toLowerCase()
       // First check that it doesn't contain "fight" or "fight training"
-      if (lowerClassName.includes('fight')) {
+      if (cls.bookable === false) {
         return false
       }
       // Then check that it matches the selected class

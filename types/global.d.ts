@@ -16,6 +16,7 @@ type Class = {
   startTime: number
   name: string
   comingSoon?: boolean
+  bookable: boolean
 }
 
 type Classes = {
