@@ -107,18 +107,6 @@ export const FormSchema = z
             message: 'Student date of birth is required',
             code: 'custom',
           })
-        } else {
-          // Validate minimum age based on location
-          const age = calculateAge(student.studentDateOfBirth)
-          const minimumAge = data.location === 'epsom' ? 7 : 5
-
-          if (age < minimumAge) {
-            ctx.addIssue({
-              path: ['students', index, 'studentDateOfBirth'],
-              message: `Student must be at least ${minimumAge} years old for ${data.location === 'epsom' ? 'Epsom' : 'Cobham'}`,
-              code: 'custom',
-            })
-          }
         }
 
         if (!student.course) {

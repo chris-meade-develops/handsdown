@@ -113,6 +113,12 @@ function getClassSchedules(
     return results
   }
 
+  const classNameMap: Record<string, string[]> = {
+    'hd dragons': ['HD Dragons & Children'],
+    children: ['Children & Juniors'],
+    juniors: ['Children & Juniors', 'Juniors & Adults'],
+    adults: ['Juniors & Adults', 'Adults FIGHT PADS'],
+  }
   // Iterate over each day in the location
   locationData.forEach((classesOnDay: Classes) => {
     const dayName = classesOnDay.dayName
@@ -120,12 +126,19 @@ function getClassSchedules(
     // Filter classes that match the selected class name
     const matchingClasses = classesOnDay.classes.filter((cls: Class) => {
       const lowerClassName = cls.name.toLowerCase()
-      // First check that it doesn't contain "fight" or "fight training"
       if (cls.bookable === false) {
         return false
       }
+
+      const lowercaseSelectedClass = classSelected.toLowerCase()
+
+      const possibleAlternatives = classNameMap[lowerClassName] ?? []
+
       // Then check that it matches the selected class
-      return lowerClassName.includes(classSelected.toLowerCase())
+      return (
+        lowerClassName.includes(lowercaseSelectedClass) ||
+        possibleAlternatives.includes(lowercaseSelectedClass)
+      )
     })
 
     // For each matching class, create dates for the next 'numWeeks' worth of occurrences
