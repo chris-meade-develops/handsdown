@@ -412,7 +412,7 @@ export default function Form({ description }: { description?: string }) {
         <div className="md:grid md:grid-cols-2 md:gap-10">
           {courseOptions.length ? (
             <StudentSelector
-              control={control}
+              control={control as any}
               index={index}
               courseOptions={courseOptions}
               errors={errors}

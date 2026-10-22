@@ -1,7 +1,6 @@
 'use client'
 import { useCallback, useEffect, useState, cloneElement } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
-import { EmblaCarouselType } from 'embla-carousel-react'
 import ArrowButton from './ArrowButton'
 import DotButton from './DotButton'
 
@@ -20,30 +19,36 @@ export default function Carousel({
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi]
+    [emblaApi],
   )
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi]
+    [emblaApi],
   )
   const scrollTo = useCallback(
     (index: number) => emblaApi && emblaApi.scrollTo(index),
-    [emblaApi]
+    [emblaApi],
   )
 
-  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-    setScrollSnaps(emblaApi.scrollSnapList())
-  }, [])
+  const onInit = useCallback(() => {
+    const snaps = emblaApi?.scrollSnapList()
+    if (snaps) {
+      setScrollSnaps(snaps)
+    }
+  }, [emblaApi])
 
-  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-  }, [])
+  const onSelect = useCallback(() => {
+    const selected = emblaApi?.selectedScrollSnap()
+    if (selected) {
+      setSelectedIndex(selected)
+    }
+  }, [emblaApi])
 
   useEffect(() => {
     if (!emblaApi) return
 
-    onInit(emblaApi)
-    onSelect(emblaApi)
+    onInit()
+    onSelect()
     emblaApi.on('reInit', onInit)
     emblaApi.on('reInit', onSelect)
     emblaApi.on('select', onSelect)
