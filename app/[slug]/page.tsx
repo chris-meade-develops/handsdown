@@ -6,11 +6,6 @@ import getNavigationData from '@/helpers/getNavigationData'
 import { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
 
-type Props = {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
 const pageDescriptions: { [key: string]: string } = {
   coaches: 'Meet our team of expert coaches',
   about: 'Learn more about Hands Down martial art and our mission',
@@ -48,20 +43,21 @@ const keywordMap: { [key: string]: string } = {
 }
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
+  { params }: PageProps<'/[slug]'>,
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  const { slug } = await params
   return {
-    title: `Hands Down | ${params.slug} `,
-    description: pageDescriptions[params.slug] || pageDescriptions.default,
+    title: `Hands Down | ${slug} `,
+    description: pageDescriptions[slug] || pageDescriptions.default,
     alternates: {
-      canonical: `/${params.slug}`,
+      canonical: `/${slug}`,
     },
     openGraph: {
-      title: `Hands Down | ${params.slug}`,
-      description: pageDescriptions[params.slug] || pageDescriptions.default,
+      title: `Hands Down | ${slug}`,
+      description: pageDescriptions[slug] || pageDescriptions.default,
       type: 'website',
-      url: `https://handsdownacademies.co.uk/${params.slug}`,
+      url: `https://handsdownacademies.co.uk/${slug}`,
       images: [
         {
           url: 'https://handsdownacademies.co.uk/images/nav_logo.png',
@@ -71,13 +67,14 @@ export async function generateMetadata(
         },
       ],
     },
-    keywords: keywordMap[params.slug] || keywordMap.default,
+    keywords: keywordMap[slug] || keywordMap.default,
   }
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: PageProps<'/[slug]'>) {
+  const { slug } = await props.params
   const [page, navigation, promoResponse] = await Promise.allSettled([
-    getCustomPageData(params.slug!),
+    getCustomPageData(slug),
     getNavigationData(),
     getDataType<ICms.Announcement>('global-config'),
   ])

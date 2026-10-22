@@ -7,10 +7,8 @@ import { redirect } from 'next/navigation'
 
 export default async function Page({
   searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined }
-}) {
-  const { code } = searchParams
+}: PageProps<'/auth/instagram-callback'>) {
+  const { code } = await searchParams
   const longLifeAccessCode = await getLongLivedAccessToken({
     code: code as string,
   })
